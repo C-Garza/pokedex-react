@@ -1,0 +1,1 @@
+export const FETCH_POKE_LIST = "FETCH_POKE_LIST";

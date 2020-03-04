@@ -1,23 +1,19 @@
 import React from "react";
+import {connect} from "react-redux";
 import PokeCard from "../PokeCard/PokeCard";
-import pokeAPI from "../../apis/pokeAPI";
+import {fetchPokeList} from "../../actions";
 
 class PokeListContainer extends React.Component {
-  state = {pokeList: []};
-
-  async componentDidMount() {
-    const response = await pokeAPI.get("pokemon");
-    console.log(response.data);
-    this.setState({pokeList: response.data.results});
+  componentDidMount() {
+    this.props.fetchPokeList();
   }
   renderCards = () => {
-    return this.state.pokeList.map((pokemon,i) => {
+    return this.props.pokeList.map((pokemon) => {
       return <PokeCard key={pokemon.name} pokemon={pokemon} />;
     });
   }
   render() {
-    console.log(this.state.pokeList);
-    if(!this.state.pokeList) {
+    if(!this.props.pokeList) {
       return <div>Loading...</div>;
     }
     return(
@@ -28,4 +24,8 @@ class PokeListContainer extends React.Component {
   }
 }
 
-export default PokeListContainer;
+const mapStateToProps = (state) => {
+  return {pokeList: state.pokemon.pokemonAll.pokeList};
+};
+
+export default connect(mapStateToProps, {fetchPokeList})(PokeListContainer);
