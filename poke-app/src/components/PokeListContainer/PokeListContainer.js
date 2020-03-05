@@ -1,5 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
+import styles from "./PokeListContainer.module.css";
 import PokeCard from "../PokeCard/PokeCard";
 import {fetchPokeList} from "../../actions";
 
@@ -17,7 +18,7 @@ class PokeListContainer extends React.Component {
       return <div>Loading...</div>;
     }
     return(
-      <div>
+      <div className={styles.container}>
         {this.renderCards()}
       </div>
     );

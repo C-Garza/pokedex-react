@@ -17,13 +17,13 @@ class PokeCard extends React.Component {
     }
   }
   render() {
-    console.log(this.props.pokemonStats);
+    // console.log(this.props.pokemonStats);
     if(!this.props.pokemonStats) {
       return <div>Loading...</div>;
     }
     const physicalChars = this.getPhysicalChars();
     return(
-      <div>
+      <div className={styles.card}>
         <PokeHeader id={this.props.pokemonStats.id} name={this.props.pokemonStats.name} />
         <PokeDescription physicalChars={physicalChars} />
       </div>
