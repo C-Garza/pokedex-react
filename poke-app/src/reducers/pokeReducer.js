@@ -1,12 +1,13 @@
 import {
-  FETCH_POKE_LIST
+  FETCH_POKE_LIST, 
+  FETCH_POKEMON
 } from "../actions/types";
 
 const INIT_STATE = {
   pokemonAll: {
     pokeList: []
   },
-  pokemon: {
+  pokemonObjs: {
 
   }
 };
@@ -17,7 +18,15 @@ export default (state=INIT_STATE, action) => {
       return {
         ...state, 
         pokemonAll: {...state.pokemonAll, pokeList: [...state.pokemonAll.pokeList, ...action.payload]}
-      }
+      };
+    case FETCH_POKEMON:
+      return {
+        ...state,
+        pokemonObjs: {
+          ...state.pokemonObjs,
+          [action.payload.species.name]: action.payload
+        }
+      };
     default:
       return state;
   }
@@ -27,7 +36,9 @@ export default (state=INIT_STATE, action) => {
 //   pokemonAll: {
 //     pokeList: [],
 //   },
-//  pokemon: {
-//    //ht, wt...
+//  pokemonObjs: {
+//    pokemon: {
+//      
+//    }
 //  }
 // }

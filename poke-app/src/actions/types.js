@@ -1,1 +1,2 @@
 export const FETCH_POKE_LIST = "FETCH_POKE_LIST";
+export const FETCH_POKEMON = "FETCH_POKEMON";
