@@ -1,16 +1,12 @@
 import React from "react";
 import {connect} from "react-redux";
 import styles from "./PokeCard.module.css";
-import pokeAPI from "../../apis/pokeAPI";
 import PokeHeader from "../PokeHeader/PokeHeader";
 import {fetchPokemon} from "../../actions";
 
 class PokeCard extends React.Component {
-  // state = {pokemon: null};
   componentDidMount() {
     this.props.fetchPokemon(this.props.pokemon.name);
-    // console.log(response.data);
-    // this.setState({pokemon: response.data});
   }
   render() {
     console.log(this.props.pokemonStats);
@@ -27,7 +23,6 @@ class PokeCard extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  // console.log(state.pokemon.pokemonObjs[ow]);
   return {pokemonStats: state.pokemon.pokemonObjs[ownProps.pokemon.name]};
 };
 
