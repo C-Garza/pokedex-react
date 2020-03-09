@@ -3,6 +3,6 @@ import axios from "axios";
 export default axios.create({
   baseURL: "https://pokeapi.co/api/v2/",
   params: {
-    limit: 35
+    limit: 6
   }
 });
