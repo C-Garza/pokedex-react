@@ -16,7 +16,7 @@ export default (state=INIT_STATE, action) => {
   switch(action.type) {
     case FETCH_POKE_LIST:
       return {
-        ...state, 
+        ...state,
         pokemonAll: {...state.pokemonAll, pokeList: [...state.pokemonAll.pokeList, ...action.payload]}
       };
     case FETCH_POKEMON:
