@@ -1,0 +1,174 @@
+.poke-type-logo {
+
+}
+/***
+BACKGROUND COLORS FOR POKECARDS TYPES
+***/
+.pokeTypeLogoFireCard {
+  background-color: #EF9A9A;
+}
+.pokeTypeLogoWaterCard {
+  background-color: #90CAF9;
+}
+.pokeTypeLogoGrassCard {
+  background-color: #A5D6A7;
+}
+.pokeTypeLogoPoisonCard {
+  background-color: #CE93D8;
+}
+.pokeTypeLogoBugCard {
+  background-color: #E6EE9C;
+}
+.pokeTypeLogoNormalCard {
+  background-color: #EEEEEE;
+}
+.pokeTypeLogoFlyingCard {
+  background-color: #90CAF9;
+}
+.pokeTypeLogoElectricCard {
+  background-color: #FFEE58;
+}
+.pokeTypeLogoGroundCard {
+  background-color: #A1887F;
+}
+.pokeTypeLogoFairyCard {
+  background-color: #FFCDD2;
+}
+.pokeTypeLogoFightingCard {
+  background-color: #BCAAA4;
+}
+.pokeTypeLogoPsychicCard {
+  background-color: #F8BBD0;
+}
+.pokeTypeLogoRockCard {
+  background-color: #c8b476;
+}
+.pokeTypeLogoSteelCard {
+  background-color: #c5c5d0;
+}
+.pokeTypeLogoIceCard {
+  background-color: #B3E5FC;
+}
+.pokeTypeLogoGhostCard {
+  background-color: #f6b4f6;
+}
+.pokeTypeLogoDragonCard {
+  background-color: #B39DDB;
+}
+.pokeTypeLogoDarkCard {
+  background-color: #7a695d;
+}
+/***
+BACKGROUND COLORS FOR POKE TYPE LOGOS
+***/
+.pokeTypeLogoFire {
+  background-color: #F44336;
+}
+.pokeTypeLogoWater {
+  background-color: #2196F3;
+}
+.pokeTypeLogoGrass {
+  background-color: #4CAF50;
+}
+.pokeTypeLogoPoison {
+  background-color: #9C27B0;
+}
+.pokeTypeLogoBug {
+  background-color: #CDDC39;
+}
+.pokeTypeLogoNormal {
+  background-color: #9E9E9E;
+}
+.pokeTypeLogoFlying {
+  background-color: #93a5f2;
+}
+.pokeTypeLogoElectric {
+  background-color: #fdbe1b;
+}
+.pokeTypeLogoGround {
+  background-color: #ccac51;
+}
+.pokeTypeLogoFairy {
+  background-color: #f6b4f6;
+}
+.pokeTypeLogoFighting {
+  background-color: #80341d;
+}
+.pokeTypeLogoPsychic {
+  background-color: #EC407A;
+}
+.pokeTypeLogoRock {
+  background-color: #b69e53;
+}
+.pokeTypeLogoSteel {
+  background-color: #8e8e9f;
+}
+.pokeTypeLogoIce {
+  background-color: #80D8FF;
+}
+.pokeTypeLogoGhost {
+  background-color: #f6b4f6;
+}
+.pokeTypeLogoDragon {
+  background-color: #6e57d3;
+}
+.pokeTypeLogoDark {
+  background-color: #513c2e;
+}
+/***
+BORDER COLORS FOR POKECARDS TYPES
+***/
+.pokeTypeLogoFireCardBorder {
+  border: 7px solid #EF9A9A;
+}
+.pokeTypeLogoWaterCardBorder {
+  border: 7px solid #90CAF9;
+}
+.pokeTypeLogoGrassCardBorder {
+  border: 7px solid #A5D6A7;
+}
+.pokeTypeLogoPoisonCardBorder {
+  border: 7px solid #CE93D8;
+}
+.pokeTypeLogoBugCardBorder {
+  border: 7px solid #E6EE9C;
+}
+.pokeTypeLogoNormalCardBorder {
+  border: 7px solid #EEEEEE;
+}
+.pokeTypeLogoFlyingCardBorder {
+  border: 7px solid #90CAF9;
+}
+.pokeTypeLogoElectricCardBorder {
+  border: 7px solid #FFEE58;
+}
+.pokeTypeLogoGroundCardBorder {
+  border: 7px solid #A7887F;
+}
+.pokeTypeLogoFairyCardBorder {
+  border: 7px solid #FFCDD2;
+}
+.pokeTypeLogoFightingCardBorder {
+  border: 7px solid #BCAAA4;
+}
+.pokeTypeLogoPsychicCardBorder {
+  border: 7px solid #F8BBD0;
+}
+.pokeTypeLogoRockCardBorder {
+  border: 7px solid #c8b476;
+}
+.pokeTypeLogoSteelCardBorder {
+  border: 7px solid #c5c5d0;
+}
+.pokeTypeLogoIceCardBorder {
+  border: 7px solid #B3E5FC;
+}
+.pokeTypeLogoGhostCardBorder {
+  border: 7px solid #f6b4f6;
+}
+.pokeTypeLogoDragonCardBorder {
+  border: 7px solid #B39DDB;
+}
+.pokeTypeLogoDarkCardBorder {
+  border: 7px solid #7a695d;
+}
