@@ -1,18 +1,19 @@
 import React from "react";
 import styles from "./PokeHeader.module.css";
 
-const PokeHeader = ({name, id}) => {
-  const nameCapitalized = name.charAt(0).toUpperCase() + name.slice(1);
+const PokeHeader = ({name = "Pokemon", id, typeClass = "grass"}) => {
   return(
-    <div className={styles.header}>
+    <div className={`${styles.header} ${typeClass.border}`}>
       <img 
-        className={styles.header__image}
-        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
-        alt={nameCapitalized}
+        className={`${styles.header__image} img-hover`}
+        src={id ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png` : ""}
+        alt={name}
+        data-hoverable="true"
       />
-      <h2 className={styles.header__name}>{nameCapitalized}</h2>
     </div>
   );
 };
+
+
 
 export default PokeHeader;
