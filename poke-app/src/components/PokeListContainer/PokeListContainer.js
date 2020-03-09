@@ -6,11 +6,16 @@ import {fetchPokeList} from "../../actions";
 
 class PokeListContainer extends React.Component {
   componentDidMount() {
-    this.props.fetchPokeList();
+    if(!this.props.pokeList.length) {
+      this.props.fetchPokeList(20, 0);
+    }
+  }
+  handleCardNavigation = (pokemon) => {
+    this.props.history.push(`/pokemon/${pokemon.name}`);
   }
   renderCards = () => {
     return this.props.pokeList.map((pokemon) => {
-      return <PokeCard key={pokemon.name} pokemon={pokemon} />;
+      return <PokeCard key={pokemon.name} pokemon={pokemon} handleNav={() => this.handleCardNavigation(pokemon)} />;
     });
   }
   render() {

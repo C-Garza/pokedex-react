@@ -8,7 +8,9 @@ import PokeDescription from "../PokeDescription/PokeDescription";
 
 class PokeCard extends React.Component {
   componentDidMount() {
-    this.props.fetchPokemon(this.props.pokemon.name);
+    if(!this.props.pokemonStats) {
+      this.props.fetchPokemon(this.props.pokemon.name);
+    }
   }
   getPhysicalChars = () => {
     return {
@@ -46,7 +48,7 @@ class PokeCard extends React.Component {
     let typesClassArr = getTypesClass(types);
     const cardClasses = `${styles.card} ${typesClassArr[0].card}`
     return(
-      <div className={cardClasses}>
+      <div className={cardClasses} onClick={this.props.handleNav}>
         <PokeHeader id={this.props.pokemonStats.id} name={nameCapitalized} typeClass={typesClassArr[0]} />
         <PokeDescription physicalChars={physicalChars} types={types} name={nameCapitalized} />
       </div>
