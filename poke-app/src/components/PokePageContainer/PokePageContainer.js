@@ -1,32 +1,29 @@
 import React from "react";
 import {connect} from "react-redux";
 import styles from "./PokePageContainer.module.css";
-// import PokeCard from "../PokeCard/PokeCard";
-// import {fetchPokeList} from "../../actions";
+import PokeCardExtended from "../PokeCardExtended/PokeCardExtended";
+import {fetchPokemon, fetchPokemonSpecies} from "../../actions";
 
 class PokePageContainer extends React.Component {
   componentDidMount() {
-    // this.props.fetchPokeList();
+    if(!this.props.pokemonStats || !(this.props.pokemonStats.hasOwnProperty("species_ext"))) {
+      this.props.fetchPokemon(this.props.match.params.id);
+    }
   }
-  // renderCards = () => {
-  //   return this.props.pokeList.map((pokemon) => {
-  //     return <PokeCard key={pokemon.name} pokemon={pokemon} />;
-  //   });
-  // }
   render() {
-    // if(!this.props.pokeList) {
-    //   return <div>Loading...</div>;
-    // }
+    if(!this.props.pokemonStats || !this.props.pokemonStats.species_ext) {
+      return <div>Loading...</div>;
+    }
     return(
       <div className={styles.container}>
-        PokePage
+        <PokeCardExtended pokemonStats={this.props.pokemonStats} />
       </div>
     );
   }
 }
 
-// const mapStateToProps = (state) => {
-//   return {pokeList: state.pokemon.pokemonAll.pokeList};
-// };
+const mapStateToProps = (state, ownProps) => {
+  return {pokemonStats: state.pokemon.pokemonObjs[ownProps.match.params.id]};
+};
 
-export default connect(null, {})(PokePageContainer);
+export default connect(mapStateToProps, {fetchPokemon, fetchPokemonSpecies})(PokePageContainer);
