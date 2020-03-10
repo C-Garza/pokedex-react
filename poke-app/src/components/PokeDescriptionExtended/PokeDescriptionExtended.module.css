@@ -1,0 +1,54 @@
+.desc__ext {
+  position: absolute;
+  padding: 10px 5px;
+  left: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 75%;
+  height: 100%;
+  font-family: "Oxanium";
+  line-height: 1;
+  font-size: 1.2em;
+  font-weight: 600;
+}
+.desc__ext__name {
+  width: 100%;
+  font-family: "Oxanium";
+  font-size: 1.6em;
+  margin: 0;
+  font-weight: 700;
+}
+.desc__ext__genera {
+  width: 100%;
+  font-family: "Oxanium";
+  font-size: 1em;
+  margin: 0;
+  font-weight: 600;
+}
+.desc__ext__physical {
+  display: flex;
+  flex-direction: column;
+  height: 75%;
+  width: 100%;
+  justify-content: center;
+}
+.desc__ext__physical__trait {
+  padding: 5px 5px;
+}
+.desc__ext__types {
+  display: flex;
+  height: 25%;
+  width: 100%;
+  align-items: center;
+}
+.desc__ext__types__type {
+  width: 33%;
+  padding: 3px 0px 2px 0px;
+  margin: 0 5px;
+  border: 2px solid black;
+  border-radius: 25px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
