@@ -12,6 +12,7 @@ export const fetchPokeList = (limit, offset) => async dispatch => {
   }});
   console.log(response.data.results);
   dispatch({type: FETCH_POKE_LIST, payload: response.data.results});
+  return Promise.resolve({next: response.data.next, prev: response.data.previous});
 };
 
 export const fetchPokemon = (name) => async dispatch => {
@@ -19,6 +20,7 @@ export const fetchPokemon = (name) => async dispatch => {
   console.log(response.data);
   dispatch({type: FETCH_POKEMON, payload: response.data});
   dispatch(fetchPokemonSpecies(name));
+  return Promise.resolve(true);
 };
 
 export const fetchPokemonSpecies = (name) => async dispatch => {
