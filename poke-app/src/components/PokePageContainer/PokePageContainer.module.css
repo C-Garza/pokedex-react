@@ -6,3 +6,112 @@
   margin: auto;
   margin-top: 15px;
 }
+.pageControls {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+.pageControls__left {
+  position: absolute;
+  top: 45%;
+  left: 5%;
+  transform: translateY(-45%);
+}
+.pageControls__right {
+  position: absolute;
+  top: 45%;
+  right: 5%;
+  transform: translateY(-45%);
+}
+.pageControls__left__button, .pageControls__right__button {
+  display: inline-block;
+  width: 4em;
+  height: 4em;
+  vertical-align: bottom;
+  border-radius: 50%;
+}
+.pageControls__left__chevron, .pageControls__right__chevron {
+  display: inline-block;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+  border: 0.3em solid #9E9E9E;
+  transition: all 0.15s ease;
+}
+.pageControls__left__chevron:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 57%;
+  width: 1.4em;
+  height: 1.4em;
+  border-left: 0.4em solid #9E9E9E;
+  border-bottom: 0.4em solid #9E9E9E;
+  transform: translate(-57%, -50%) rotate(45deg);
+  transition: all 0.15s ease;
+}
+.pageControls__right__chevron:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 43%;
+  width: 1.4em;
+  height: 1.4em;
+  border-right: 0.4em solid #9E9E9E;
+  border-bottom: 0.4em solid #9E9E9E;
+  transform: translate(-43%, -50%) rotate(-45deg);
+  transition: all 0.15s ease;
+}
+.pageControls__hover:hover,
+.pageControls__hover:hover .pageControls__left__chevron:after,
+.pageControls__hover:hover .pageControls__right__chevron:after {
+  border-color: #df3a27;
+}
+.pageControls__hover:hover .pageControls__left__chevron:after {
+  transform: translate(-57%, -50%) rotate(45deg);
+  animation: onLeftButtonHover 1.35s ease-in-out infinite;
+}
+.pageControls__hover:hover .pageControls__right__chevron:after {
+  transform: translate(-43%, -50%) rotate(-45deg);
+  animation: onRightButtonHover 1.35s ease-in-out infinite;
+}
+@keyframes onLeftButtonHover {
+  0% {
+    transform: translate(-57%, -50%) rotate(45deg);
+  }
+  10% {
+    transform: translate(-67%, -50%) rotate(45deg);
+  }
+  20% {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  30% {
+    transform: translate(-64%, -50%) rotate(45deg);
+  }
+  40% {
+    transform: translate(-53%, -50%) rotate(45deg);
+  }
+  50% {
+    transform: translate(-57%, -50%) rotate(45deg);
+  }
+}
+@keyframes onRightButtonHover {
+  0% {
+    transform: translate(-43%, -50%) rotate(-45deg);
+  }
+  10% {
+    transform: translate(-33%, -50%) rotate(-45deg);
+  }
+  20% {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+  30% {
+    transform: translate(-36%, -50%) rotate(-45deg);
+  }
+  40% {
+    transform: translate(-47%, -50%) rotate(-45deg);
+  }
+  50% {
+    transform: translate(-43%, -50%) rotate(-45deg);
+  }
+}
