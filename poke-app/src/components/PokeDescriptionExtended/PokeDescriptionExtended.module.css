@@ -16,6 +16,7 @@
   width: 100%;
   font-family: "Oxanium";
   font-size: 1.6em;
+  font-size: 2em;
   margin: 0;
   font-weight: 700;
 }
@@ -23,6 +24,7 @@
   width: 100%;
   font-family: "Oxanium";
   font-size: 1em;
+  font-size: 1.1em;
   margin: 0;
   font-weight: 600;
 }
@@ -36,6 +38,9 @@
 .desc__ext__physical__trait {
   padding: 5px 5px;
 }
+.desc__ext__physical__trait__bold {
+  font-weight: 700;
+}
 .desc__ext__types {
   display: flex;
   height: 25%;
@@ -43,8 +48,8 @@
   align-items: center;
 }
 .desc__ext__types__type {
-  width: 33%;
-  padding: 3px 0px 2px 0px;
+  width: 25%;
+  padding: 5px 0px 4px 0px;
   margin: 0 5px;
   border: 2px solid black;
   border-radius: 25px;

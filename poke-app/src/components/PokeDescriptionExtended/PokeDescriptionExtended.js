@@ -14,8 +14,8 @@ const PokeDescription = ({physicalChars={height: "Loading", weight: "Loading", d
       <h2 className={styles.desc__ext__name}>{name}</h2>
       <h3 className={styles.desc__ext__genera}>{physicalChars.genera}</h3>
       <div className={styles.desc__ext__physical}>
-        <p className={styles.desc__ext__physical__trait}>Height: {physicalChars.height} m</p>
-        <p className={styles.desc__ext__physical__trait}>Weight: {physicalChars.weight} kg</p>
+        <p className={styles.desc__ext__physical__trait}><span className={styles.desc__ext__physical__trait__bold}>Height: </span>{physicalChars.height} m</p>
+        <p className={styles.desc__ext__physical__trait}><span className={styles.desc__ext__physical__trait__bold}>Weight: </span>{physicalChars.weight} kg</p>
         <p className={styles.desc__ext__physical__trait}>{physicalChars.desc}</p>
       </div>
       <div className={styles.desc__ext__types}>
