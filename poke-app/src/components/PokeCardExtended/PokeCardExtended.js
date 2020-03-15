@@ -6,10 +6,13 @@ import {getTypesClass} from "../utils/helper-functions"
 
 class PokeCardExtended extends React.Component {
   getPhysicalChars = () => {
+    let englishDesc = this.props.pokemonStats.species_ext.flavor_text_entries.find(text => {
+      return text.language.name === "en";
+    });
     return {
       height: this.props.pokemonStats.height / 10,
       weight: this.props.pokemonStats.weight / 10,
-      desc: this.props.pokemonStats.species_ext.flavor_text_entries[1].flavor_text,
+      desc: englishDesc.flavor_text,
       genera: this.props.pokemonStats.species_ext.genera[2].genus
     }
   }
