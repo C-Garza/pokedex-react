@@ -33,7 +33,6 @@ class PokeCard extends React.Component {
     return arr;
   }
   render() {
-    console.log(this.props.pokemonStats);
     if(!this.props.pokemonStats) {
       return(
         <div className={styles.card}>
