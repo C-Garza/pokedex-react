@@ -1,12 +1,15 @@
 .desc__ext {
-  position: absolute;
-  padding: 10px 5px;
+  /* position: absolute;
   left: 25%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 75%;
-  height: 100%;
+  align-items: center; */
+  display: flex;
+  flex-direction: column;
+  flex: 75;
+  padding: 10px 5px;
+  /* min-width: 75%; */
+  /* height: 100%; */
   font-family: "Oxanium";
   line-height: 1;
   font-size: 1.2em;
@@ -18,6 +21,7 @@
   font-size: 1.6em;
   font-size: 2em;
   margin: 0;
+  margin-bottom: 5px;
   font-weight: 700;
 }
 .desc__ext__genera {
@@ -26,6 +30,7 @@
   font-size: 1em;
   font-size: 1.1em;
   margin: 0;
+  margin-bottom: 15px;
   font-weight: 600;
 }
 .desc__ext__physical {
@@ -33,6 +38,7 @@
   flex-direction: column;
   height: 75%;
   width: 100%;
+  margin-bottom: 15px;
   justify-content: center;
 }
 .desc__ext__physical__trait {
@@ -45,6 +51,7 @@
   display: flex;
   height: 25%;
   width: 100%;
+  margin-bottom: 10px;
   align-items: center;
 }
 .desc__ext__types__type {

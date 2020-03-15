@@ -52,16 +52,18 @@
 HEADER EXTENDED
 *****/
 .header__ext {
-  position: absolute;
+  /* position: absolute; */
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 25%;
-  height: 100%;
-  top: 0;
+  position: relative;
+  /* min-width: 25%; */
+  /* min-height: 100%; */ /*CHANGED TO MIN*/
+  /* top: 0; */
   background-color: #F5F5F5;
   border-radius: 15px;
   z-index: 1;
+  flex: 25;
   transition: all 0.15s ease;
 }
 .header__ext:before {
@@ -81,6 +83,7 @@ HEADER EXTENDED
 .header__ext:after {
   content: "";
   display: block;
+  top: 0;
   width: 100%;
   height: 100%;
   position: absolute;
