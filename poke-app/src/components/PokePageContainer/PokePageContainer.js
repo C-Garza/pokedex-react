@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import styles from "./PokePageContainer.module.css";
 import PokeCardExtended from "../PokeCardExtended/PokeCardExtended";
+import RadarChart from "../RadarChart.js/RadarChart";
 import {fetchPokeList ,fetchPokemon, fetchPokemonSpecies} from "../../actions";
 
 class PokePageContainer extends React.Component {
@@ -56,6 +57,8 @@ class PokePageContainer extends React.Component {
               <span className={`${styles.pageControls__left__chevron} ${styles.pageControls__hover}`}></span>
             </Link>
           </div>
+        </div>
+        <div className={styles.pageControls}>
           <div className={styles.pageControls__right}>
             <Link to={pageControls.next} className={`${styles.pageControls__right__button} ${styles.pageControls__hover}`}>
               <span className={`${styles.pageControls__right__chevron} ${styles.pageControls__hover}`}></span>
@@ -63,6 +66,9 @@ class PokePageContainer extends React.Component {
           </div>
         </div>
         <PokeCardExtended pokemonStats={this.props.pokemonStats} />
+        <div className={styles.statsContainer}>
+          <RadarChart pokemonStats={this.props.pokemonStats} />
+        </div>
       </div>
     );
   }
