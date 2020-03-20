@@ -3,8 +3,9 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import styles from "./PokePageContainer.module.css";
 import PokeCardExtended from "../PokeCardExtended/PokeCardExtended";
-import RadarChart from "../RadarChart.js/RadarChart";
+import RadarChart from "../RadarChart/RadarChart";
 import {fetchPokeList ,fetchPokemon, fetchPokemonSpecies} from "../../actions";
+import PokeSprites from "../PokeSprites/PokeSprites";
 
 class PokePageContainer extends React.Component {
   componentDidMount() {
@@ -66,8 +67,13 @@ class PokePageContainer extends React.Component {
           </div>
         </div>
         <PokeCardExtended pokemonStats={this.props.pokemonStats} />
-        <div className={styles.statsContainer}>
-          <RadarChart pokemonStats={this.props.pokemonStats} />
+        <div className={styles.secondRow}>
+          <div className={styles.statsContainer}>
+            <RadarChart pokemonStats={this.props.pokemonStats} />
+          </div>
+          <div className={styles.spritesContainer}>
+            <PokeSprites pokemon={this.props.pokemonStats} />
+          </div>
         </div>
       </div>
     );
