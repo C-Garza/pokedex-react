@@ -41,6 +41,17 @@
   margin-bottom: 15px;
   justify-content: center;
 }
+.desc__ext__physical__trait__row {
+  display: flex;
+}
+.desc__ext__physical__trait__column__two {
+  display: flex;
+  margin-left: 10%;
+}
+.desc__ext__physical__trait_heading {
+  padding: 5px 5px;
+  font-weight: 700;
+}
 .desc__ext__physical__trait {
   padding: 5px 5px;
 }
