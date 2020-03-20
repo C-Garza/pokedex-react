@@ -61,7 +61,7 @@ HEADER EXTENDED
   /* min-height: 100%; */ /*CHANGED TO MIN*/
   /* top: 0; */
   background-color: #F5F5F5;
-  border-radius: 15px;
+  /* border-radius: 15px; */
   z-index: 1;
   flex: 25;
   transition: all 0.15s ease;
@@ -87,8 +87,9 @@ HEADER EXTENDED
   width: 100%;
   height: 100%;
   position: absolute;
-  border-radius: 7px;
-  border: 3px solid #212121;
+  /* border-radius: 7px; */
+  /* border: 3px solid #212121; */
+  border-right: 3px solid #212121;
   z-index: -1;
   /* border-left: none;
   border-top: none;

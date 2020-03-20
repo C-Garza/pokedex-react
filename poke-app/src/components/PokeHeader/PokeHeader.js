@@ -13,7 +13,7 @@ const PokeHeader = ({name = "Pokemon", id=null, typeClass = "grass", extended = 
   };
   return(
     <React.Fragment>
-    <div className={extended ? `${styles.header__ext} ${typeClass.border}` : `${styles.header} ${typeClass.border}`}>
+    <div className={extended ? `${styles.header__ext}` : `${styles.header} ${typeClass.border}`}>
       <img 
         className={extended ? `${styles.header__ext__image} img-hover` : `${styles.header__image} img-hover`}
         src={id ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png` : ""}
