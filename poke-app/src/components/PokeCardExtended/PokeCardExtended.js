@@ -13,7 +13,8 @@ class PokeCardExtended extends React.Component {
       height: this.props.pokemonStats.height / 10,
       weight: this.props.pokemonStats.weight / 10,
       desc: englishDesc.flavor_text,
-      genera: this.props.pokemonStats.species_ext.genera[2].genus
+      genera: this.props.pokemonStats.species_ext.genera[2].genus,
+      abilities: this.props.pokemonStats.abilities
     }
   }
   getTypes = () => {
