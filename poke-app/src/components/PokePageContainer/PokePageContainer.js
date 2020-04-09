@@ -8,16 +8,16 @@ import {fetchPokeList ,fetchPokemon, fetchPokemonSpecies} from "../../actions";
 import PokeSprites from "../PokeSprites/PokeSprites";
 
 class PokePageContainer extends React.Component {
-  componentDidMount() {
+  componentDidMount() { //CHANGE IF CHECK TO FETCHPOKELIST FIRST
     if(!this.props.pokemonStats || !(this.props.pokemonStats.hasOwnProperty("species_ext"))) {
-      this.props.fetchPokemon(this.props.match.params.id)
+      this.props.fetchPokemon(this.props.match.params.id, true)
       .then(() => this.getPageControlsLink());
     }
   }
   componentDidUpdate(prevProps) {
     if(prevProps.match.params.id !== this.props.match.params.id) {
       if(!this.props.pokemonStats || !(this.props.pokemonStats.hasOwnProperty("species_ext"))) {
-        this.props.fetchPokemon(this.props.match.params.id)
+        this.props.fetchPokemon(this.props.match.params.id, true)
         .then(() => this.getPageControlsLink());
       }
       else {
