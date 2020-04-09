@@ -15,11 +15,13 @@ export const fetchPokeList = (limit, offset) => async dispatch => {
   return Promise.resolve({next: response.data.next, prev: response.data.previous});
 };
 
-export const fetchPokemon = (name) => async dispatch => {
+export const fetchPokemon = (name, isExtended = false) => async dispatch => {
   const response = await pokeAPI.get(`pokemon/${name}`);
   console.log(response.data);
   dispatch({type: FETCH_POKEMON, payload: response.data});
-  dispatch(fetchPokemonSpecies(name));
+  if(isExtended) {
+    dispatch(fetchPokemonSpecies(name));
+  }
   return Promise.resolve(true);
 };
 
