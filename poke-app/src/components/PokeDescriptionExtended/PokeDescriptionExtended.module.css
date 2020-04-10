@@ -1,15 +1,8 @@
 .desc__ext {
-  /* position: absolute;
-  left: 25%;
   display: flex;
   flex-direction: column;
-  align-items: center; */
-  display: flex;
-  flex-direction: column;
-  flex: 75;
+  min-width: 75%;
   padding: 10px 5px;
-  /* min-width: 75%; */
-  /* height: 100%; */
   font-family: "Oxanium";
   line-height: 1;
   font-size: 1.2em;
@@ -74,4 +67,17 @@
   text-align: center;
   color: white;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+@media(max-width: 1500px) {
+  .desc__ext {
+    line-height: 1.1;
+    font-size: 1.1em;
+  }
+}
+@media(max-width: 800px) {
+  .desc__ext {
+    min-width: 70%;
+    line-height: 1;
+    font-size: 1em;
+  }
 }
