@@ -6,3 +6,9 @@
   margin: auto;
   margin-top: 15px;
 }
+
+@media(max-width: 1400px) {
+  .container {
+    max-width: 100%;
+  }
+}
