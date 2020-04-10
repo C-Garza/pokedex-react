@@ -35,18 +35,20 @@ const PokeSprites = ({pokemon: {name, sprites, species_ext: {gender_rate}}}) => 
             </React.Fragment>
         }
       </div>
-      <img className={styles.sprites__sprite} src={sprites.front_default} alt={name} />
-      <img className={styles.sprites__sprite} src={sprites.back_default} alt={name} />
-      <img 
-        className={styles.sprites__sprite} 
-        src={!sprites.front_female ? sprites.front_default : sprites.front_female} 
-        alt={name + " female"} 
-      />
-      <img 
-        className={styles.sprites__sprite} 
-        src={!sprites.back_female ? sprites.back_default : sprites.back_female} 
-        alt={name + " female"} 
-      />
+      <div className={styles.sprites__sprite__container}>
+        <img className={styles.sprites__sprite} src={sprites.front_default} alt={name} />
+        <img className={styles.sprites__sprite} src={sprites.back_default} alt={name} />
+        <img 
+          className={styles.sprites__sprite} 
+          src={!sprites.front_female ? sprites.front_default : sprites.front_female} 
+          alt={name + " female"} 
+        />
+        <img 
+          className={styles.sprites__sprite} 
+          src={!sprites.back_female ? sprites.back_default : sprites.back_female} 
+          alt={name + " female"} 
+        />
+      </div>
     </div>
   );
 };

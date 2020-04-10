@@ -44,6 +44,9 @@
   margin: 5px 5px 0 5px;
   color: #ea1e63;
 }
+.sprites__sprite__container {
+  margin-top: 10px;
+}
 .symbol {
   margin-left: 0.2em;
 }
