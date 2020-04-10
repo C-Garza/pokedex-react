@@ -8,7 +8,7 @@
   height: 40%;
   font-family: "Oxanium";
   line-height: 1;
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: 600;
 }
 .desc__name {
@@ -16,6 +16,7 @@
   text-align: center;
   font-family: "Oxanium";
   font-size: 1.5em;
+  font-size: 1.8em;
   margin: 0;
   font-weight: 700;
 }
@@ -25,6 +26,7 @@
   width: 100%;
   justify-content: center;
   align-items: center;
+  font-size: 1.2em;
 }
 .desc__physical__trait {
   padding: 0 5px;
@@ -35,6 +37,7 @@
   width: 100%;
   justify-content: center;
   align-items: center;
+  font-size: 1.1em;
 }
 .desc__types__type {
   width: 33%;
@@ -45,4 +48,40 @@
   text-align: center;
   color: white;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+@media(min-width: 2500px) {
+  .desc {
+    font-size: 1.2em;
+  }
+}
+@media(max-width: 1850px) {
+  .desc__types {
+    font-size: 1em;
+  }
+}
+@media(max-width: 1000px) {
+  .desc {
+    font-size: 0.9em;
+  }
+  .desc__types {
+    font-size: 1.05em;
+  }
+}
+@media(max-width: 800px) {
+  .desc {
+    font-size: 1.1em;
+  }
+}
+@media(max-width: 500px) {
+  .desc {
+    font-size: 1.2em;
+  }
+  .desc__types {
+    font-size: 1em;
+  }
+}
+@media(max-width: 330px) {
+  .desc {
+    font-size: 1em;
+  }
 }

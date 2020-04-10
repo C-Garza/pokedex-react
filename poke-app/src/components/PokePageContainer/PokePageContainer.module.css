@@ -12,6 +12,7 @@
   border: 3px solid #212121;
   border-radius: 15px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  transition: all 0.15s ease;
 }
 .statsContainer {
   width: 65%;
@@ -132,5 +133,31 @@
   }
   50% {
     transform: translate(-43%, -50%) rotate(-45deg);
+  }
+}
+@media(max-width: 1400px) {
+  .container {
+    max-width: 100%;
+  }
+}
+@media(max-width: 1000px) {
+  .secondRow {
+    width: 90%;
+  }
+  .pageControls {
+    right: 0%;
+    width: 5%;
+  }
+  .container .pageControls:nth-child(1) {
+    left: 0%;
+  }
+  .pageControls__left__button, .pageControls__right__button {
+    width: 3em;
+    height: 3em;
+  }
+  .pageControls__left__chevron, .pageControls__right__chevron {
+    width: 3em;
+    height: 3em;
+    border: none;
   }
 }

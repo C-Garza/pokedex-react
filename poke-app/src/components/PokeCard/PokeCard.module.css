@@ -21,3 +21,45 @@
 .card:hover :global(.img-hover) {
   transform: scale(1.1) translateY(-5px);
 }
+@media(max-width: 1650px) {
+  .card {
+    width: 25%;
+    padding-bottom: calc(25% - 6px);
+  }
+}
+@media(max-width: 1000px) {
+  .card {
+    width: 30%;
+    padding-bottom: calc(30% - 6px);
+  }
+}
+@media(max-width: 800px) {
+  .card {
+    width: 45%;
+    padding-bottom: calc(45% - 6px);
+  }
+}
+@media(max-width: 700px) {
+  .card {
+    width: 50%;
+    padding-bottom: calc(50% - 6px);
+  }
+}
+@media(max-width: 600px) {
+  .card {
+    width: 60%;
+    padding-bottom: calc(60% - 6px);
+  }
+}
+@media(max-width: 500px) {
+  .card {
+    width: 75%;
+    padding-bottom: calc(75% - 6px);
+  }
+}
+@media(max-width: 400px) {
+  .card {
+    width: 100%;
+    padding-bottom: calc(100% - 6px);
+  }
+}

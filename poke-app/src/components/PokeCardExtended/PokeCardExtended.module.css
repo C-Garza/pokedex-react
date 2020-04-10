@@ -2,12 +2,15 @@
   display: flex;
   position: relative;
   width: 75%;
-  /* height: 100%; */
-  /* padding-bottom: calc(20% - 6px); */
   margin: 15px;
   border: 3px solid #212121;
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   transition: all 0.15s ease;
+}
+@media(max-width: 1000px) {
+  .card {
+    width: 90%;
+  }
 }
