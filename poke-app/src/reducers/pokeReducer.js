@@ -25,7 +25,7 @@ export default (state=INIT_STATE, action) => {
         ...state,
         pokemonObjs: {
           ...state.pokemonObjs,
-          [action.payload.species.name]: action.payload
+          [action.payload.name]: action.payload
         }
       };
     case FETCH_POKEMON_SPECIES:
@@ -33,8 +33,8 @@ export default (state=INIT_STATE, action) => {
         ...state,
         pokemonObjs: {
           ...state.pokemonObjs,
-          [action.payload.name]: {
-            ...state.pokemonObjs[action.payload.name],
+          [action.payload.varieties[0].pokemon.name]: {
+            ...state.pokemonObjs[action.payload.varieties[0].pokemon.name],
             species_ext: action.payload
           }
         }
