@@ -20,7 +20,7 @@ export const fetchPokemon = (name, isExtended = false) => async dispatch => {
   console.log(response.data);
   dispatch({type: FETCH_POKEMON, payload: response.data});
   if(isExtended) {
-    dispatch(fetchPokemonSpecies(name));
+    return dispatch(fetchPokemonSpecies(response.data.id));
   }
   return Promise.resolve(true);
 };
