@@ -1,5 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 import styles from "./PokeCard.module.css";
 import PokeHeader from "../PokeHeader/PokeHeader";
 import {fetchPokemon} from "../../actions";
@@ -7,6 +8,8 @@ import {getTypesClass} from "../utils/helper-functions"
 import PokeDescription from "../PokeDescription/PokeDescription";
 
 class PokeCard extends React.Component {
+  state = {isFocus: false};
+
   componentDidMount() {
     if(!this.props.pokemonStats) {
       this.props.fetchPokemon(this.props.pokemon.name);
@@ -32,6 +35,9 @@ class PokeCard extends React.Component {
     }
     return arr;
   }
+  handleFocus = () => {
+    this.setState({isFocus: !this.state.isFocus});
+  }
   render() {
     if(!this.props.pokemonStats) {
       return(
@@ -41,15 +47,17 @@ class PokeCard extends React.Component {
         </div>
       );
     }
-    const nameCapitalized = this.props.pokemonStats.name.charAt(0).toUpperCase() + this.props.pokemonStats.name.slice(1);
+    const nameCapitalized = this.props.pokemonStats.species.name.charAt(0).toUpperCase() + this.props.pokemonStats.species.name.slice(1);
     const physicalChars = this.getPhysicalChars();
     const types = this.getTypes();
     let typesClassArr = getTypesClass(types);
-    const cardClasses = `${styles.card} ${typesClassArr[0].card}`
+    const cardClasses = `${styles.card} ${typesClassArr[0].card} ${styles.nav} ${this.state.isFocus ? styles.cardFocus : ""}`
     return(
-      <div className={cardClasses} onClick={this.props.handleNav}>
-        <PokeHeader id={this.props.pokemonStats.id} name={nameCapitalized} typeClass={typesClassArr[0]} />
-        <PokeDescription physicalChars={physicalChars} types={types} name={nameCapitalized} />
+      <div className={cardClasses}>
+        <Link to={`/pokemon/${this.props.pokemon.name}`} className={styles.nav} onFocus={this.handleFocus} onBlur={this.handleFocus}>
+          <PokeHeader id={this.props.pokemonStats.id} name={nameCapitalized} typeClass={typesClassArr[0]} />
+          <PokeDescription physicalChars={physicalChars} types={types} name={nameCapitalized} />
+        </Link>
       </div>
     );
   }
