@@ -40,7 +40,7 @@ class PokeCardExtended extends React.Component {
         </div>
       );
     }
-    const nameCapitalized = this.props.pokemonStats.name.charAt(0).toUpperCase() + this.props.pokemonStats.name.slice(1);
+    const nameCapitalized = this.props.pokemonStats.species.name.charAt(0).toUpperCase() + this.props.pokemonStats.species.name.slice(1);
     const physicalChars = this.getPhysicalChars();
     const types = this.getTypes();
     let typesClassArr = getTypesClass(types);
