@@ -20,9 +20,6 @@ class PokeListContainer extends React.Component {
   componentWillUnmount() {
     window.removeEventListener("scroll", this.handleScroll);
   }
-  handleCardNavigation = (pokemon) => {
-    this.props.history.push(`/pokemon/${pokemon.name}`);
-  }
   handleScroll = (e) => {
     let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
     if((window.innerHeight + scrollTop) >= document.body.offsetHeight - 200) {
@@ -35,7 +32,7 @@ class PokeListContainer extends React.Component {
   renderCards = () => {
     let cards = this.props.pokeList.slice(0, this.state.offset);
     return cards.map((pokemon) => {
-      return <PokeCard key={pokemon.name} pokemon={pokemon} handleNav={() => this.handleCardNavigation(pokemon)} />;
+      return <PokeCard key={pokemon.name} pokemon={pokemon} />;
     });
   }
   render() {
