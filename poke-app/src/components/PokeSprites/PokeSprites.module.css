@@ -45,6 +45,7 @@
   color: #ea1e63;
 }
 .sprites__sprite__container {
+  margin: auto;
   margin-top: 10px;
 }
 .symbol {
