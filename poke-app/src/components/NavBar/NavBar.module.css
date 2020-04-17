@@ -1,9 +1,259 @@
 .navbar {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
   padding: 5px;
+  background-color: #df3a27;
+  border-bottom: 2px solid #212121;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 .main__logo {
   font-family: "Oxanium";
   font-size: 2em;
   font-weight: 600;
   cursor: pointer;
+}
+/*****
+POKEDEX REACT MENU LIGHTS
+*****/
+.lights__container {
+  /* border: 1px solid green; */
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  margin-left: auto;
+}
+.lights__on {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  z-index: 1;
+}
+.lights__main {
+  position: relative;
+  border-radius: 50%;
+  width: 2.5em;
+  height: 2.5em;
+  /* background-color: #19699e; */
+  background: radial-gradient(circle at 0.65em 0.65em, #FFFFFF 3%, #28abfc 25%, #19699E 90%);
+  /* background: radial-gradient(circle at 0.65em 0.65em, #FFFFFF 3%, #1698e9); */
+  border: 3px solid #dddddd;
+}
+.lights__main__on.nav__menu__expanded {
+  background: radial-gradient(circle at 0.65em 0.65em, #FFFFFF 3%, #1680e9);
+  animation: flickerLightOn 0.5s ease-in-out;
+}
+.lights__main__on.nav__menu__closed {
+  background: radial-gradient(circle at 0.65em 0.65em, #FFFFFF 3%, #1680e9);
+  animation: flickerLightOff 0.5s ease-in-out forwards;
+}
+.lights__sub__one {
+  position: relative;
+  border-radius: 50%;
+  width: 1.2em;
+  height: 1.2em;
+  margin-left: 5px;
+  background: radial-gradient(circle at 0.33em 0.33em, #FFFFFF 3%, #e80934 25%, #9B0118 90%);
+  /* background: radial-gradient(circle at 0.33em 0.33em, #FFFFFF 3%, #c5072d); */
+  border: 2px solid #dddddd;
+}
+.lights__sub__one__on.nav__menu__expanded {
+  background: radial-gradient(circle at 0.33em 0.33em, #FFFFFF 3%, #f60938);
+  animation: flickerLightOn 0.5s ease-in-out;
+}
+.lights__sub__one__on.nav__menu__closed {
+  background: radial-gradient(circle at 0.33em 0.33em, #FFFFFF 3%, #f60938);
+  animation: flickerLightOff 0.5s ease-in-out forwards;
+}
+.lights__sub__two {
+  position: relative;
+  border-radius: 50%;
+  width: 1.2em;
+  height: 1.2em;
+  margin-left: 5px;
+  background: radial-gradient(circle at 0.33em 0.33em, #FFFFFF 3%, #fbe44b 25%, #a2880f 90%);
+  /* background: radial-gradient(circle at 0.33em 0.33em, #FFFFFF 3%, #fbdf28); */
+  border: 2px solid #dddddd;
+}
+.lights__sub__two__on.nav__menu__expanded {
+  background: radial-gradient(circle at 0.33em 0.33em, #FFFFFF 3%, #fadc19);
+  animation: flickerLightOn 0.5s ease-in-out;
+}
+.lights__sub__two__on.nav__menu__closed {
+  background: radial-gradient(circle at 0.33em 0.33em, #FFFFFF 3%, #fadc19);
+  animation: flickerLightOff 0.5s ease-in-out forwards;
+}
+.lights__sub__three {
+  position: relative;
+  border-radius: 50%;
+  width: 1.2em;
+  height: 1.2em;
+  margin-left: 5px;
+  background: radial-gradient(circle at 0.33em 0.33em, #FFFFFF 3%, #51a262 25%, #34693c 90%);
+  /* background: radial-gradient(circle at 0.33em 0.33em, #FFFFFF 3%, #468b55); */
+  border: 2px solid #dddddd;
+}
+.lights__sub__three__on.nav__menu__expanded {
+  background: radial-gradient(circle at 0.33em 0.33em, #FFFFFF 3%, #55aa68);
+  animation: flickerLightOn 0.5s ease-in-out;
+}
+.lights__sub__three__on.nav__menu__closed {
+  background: radial-gradient(circle at 0.33em 0.33em, #FFFFFF 3%, #55aa68);
+  animation: flickerLightOff 0.5s ease-in-out forwards;
+}
+/*****
+HAMBURGER MENU
+*****/
+.nav__menu {
+  height: 40px;
+  width: 40px;
+  margin-right: 25px;
+  margin-left: 25px;
+  border-radius: 5px;
+  border: 2px solid #212121;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  cursor: pointer;
+}
+.nav__menu__bar {
+  width: 28px;
+  height: 5px;
+  margin: auto;
+  margin-top: 5px;
+  background-color: #212121;
+  border-radius: 15px;
+  transition: all 0.15s;
+}
+.nav__menu:hover {
+  /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); */
+}
+.nav__menu__expanded {
+
+}
+.nav__menu__closed {
+
+}
+.nav__menu__closed .nav__menu__bar__one {
+  animation: navBarOneClose 0.5s ease forwards;
+}
+.nav__menu__closed .nav__menu__bar__two {
+  animation: navBarTwoClose 0.5s ease forwards;
+}
+.nav__menu__closed .nav__menu__bar__three {
+  animation: navBarThreeClose 0.5s ease forwards;
+}
+.nav__menu__expanded .nav__menu__bar__one {
+  animation: navBarOneOpen 0.5s ease forwards;
+}
+.nav__menu__expanded .nav__menu__bar__two {
+  animation: navBarTwoOpen 0.5s ease forwards;
+}
+.nav__menu__expanded .nav__menu__bar__three {
+  animation: navBarThreeOpen 0.5s ease forwards;
+}
+.nav__menu__list {
+  position: fixed;
+  height: calc(100% - 50px);
+  width: 20%;
+  right: 0;
+  bottom: 0;
+  background-color: #212121;
+  border: 2px solid #212121;
+  transform: translateX(105%);
+  transition: all 0.5s ease;
+}
+.nav__menu__list__expanded {
+  transform: translateX(0);
+}
+/*****
+ANIMATIONS
+*****/
+@keyframes flickerLightOn {
+  0% {
+    opacity: 0;
+  }
+  2% {
+    opacity: 0.25;
+  }
+  40% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 0.75;
+  }
+  80% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes flickerLightOff {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes navBarOneOpen {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(198%);
+  }
+  100% {
+    transform: translateY(198%) rotate(45deg);
+  }
+}
+@keyframes navBarTwoOpen {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes navBarThreeOpen {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-198%);
+  }
+  100% {
+    transform: translateY(-198%) rotate(-45deg);
+  }
+}
+@keyframes navBarOneClose {
+  0% {
+    transform: translateY(198%) rotate(45deg);
+  }
+  50% {
+    transform: translateY(198%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes navBarTwoClose {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes navBarThreeClose {
+  0% {
+    transform: translateY(-198%) rotate(-45deg);
+  }
+  50% {
+    transform: translateY(-198%);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
