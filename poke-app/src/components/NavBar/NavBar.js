@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import styles from "./NavBar.module.css";
+import NavSearch from "../NavSearch/NavSearch";
 
 const NavBar = () => {
   const [active, isActive] = useState(false);
@@ -25,6 +26,12 @@ const NavBar = () => {
   const handleNavClick = () => {
     isActive(!active);
   };
+  const handleNavKey = (e) => {
+    if(e.keyCode !== 13) {
+      return;
+    }
+    isActive(!active);
+  };
   return(
     <nav className={styles.navbar}>
       <div className={styles.main__logo__container}>
@@ -44,13 +51,13 @@ const NavBar = () => {
           <div className={`${styles.lights__sub__three__on} ${styles.lights__on} ${handleNavExpanded()}`}></div>
         </div>
       </div>
-      <div className={`${styles.nav__menu} ${handleNavExpanded()}`} onClick={handleNavClick} onKeyDown={handleNavClick} tabIndex="0">
+      <div className={`${styles.nav__menu} ${handleNavExpanded()}`} onClick={handleNavClick} onKeyDown={handleNavKey} tabIndex="0">
         <div className={`${styles.nav__menu__bar} ${styles.nav__menu__bar__one}`}></div>
         <div className={`${styles.nav__menu__bar} ${styles.nav__menu__bar__two}`}></div>
         <div className={`${styles.nav__menu__bar} ${styles.nav__menu__bar__three}`}></div>
       </div>
       <div className={`${styles.nav__menu__list} ${active ? styles.nav__menu__list__expanded : ""}`}>
-        
+        <NavSearch />
       </div>
     </nav>
   );

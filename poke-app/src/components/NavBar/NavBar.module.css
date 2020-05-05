@@ -36,7 +36,6 @@ POKEDEX REACT MENU LIGHTS
   border-radius: 50%;
   width: 2.5em;
   height: 2.5em;
-  /* background-color: #19699e; */
   background: radial-gradient(circle at 0.65em 0.65em, #FFFFFF 3%, #28abfc 25%, #19699E 90%);
   /* background: radial-gradient(circle at 0.65em 0.65em, #FFFFFF 3%, #1698e9); */
   border: 3px solid #dddddd;
@@ -156,14 +155,17 @@ HAMBURGER MENU
   position: fixed;
   height: calc(100% - 50px);
   width: 20%;
+  /* width: 300px; */
   right: 0;
   bottom: 0;
+  visibility: hidden;
   background-color: #212121;
   border: 2px solid #212121;
   transform: translateX(105%);
   transition: all 0.5s ease;
 }
 .nav__menu__list__expanded {
+  visibility: visible;
   transform: translateX(0);
 }
 /*****
