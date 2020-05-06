@@ -62,6 +62,7 @@ SUGGESTIONS
   height: 60px;
 }
 .suggestion__name {
+  margin-left: auto;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
