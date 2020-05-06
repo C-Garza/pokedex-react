@@ -154,8 +154,7 @@ HAMBURGER MENU
 .nav__menu__list {
   position: fixed;
   height: calc(100% - 50px);
-  width: 20%;
-  /* width: 300px; */
+  width: 400px;
   right: 0;
   bottom: 0;
   visibility: hidden;
@@ -167,6 +166,24 @@ HAMBURGER MENU
 .nav__menu__list__expanded {
   visibility: visible;
   transform: translateX(0);
+}
+/*****
+MEDIA QUERIES
+*****/
+@media(min-width: 2250px) {
+  .nav__menu__list {
+    width: 20%;
+  }
+}
+@media(max-width: 800px) {
+  .nav__menu__list {
+    width: 50%;
+  }
+}
+@media(max-width: 640px) {
+  .nav__menu__list {
+    width: 100%;
+  }
 }
 /*****
 ANIMATIONS
