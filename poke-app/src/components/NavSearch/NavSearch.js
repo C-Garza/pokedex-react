@@ -112,9 +112,9 @@ class NavSearch extends React.Component {
               let selectedTermClass = styles.suggestion;
               let indexOfInput = suggestion.name.toLowerCase().indexOf(userInput.toLowerCase());
               let suggestionHighlighted = [
-                suggestion.name.substring(0, indexOfInput),
-                <span key={suggestion.id} className={styles.suggestion__text__hightlight}>{suggestion.name.substring(indexOfInput, indexOfInput + userInput.length)}</span>,
-                suggestion.name.substring(indexOfInput + userInput.length)
+                <p className={styles.suggestion__name}>{suggestion.name.substring(0, indexOfInput)}
+                <span key={suggestion.id} className={styles.suggestion__text__hightlight}>{suggestion.name.substring(indexOfInput, indexOfInput + userInput.length)}</span>
+                {suggestion.name.substring(indexOfInput + userInput.length)}</p>
               ];
               let suggestionID = `#${suggestion.id}`;
 
