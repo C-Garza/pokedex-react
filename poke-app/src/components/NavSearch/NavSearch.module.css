@@ -82,7 +82,11 @@ TEMP FIX UNTIL MOUSEOVER FUNCTION IS MADE
   color: white;
 }
 .suggestions__none {
-  
+  text-align: center;
+  border-top: 2px solid #212121;
+  border-radius: 0 0 25px 25px;
+  font-size: 1.2em;
+  font-weight: 700;
 }
 /*****
 SEARCH BUTTONS
