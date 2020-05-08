@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import styles from "./NavBar.module.css";
 import NavSearch from "../NavSearch/NavSearch";
+import NavType from "../NavType/NavType";
 
 const NavBar = () => {
   const [active, isActive] = useState(false);
@@ -58,6 +59,7 @@ const NavBar = () => {
       </div>
       <div className={`${styles.nav__menu__list} ${active ? styles.nav__menu__list__expanded : ""}`}>
         <NavSearch />
+        <NavType />
       </div>
     </nav>
   );
