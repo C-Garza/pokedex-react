@@ -24,6 +24,15 @@ class NavType extends React.Component {
       this.setState({filterHistory: [...newArr, selectedType]});
     }
   }
+  handleTypeKey = (e) => {
+    if(e.keyCode !== 13 && e.keyCode !== 32) {
+      return;
+    }
+    if(e.keyCode === 32) {
+      e.preventDefault();
+    }
+    this.handleTypeClick(e);
+  }
   renderCheckboxes = (types) => {
     const {filterHistory} = this.state;
     return types.map(type => {
@@ -34,7 +43,9 @@ class NavType extends React.Component {
             `${styles.types__checkbox} ${isActive ? `${styles[`types__checkbox__${type}__active`]} ${styles.active}` : styles[`types__checkbox__${type}`]}`
           }
           key={type}
+          tabIndex="0"
           onClick={this.handleTypeClick}
+          onKeyDown={this.handleTypeKey}
         >
           <i className={`fas fa-plus ${styles.types__filter__icon} ${isActive ? styles.hidden : ""}`}></i>
           <i className={`fas fa-minus ${styles.types__filter__icon} ${isActive ? "" : styles.hidden}`}></i>
@@ -57,6 +68,7 @@ class NavType extends React.Component {
           <h3 className={styles.types__filter__heading}>Filter by Type(s)</h3>
           <div className={styles.types__filter__container}>
             {this.renderCheckboxes(typesArr)}
+            <button className={`${styles.types__filter__button} ${styles.types__filter__search}`}>Search</button>
           </div>
         </div>
       </div>
