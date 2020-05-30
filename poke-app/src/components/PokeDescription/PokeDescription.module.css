@@ -47,6 +47,11 @@
   border-radius: 25px;
   text-align: center;
   color: white;
+  text-shadow:
+  -1px -1px 0 #000,  
+   1px -1px 0 #000,
+   -1px 1px 0 #000,
+    1px 1px 0 #000;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 @media(min-width: 2500px) {
