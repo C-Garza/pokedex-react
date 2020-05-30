@@ -23,13 +23,13 @@ BACKGROUND COLORS FOR POKECARDS TYPES
   background-color: #EEEEEE;
 }
 .pokeTypeLogoFlyingCard {
-  background-color: #90CAF9;
+  background-color: #9bb1eb;
 }
 .pokeTypeLogoElectricCard {
   background-color: #FFEE58;
 }
 .pokeTypeLogoGroundCard {
-  background-color: #A1887F;
+  background-color: #dcc481;
 }
 .pokeTypeLogoFairyCard {
   background-color: #FFCDD2;
@@ -50,7 +50,7 @@ BACKGROUND COLORS FOR POKECARDS TYPES
   background-color: #B3E5FC;
 }
 .pokeTypeLogoGhostCard {
-  background-color: #f6b4f6;
+  background-color: #6e5896;
 }
 .pokeTypeLogoDragonCard {
   background-color: #B39DDB;
@@ -95,10 +95,10 @@ BACKGROUND COLORS FOR POKE TYPE LOGOS
   background-color: #80341d;
 }
 .pokeTypeLogoPsychic {
-  background-color: #EC407A;
+  background-color: #db326a;
 }
 .pokeTypeLogoRock {
-  background-color: #b69e53;
+  background-color: #9e863d;
 }
 .pokeTypeLogoSteel {
   background-color: #8e8e9f;
@@ -107,7 +107,7 @@ BACKGROUND COLORS FOR POKE TYPE LOGOS
   background-color: #80D8FF;
 }
 .pokeTypeLogoGhost {
-  background-color: #f6b4f6;
+  background-color: #5e60b1;
 }
 .pokeTypeLogoDragon {
   background-color: #6e57d3;
@@ -137,13 +137,13 @@ BORDER COLORS FOR POKECARDS TYPES
   border: 7px solid #EEEEEE;
 }
 .pokeTypeLogoFlyingCardBorder {
-  border: 7px solid #90CAF9;
+  border: 7px solid #9bb1eb;
 }
 .pokeTypeLogoElectricCardBorder {
   border: 7px solid #FFEE58;
 }
 .pokeTypeLogoGroundCardBorder {
-  border: 7px solid #A7887F;
+  border: 7px solid #dcc481;
 }
 .pokeTypeLogoFairyCardBorder {
   border: 7px solid #FFCDD2;
@@ -164,7 +164,7 @@ BORDER COLORS FOR POKECARDS TYPES
   border: 7px solid #B3E5FC;
 }
 .pokeTypeLogoGhostCardBorder {
-  border: 7px solid #f6b4f6;
+  border: 7px solid #6e5896;
 }
 .pokeTypeLogoDragonCardBorder {
   border: 7px solid #B39DDB;
