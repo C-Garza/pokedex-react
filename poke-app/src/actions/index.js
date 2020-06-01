@@ -2,7 +2,8 @@ import pokeAPI from "../apis/pokeAPI";
 import {
   FETCH_POKE_LIST,
   FETCH_POKEMON,
-  FETCH_POKEMON_SPECIES
+  FETCH_POKEMON_SPECIES,
+  FETCH_TYPE
 } from "./types";
 
 export const fetchPokeList = (limit, offset) => async dispatch => {
@@ -29,4 +30,10 @@ export const fetchPokemonSpecies = (name) => async dispatch => {
   const response = await pokeAPI.get(`pokemon-species/${name}`);
   console.log(response.data);
   dispatch({type: FETCH_POKEMON_SPECIES, payload: response.data});
+}
+
+export const fetchTypes = (index) => async dispatch => {
+  const response = await pokeAPI.get(`type/${index}`);
+  console.log(response.data);
+  dispatch({type: FETCH_TYPE, payload: response.data});
 }
