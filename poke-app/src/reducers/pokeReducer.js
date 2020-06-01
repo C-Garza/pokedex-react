@@ -1,7 +1,8 @@
 import {
   FETCH_POKE_LIST, 
   FETCH_POKEMON,
-  FETCH_POKEMON_SPECIES
+  FETCH_POKEMON_SPECIES,
+  FETCH_TYPE
 } from "../actions/types";
 
 const INIT_STATE = {
@@ -9,6 +10,9 @@ const INIT_STATE = {
     pokeList: []
   },
   pokemonObjs: {
+
+  },
+  types: {
 
   }
 };
@@ -39,6 +43,14 @@ export default (state=INIT_STATE, action) => {
           }
         }
       };
+    case FETCH_TYPE:
+      return {
+        ...state,
+        types: {
+          ...state.types,
+          [action.payload.name]: [...action.payload.pokemon]
+        }
+      };
     default:
       return state;
   }
@@ -53,5 +65,8 @@ export default (state=INIT_STATE, action) => {
 //      ...pokemon,
 //      species.ext{}
 //    }
+//  }
+//  types: {
+//    fighting: []
 //  }
 // }
