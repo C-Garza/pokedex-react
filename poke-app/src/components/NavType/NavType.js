@@ -1,12 +1,16 @@
 import React from "react";
 import {connect} from "react-redux";
 import styles from "./NavType.module.css";
+import {fetchTypes} from "../../actions";
 
 class NavType extends React.Component {
   state = {filterHistory: []};
 
   componentDidMount() {
-
+    const NUM_OF_TYPES = 19;
+    for(let i = 1; i < NUM_OF_TYPES; i++) {
+      this.props.fetchTypes(i);
+    }
   }
   handleTypeClick = (e) => {
     const {filterHistory} = this.state;
@@ -32,6 +36,9 @@ class NavType extends React.Component {
       e.preventDefault();
     }
     this.handleTypeClick(e);
+  }
+  handleSearchButton = (e) => {
+    //SEND TO SEARCH PAGE WHICH IS POKELISTCONTAINER WITH SEARCH RESULTS
   }
   renderCheckboxes = (types) => {
     const {filterHistory} = this.state;
@@ -68,7 +75,12 @@ class NavType extends React.Component {
           <h3 className={styles.types__filter__heading}>Filter by Type(s)</h3>
           <div className={styles.types__filter__container}>
             {this.renderCheckboxes(typesArr)}
-            <button className={`${styles.types__filter__button} ${styles.types__filter__search}`}>Search</button>
+            <button 
+              className={`${styles.types__filter__button} ${styles.types__filter__search}`}
+              onClick={this.handleSearchButton}
+            >
+              Search
+            </button>
           </div>
         </div>
       </div>
@@ -77,7 +89,7 @@ class NavType extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {pokemonTypes: state.pokemon.types};
 };
 
-export default connect(mapStateToProps, {})(NavType);
+export default connect(mapStateToProps, {fetchTypes})(NavType);
