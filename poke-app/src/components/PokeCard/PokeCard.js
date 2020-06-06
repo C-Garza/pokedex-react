@@ -22,17 +22,11 @@ class PokeCard extends React.Component {
     }
   }
   getTypes = () => {
-    let doReverse = false;
-    let arr = this.props.pokemonStats.types.map((type) => {
-      if(type.slot > 1 && !doReverse) {
-        doReverse = true;
-      }
+    let arr = this.props.pokemonStats.types.sort((a,b) => {
+      return a.slot - b.slot;
+    }).map(type => {
       return type.type.name;
     });
-    ////LET MAIN TYPE BE FIRST SHOWN
-    if(doReverse) {
-      return arr.reverse();
-    }
     return arr;
   }
   handleFocus = () => {
