@@ -7,28 +7,25 @@ import {getTypesClass} from "../utils/helper-functions"
 class PokeCardExtended extends React.Component {
   getPhysicalChars = () => {
     let englishDesc = this.props.pokemonStats.species_ext.flavor_text_entries.find(text => {
+      return text.language.name === "en" && (text.version.name === "ultra-sun" || text.version.name === "omega-ruby");
+    });
+    let englishGenera = this.props.pokemonStats.species_ext.genera.find(text => {
       return text.language.name === "en";
     });
     return {
       height: this.props.pokemonStats.height / 10,
       weight: this.props.pokemonStats.weight / 10,
       desc: englishDesc.flavor_text,
-      genera: this.props.pokemonStats.species_ext.genera[2].genus,
+      genera: englishGenera.genus,
       abilities: this.props.pokemonStats.abilities
     }
   }
   getTypes = () => {
-    let doReverse = false;
-    let arr = this.props.pokemonStats.types.map((type) => {
-      if(type.slot > 1 && !doReverse) {
-        doReverse = true;
-      }
+    let arr = this.props.pokemonStats.types.sort((a,b) => {
+      return a.slot - b.slot;
+    }).map(type => {
       return type.type.name;
     });
-    ////LET MAIN TYPE BE FIRST SHOWN
-    if(doReverse) {
-      return arr.reverse();
-    }
     return arr;
   }
   render() {
