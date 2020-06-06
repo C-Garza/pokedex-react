@@ -30,10 +30,10 @@ export const fetchPokemonSpecies = (name) => async dispatch => {
   const response = await pokeAPI.get(`pokemon-species/${name}`);
   console.log(response.data);
   dispatch({type: FETCH_POKEMON_SPECIES, payload: response.data});
-}
+};
 
 export const fetchTypes = (index) => async dispatch => {
   const response = await pokeAPI.get(`type/${index}`);
   console.log(response.data);
   dispatch({type: FETCH_TYPE, payload: response.data});
-}
+};
