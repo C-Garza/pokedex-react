@@ -1,5 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
+import {withRouter} from "react-router";
 import styles from "./NavType.module.css";
 import {fetchTypes} from "../../actions";
 
@@ -7,10 +8,7 @@ class NavType extends React.Component {
   state = {filterHistory: []};
 
   componentDidMount() {
-    const NUM_OF_TYPES = 19;
-    for(let i = 1; i < NUM_OF_TYPES; i++) {
-      this.props.fetchTypes(i);
-    }
+    
   }
   handleTypeClick = (e) => {
     const {filterHistory} = this.state;
@@ -38,7 +36,12 @@ class NavType extends React.Component {
     this.handleTypeClick(e);
   }
   handleSearchButton = (e) => {
-    //SEND TO SEARCH PAGE WHICH IS POKELISTCONTAINER WITH SEARCH RESULTS
+    const {filterHistory} = this.state;
+    let queryPar = "";
+    for(let i = 0; i < filterHistory.length; i++) {
+      i === 0 ? queryPar = `type=${filterHistory[i]}` : queryPar += `&type=${filterHistory[i]}`;
+    }
+    this.props.history.push(`/search?${queryPar}`);
   }
   renderCheckboxes = (types) => {
     const {filterHistory} = this.state;
@@ -92,4 +95,4 @@ const mapStateToProps = (state) => {
   return {pokemonTypes: state.pokemon.types};
 };
 
-export default connect(mapStateToProps, {fetchTypes})(NavType);
+export default withRouter(connect(mapStateToProps, {fetchTypes})(NavType));
