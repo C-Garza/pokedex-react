@@ -3,11 +3,20 @@
   flex-direction: column;
   align-items: center;
   color: white;
+  border: 1px solid green;
 }
 .types__collapsible {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.types__collapsible__hidden {
+  display: none;
+}
+.types__container__header {
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
 }
 .types__filter__heading {
 

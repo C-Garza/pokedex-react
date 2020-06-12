@@ -43,6 +43,9 @@ class NavType extends React.Component {
     }
     this.props.history.push(`/search?${queryPar}`);
   }
+  handleToggleRow = (e) => {
+    this.props.toggleRow(this.props.rowIndex);
+  }
   renderCheckboxes = (types) => {
     const {filterHistory} = this.state;
     return types.map(type => {
@@ -73,8 +76,10 @@ class NavType extends React.Component {
     ];
     return(
       <div className={styles.types__container}>
-        <h2>TYPES</h2>
-        <div className={`${styles.types__collapsible} ${styles.types__collapsible__hidden}`}>
+        <div className={styles.types__container__header} onClick={this.handleToggleRow}>
+          <h2>TYPES</h2>
+        </div>
+        <div className={`${this.props.isOpenIndex === this.props.rowIndex ? styles.types__collapsible : styles.types__collapsible__hidden}`}>
           <h3 className={styles.types__filter__heading}>Filter by Type(s)</h3>
           <div className={styles.types__filter__container}>
             {this.renderCheckboxes(typesArr)}
