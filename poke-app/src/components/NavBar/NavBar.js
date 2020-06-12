@@ -7,6 +7,8 @@ import NavType from "../NavType/NavType";
 const NavBar = () => {
   const [active, isActive] = useState(false);
   const [loaded, hasLoaded] = useState(false);
+  const [openedRow, openedRowIndex] = useState(-1);
+  const rowIndex = [1];
   console.log(active);
 
   const handleNavExpanded = () => {
@@ -32,6 +34,13 @@ const NavBar = () => {
       return;
     }
     isActive(!active);
+  };
+  const toggleRow = (i) => {
+    if(openedRow === i) {
+      openedRowIndex(-1);
+      return;
+    }
+    openedRowIndex(i);
   };
   return(
     <nav className={styles.navbar}>
@@ -59,7 +68,9 @@ const NavBar = () => {
       </div>
       <div className={`${styles.nav__menu__list} ${active ? styles.nav__menu__list__expanded : ""}`}>
         <NavSearch />
-        <NavType />
+        <div className={styles.nav__menu__list__collapsible}>
+          <NavType toggleRow={toggleRow} isOpenIndex={openedRow} rowIndex={rowIndex[0]} />
+        </div>
       </div>
     </nav>
   );
