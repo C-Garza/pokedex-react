@@ -59,6 +59,15 @@ class NavSearch extends React.Component {
       userInput: e.currentTarget.innerText.slice(0, -4)
     });
   }
+  handleRandomButton = (e) => {
+    let randomPoke = this.props.pokeList[Math.floor(Math.random() * this.props.pokeList.length)];
+    this.props.history.push(`/pokemon/${randomPoke.name}`);
+    this.setState({
+      selectedTerm: 0,
+      filteredSuggestions: [],
+      showSuggestions: false
+    });
+  }
   handleKeyDown = (e) => {
     const {selectedTerm, filteredSuggestions} = this.state;
 
@@ -164,7 +173,12 @@ class NavSearch extends React.Component {
           </ul>
           <div className={`${styles.search__buttons} ${styles.search__buttons__open}`}>
             <button className={`${styles.search__buttons__button} ${styles.search__buttons__search}`}>Search</button>
-            <button className={`${styles.search__buttons__button} ${styles.search__buttons__random}`}>Random</button>
+            <button 
+              className={`${styles.search__buttons__button} ${styles.search__buttons__random}`}
+              onClick={this.handleRandomButton}
+            >
+              Random
+            </button>
           </div>
           </React.Fragment>
         );
@@ -194,7 +208,12 @@ class NavSearch extends React.Component {
         </div>
         <div className={`${styles.search__buttons} ${this.state.showSuggestions ? styles.tabHidden : ""}`}>
           <button className={`${styles.search__buttons__button} ${styles.search__buttons__search}`}>Search</button>
-          <button className={`${styles.search__buttons__button} ${styles.search__buttons__random}`}>Random</button>
+          <button 
+            className={`${styles.search__buttons__button} ${styles.search__buttons__random}`}
+            onClick={this.handleRandomButton}
+          >
+            Random
+          </button>
         </div>
       </div>
     )
