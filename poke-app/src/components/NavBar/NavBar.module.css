@@ -167,6 +167,9 @@ HAMBURGER MENU
   visibility: visible;
   transform: translateX(0);
 }
+.nav__menu__list__collapsible {
+  margin-top: 50px;
+}
 /*****
 MEDIA QUERIES
 *****/
