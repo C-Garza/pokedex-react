@@ -3,19 +3,26 @@
   flex-direction: column;
   align-items: center;
   color: white;
-  border: 1px solid green;
+  overflow: hidden;
 }
 .types__collapsible {
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: all 0.5s;
+}
+.types__collapsible__open {
+  max-height: 400px;
+  transition: all 0.15s ease-in-out;
 }
 .types__collapsible__hidden {
-  display: none;
+  max-height: 0;
+  transition: all 0.15s ease-in-out;
 }
 .types__container__header {
   width: 100%;
   text-align: center;
+  user-select: none;
   cursor: pointer;
 }
 .types__filter__heading {

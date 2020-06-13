@@ -79,7 +79,10 @@ class NavType extends React.Component {
         <div className={styles.types__container__header} onClick={this.handleToggleRow}>
           <h2>TYPES</h2>
         </div>
-        <div className={`${this.props.isOpenIndex === this.props.rowIndex ? styles.types__collapsible : styles.types__collapsible__hidden}`}>
+        <div className={
+          `${styles.types__collapsible}
+          ${this.props.isOpenIndex === this.props.rowIndex ? styles.types__collapsible__open : styles.types__collapsible__hidden}`
+        }>
           <h3 className={styles.types__filter__heading}>Filter by Type(s)</h3>
           <div className={styles.types__filter__container}>
             {this.renderCheckboxes(typesArr)}
