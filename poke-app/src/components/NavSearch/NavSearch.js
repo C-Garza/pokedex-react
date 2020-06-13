@@ -9,10 +9,10 @@ class NavSearch extends React.Component {
   node = React.createRef();
 
   componentDidMount() {
-    window.addEventListener("mousedown", this.handleOutsideClick);
+    window.addEventListener("click", this.handleOutsideClick);
   }
   componentWillUnmount() {
-    window.removeEventListener("mousedown", this.handleOutsideClick);
+    window.removeEventListener("click", this.handleOutsideClick);
   }
   componentDidUpdate() {
     if(this.activeSuggestion.current !== null && this.state.showSuggestions) {
