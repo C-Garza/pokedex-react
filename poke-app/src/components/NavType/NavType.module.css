@@ -3,15 +3,34 @@
   flex-direction: column;
   align-items: center;
   color: white;
-  border: 2px solid white;
+  border: 2px solid #FBF5F3;
   border-left: none;
   border-right: none;
   overflow: hidden;
+}
+.types__container__header {
+  background-color: #df3a27;
+  font-family: "Oxanium";
+  font-weight: 400;
+}
+.types__container__header:hover {
+  background-color: #D53220;
+}
+.types__container__header:focus {
+  background-color: #D53220;
+}
+.row__one {
+  border-bottom: none;
+}
+.types__container__header__open {
+  border-bottom: 2px solid #212121;
 }
 .types__collapsible {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #FBF5F3;
+  color: black;
   transition: all 0.5s;
 }
 .types__collapsible__open {
@@ -20,6 +39,7 @@
 }
 .types__collapsible__hidden {
   max-height: 0;
+  visibility: hidden;
   transition: all 0.15s ease-in-out;
 }
 .types__container__header {
@@ -29,7 +49,7 @@
   cursor: pointer;
 }
 .types__filter__heading {
-
+  
 }
 .types__filter__container {
   display: flex;

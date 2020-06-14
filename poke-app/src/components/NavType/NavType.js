@@ -46,6 +46,12 @@ class NavType extends React.Component {
   handleToggleRow = (e) => {
     this.props.toggleRow(this.props.rowIndex);
   }
+  handleToggleRowKey = (e) => {
+    if(e.keyCode !== 13) {
+      return;
+    }
+    this.props.toggleRow(this.props.rowIndex);
+  }
   renderCheckboxes = (types) => {
     const {filterHistory} = this.state;
     return types.map(type => {
@@ -75,8 +81,16 @@ class NavType extends React.Component {
       "ghost", "steel", "dragon", "fairy"
     ];
     return(
-      <div className={styles.types__container}>
-        <div className={styles.types__container__header} onClick={this.handleToggleRow}>
+      <div className={`${styles.types__container} ${this.props.rowClass ? styles[this.props.rowClass] : ""}`}>
+        <div 
+          className={`
+            ${styles.types__container__header} 
+            ${this.props.isOpenIndex === this.props.rowIndex ? styles.types__container__header__open : styles.types__container__header__closed}
+          `} 
+          onClick={this.handleToggleRow} 
+          onKeyDown={this.handleToggleRowKey} 
+          tabIndex="0"
+        >
           <h2>TYPES</h2>
         </div>
         <div className={
