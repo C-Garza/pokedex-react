@@ -1,0 +1,13 @@
+.search__results__container {
+
+}
+.search__results__header__container {
+  max-width: 75%;
+  margin: auto;
+  margin-top: 75px;
+  font-family: "Oxanium";
+  font-size: 0.9em;
+}
+.search__results__header {
+  margin: 0;
+}
