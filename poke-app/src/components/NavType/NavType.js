@@ -37,6 +37,9 @@ class NavType extends React.Component {
   }
   handleSearchButton = (e) => {
     const {filterHistory} = this.state;
+    if(!filterHistory.length) {
+      return;
+    }
     let queryPar = "";
     for(let i = 0; i < filterHistory.length; i++) {
       i === 0 ? queryPar = `type=${filterHistory[i]}` : queryPar += `&type=${filterHistory[i]}`;
