@@ -59,6 +59,17 @@ class NavSearch extends React.Component {
       userInput: e.currentTarget.innerText.slice(0, -4)
     });
   }
+  handleSearchButton = (e) => {
+    if(!this.state.userInput || !this.state.filteredSuggestions.length) {
+      return;
+    }
+    let queryPar = this.state.userInput;
+    this.props.history.push(`/search?name=${queryPar}`);
+    this.setState({
+      selectedTerm: 0,
+      showSuggestions: false
+    });
+  }
   handleRandomButton = (e) => {
     let randomPoke = this.props.pokeList[Math.floor(Math.random() * this.props.pokeList.length)];
     this.props.history.push(`/pokemon/${randomPoke.name}`);
@@ -172,7 +183,12 @@ class NavSearch extends React.Component {
             })}
           </ul>
           <div className={`${styles.search__buttons} ${styles.search__buttons__open}`}>
-            <button className={`${styles.search__buttons__button} ${styles.search__buttons__search}`}>Search</button>
+            <button 
+              className={`${styles.search__buttons__button} ${styles.search__buttons__search}`}
+              onClick={this.handleSearchButton}
+            >
+              Search
+            </button>
             <button 
               className={`${styles.search__buttons__button} ${styles.search__buttons__random}`}
               onClick={this.handleRandomButton}
@@ -207,7 +223,12 @@ class NavSearch extends React.Component {
             {this.renderSuggestions()}
         </div>
         <div className={`${styles.search__buttons} ${this.state.showSuggestions ? styles.tabHidden : ""}`}>
-          <button className={`${styles.search__buttons__button} ${styles.search__buttons__search}`}>Search</button>
+          <button 
+            className={`${styles.search__buttons__button} ${styles.search__buttons__search}`}
+            onClick={this.handleSearchButton}
+          >
+            Search
+          </button>
           <button 
             className={`${styles.search__buttons__button} ${styles.search__buttons__random}`}
             onClick={this.handleRandomButton}
