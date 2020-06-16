@@ -151,6 +151,9 @@ HAMBURGER MENU
 .nav__menu__expanded .nav__menu__bar__three {
   animation: navBarThreeOpen 0.5s ease forwards;
 }
+/*****
+NAV SIDEBAR
+*****/
 .nav__menu__list {
   position: fixed;
   height: calc(100% - 50px);
@@ -168,7 +171,7 @@ HAMBURGER MENU
   transform: translateX(0);
 }
 .nav__menu__list__collapsible {
-  margin-top: 50px;
+  margin-top: 165px;
 }
 /*****
 MEDIA QUERIES
