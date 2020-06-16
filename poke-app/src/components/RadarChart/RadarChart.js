@@ -75,7 +75,10 @@ class RadarChart extends React.PureComponent {
           titleFontFamily: "Oxanium", ////CHANGE
           titleFontSize: 14,
           titleFontStyle: "normal",
-          bodyFontFamily: "Oxanium"
+          bodyFontFamily: "Oxanium",
+          callbacks: {
+            title: (tooltipItem, data) => data.labels[tooltipItem[0].index]
+          }
           // displayColors: false
         }
       }
