@@ -36,7 +36,7 @@ class PokeListContainer extends React.Component {
       return <div>Loading...</div>;
     }
     return(
-      <div className={styles.container}>
+      <div className={`${styles.container} ${this.props.searchResults ? styles.small__container : ""}`}>
         {this.renderCards()}
       </div>
     );
