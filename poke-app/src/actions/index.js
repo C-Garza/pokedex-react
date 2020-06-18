@@ -3,7 +3,8 @@ import {
   FETCH_POKE_LIST,
   FETCH_POKEMON,
   FETCH_POKEMON_SPECIES,
-  FETCH_TYPE
+  FETCH_TYPE,
+  SET_CHART_PREFERENCE
 } from "./types";
 
 export const fetchPokeList = (limit, offset) => async dispatch => {
@@ -36,4 +37,8 @@ export const fetchTypes = (index) => async dispatch => {
   const response = await pokeAPI.get(`type/${index}`);
   console.log(response.data);
   dispatch({type: FETCH_TYPE, payload: response.data});
+};
+
+export const setChartPreference = (chart) => {
+  return {type: SET_CHART_PREFERENCE, payload: chart};
 };
