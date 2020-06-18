@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./RadarChart.module.css";
 import Chart from "chart.js";
-let radarChart;
+let currentChart;
 
 class RadarChart extends React.PureComponent {
   chartRef = React.createRef();
@@ -14,14 +14,16 @@ class RadarChart extends React.PureComponent {
   }
   initChart = () => {
     const chart = this.chartRef.current.getContext("2d");
+    let barColors = ["rgba(244, 67, 54, 0.1)", "rgba(183, 28, 28, 0.1)", "rgba(13, 71, 161, 0.1)", "rgba(49, 27, 146, 0.1)", "rgba(1, 87, 155, 0.1)", "rgba(136, 14, 79, 0.1)"];
+    let hoverBarColors = ["rgba(244, 67, 54, 0.4)", "rgba(183, 28, 28, 0.4)", "rgba(13, 71, 161, 0.4)", "rgba(49, 27, 146, 0.4)", "rgba(1, 87, 155, 0.4)", "rgba(136, 14, 79, 0.4)"];
 
-    if(typeof radarChart !== "undefined") {
-      radarChart.destroy();
+    if(typeof currentChart !== "undefined") {
+      currentChart.destroy();
     }
-
-    radarChart = new Chart(chart, {
-      type: "radar",
-      data: {
+    let chartData = null;
+    let chartOptions = null;
+    if(this.props.chartType === "radar") {
+      chartData = {
         labels: ["HP", "Attack", "Defense", "Speed", "Sp. Def", "Sp. Atk"],
         datasets: [{
           label: this.nameCapitalized(this.props.pokemonStats.name),
@@ -35,13 +37,10 @@ class RadarChart extends React.PureComponent {
           pointHoverBackgroundColor: "#ffffff",
           pointHoverBorderColor: "#36a2eb",
           lineTension: 0.1,
-          data: this.filterStats(this.props.pokemonStats.stats)
+          data: this.filterStats(this.props.pokemonStats.stats),
         }]
-      },
-      options: {
-        hover: {
-          // animationDuration: 0
-        },
+      };
+      chartOptions = {
         legend: {
           // onHover: {
           //   ////CHANGE OPACITY TO FULL
@@ -81,7 +80,53 @@ class RadarChart extends React.PureComponent {
           }
           // displayColors: false
         }
-      }
+      };
+    }
+    if(this.props.chartType === "horizontalBar") {
+      chartData = {
+        labels: ["HP", "Attack", "Defense", "Speed", "Sp. Def", "Sp. Atk"],
+        datasets: [{
+          label: this.nameCapitalized(this.props.pokemonStats.name),
+          backgroundColor: barColors,
+          borderColor: ["#F44336", "#B71C1C", "#0D47A1", "#311B92", "#01579B", "#880E4F"],
+          data: this.filterStats(this.props.pokemonStats.stats),
+          borderWidth: 1,
+          hoverBackgroundColor: hoverBarColors
+        }]
+      };
+      chartOptions = {
+        hover: {
+          animationDuration: 0
+        },
+        legend: {
+          labels: {
+            fontFamily: "Oxanium",
+            fontSize: 14
+          }
+        },
+        scales: {
+          xAxes: [{
+            ticks: {
+              beginAtZero: true,
+              suggestedMax: 120
+            }
+          }]
+        },
+        tooltips: {
+          titleFontFamily: "Oxanium", ////CHANGE
+          titleFontSize: 14,
+          titleFontStyle: "normal",
+          bodyFontFamily: "Oxanium",
+          callbacks: {
+            title: (tooltipItem, data) => data.labels[tooltipItem[0].index]
+          }
+        }
+      };
+    }
+    currentChart = new Chart(chart, {
+      type: this.props.chartType,
+      data: chartData, 
+      options: chartOptions
     });
   }
   nameCapitalized = (name) => {
