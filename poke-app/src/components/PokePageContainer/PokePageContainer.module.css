@@ -19,6 +19,27 @@
   width: 65%;
   border-radius: 15px;
 }
+.stats__chart__menu {
+  margin: 5px 0 0 15px;
+  font-family: "Oxanium";
+}
+.stats__chart__menu__header {
+  font-weight: 600;
+  font-size: 1.1em;
+}
+.stats__chart__menu__list {
+  cursor: pointer;
+  font-family: "Oxanium";
+  font-weight: 600;
+}
+.stats__chart__menu__list:hover {
+  border-color: #212121;
+}
+.stats__chart__menu__list option {
+  font-family: "Oxanium", Arial;
+  font-weight: 400;
+  font-size: 1.1em;
+}
 .spritesContainer {
   width: 35%;
   border-left: 3px solid #212121;

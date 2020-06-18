@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import styles from "./PokePageContainer.module.css";
 import PokeCardExtended from "../PokeCardExtended/PokeCardExtended";
 import RadarChart from "../RadarChart/RadarChart";
-import {fetchPokeList ,fetchPokemon, fetchPokemonSpecies} from "../../actions";
+import {fetchPokeList, fetchPokemon, fetchPokemonSpecies, setChartPreference} from "../../actions";
 import PokeSprites from "../PokeSprites/PokeSprites";
 
 class PokePageContainer extends React.Component {
@@ -24,6 +24,9 @@ class PokePageContainer extends React.Component {
         this.getPageControlsLink();
       }
     }
+  }
+  handleChange = (e) => {
+    this.props.setChartPreference(e.target.value);
   }
   getPageControlsLink = () => {
     let pokeID = this.props.pokemonStats.id;
@@ -69,7 +72,14 @@ class PokePageContainer extends React.Component {
         <PokeCardExtended pokemonStats={this.props.pokemonStats} />
         <div className={styles.secondRow}>
           <div className={styles.statsContainer}>
-            <RadarChart pokemonStats={this.props.pokemonStats} />
+            <div className={styles.stats__chart__menu}>
+              <p className={styles.stats__chart__menu__header}>Chart Type</p>
+              <select className={styles.stats__chart__menu__list} value={this.props.chartType} onChange={this.handleChange}>
+                <option value="radar">Radar Chart</option>
+                <option value="horizontalBar">Bar Chart</option>
+              </select>
+            </div>
+            <RadarChart pokemonStats={this.props.pokemonStats} chartType={this.props.chartType} />
           </div>
           <div className={styles.spritesContainer}>
             <PokeSprites pokemon={this.props.pokemonStats} />
@@ -83,8 +93,9 @@ class PokePageContainer extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     pokemonStats: state.pokemon.pokemonObjs[ownProps.match.params.id],
-    pokeList: state.pokemon.pokemonAll.pokeList
+    pokeList: state.pokemon.pokemonAll.pokeList,
+    chartType: state.userPreferences.chartPreference
   };
 };
 
-export default connect(mapStateToProps, {fetchPokeList ,fetchPokemon, fetchPokemonSpecies})(PokePageContainer);
+export default connect(mapStateToProps, {fetchPokeList ,fetchPokemon, fetchPokemonSpecies, setChartPreference})(PokePageContainer);
