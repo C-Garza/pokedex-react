@@ -7,12 +7,16 @@
   margin-top: 15px;
   margin-top: 65px;
 }
-.secondRow {
+.row {
   display: flex;
+  position: relative;
   width: 75%;
+  margin: 15px;
+  background-color: white;
   border: 3px solid #212121;
   border-radius: 15px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  overflow: hidden;
   transition: all 0.15s ease;
 }
 .statsContainer {
@@ -67,6 +71,7 @@
 }
 .pageControls__left__button, .pageControls__right__button {
   display: inline-block;
+  background-color: white;
   width: 4em;
   height: 4em;
   vertical-align: bottom;
@@ -163,7 +168,7 @@
   }
 }
 @media(max-width: 1000px) {
-  .secondRow {
+  .row {
     width: 90%;
   }
   .pageControls {
