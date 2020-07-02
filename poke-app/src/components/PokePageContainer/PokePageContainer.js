@@ -3,22 +3,35 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import styles from "./PokePageContainer.module.css";
 import PokeCardExtended from "../PokeCardExtended/PokeCardExtended";
-import RadarChart from "../RadarChart/RadarChart";
-import {fetchPokeList, fetchPokemon, fetchPokemonSpecies, setChartPreference} from "../../actions";
 import PokeSprites from "../PokeSprites/PokeSprites";
+import EvolutionChain from "../EvolutionChain/EvolutionChain";
+import RadarChart from "../RadarChart/RadarChart";
+import {fetchPokeList, fetchPokemon, fetchPokemonSpecies, fetchEvolutionChain, setChartPreference} from "../../actions";
 
 class PokePageContainer extends React.Component {
   componentDidMount() { //CHANGE IF CHECK TO FETCHPOKELIST FIRST
     if(!this.props.pokemonStats || !(this.props.pokemonStats.hasOwnProperty("species_ext"))) {
-      this.props.fetchPokemon(this.props.match.params.id, true)
-      .then(() => this.getPageControlsLink());
+      this.props.fetchPokemon(this.props.match.params.id, true) ////FIX EXTRA CALL WHEN HAS STATS BUT NO SPECIES
+      .then(() => {
+        this.getPageControlsLink();
+        let index = this.props.pokemonStats.species_ext.evolution_chain.url.slice(42, -1);
+        if(!this.props.pokemonEvolution[index]) {
+          this.props.fetchEvolutionChain(index);
+        }
+      });
     }
   }
   componentDidUpdate(prevProps) {
     if(prevProps.match.params.id !== this.props.match.params.id) {
       if(!this.props.pokemonStats || !(this.props.pokemonStats.hasOwnProperty("species_ext"))) {
         this.props.fetchPokemon(this.props.match.params.id, true)
-        .then(() => this.getPageControlsLink());
+        .then(() => {
+          this.getPageControlsLink();
+          let index = this.props.pokemonStats.species_ext.evolution_chain.url.slice(42, -1);
+          if(!this.props.pokemonEvolution[index]) {
+            this.props.fetchEvolutionChain(index);
+          }
+        });
       }
       else {
         this.getPageControlsLink();
@@ -47,12 +60,17 @@ class PokePageContainer extends React.Component {
       }
     }
   }
+  getEvolutionChain = () => {
+    let index = this.props.pokemonStats.species_ext.evolution_chain.url.slice(42, -1);
+    return this.props.pokemonEvolution[index];
+  }
   render() {
-    if(!this.props.pokemonStats || !this.props.pokemonStats.species_ext || this.props.pokeList.length === 0) {
+    if(!this.props.pokemonStats || !this.props.pokemonStats.species_ext || !this.getEvolutionChain() || this.props.pokeList.length === 0) {
       return <div>Loading...</div>;
     }
     ///HANDLE MAKING STATS CONTAINER NOW
     const pageControls = this.getPageControlsLink();
+    const chain = this.getEvolutionChain();
     return(
       <div className={styles.container}>
         <div className={styles.pageControls}>
@@ -69,8 +87,11 @@ class PokePageContainer extends React.Component {
             </Link>
           </div>
         </div>
-        <PokeCardExtended pokemonStats={this.props.pokemonStats} />
-        <div className={styles.secondRow}>
+        <div className={styles.row}>
+          <PokeCardExtended pokemonStats={this.props.pokemonStats} />
+        </div>
+        {/* <PokeCardExtended pokemonStats={this.props.pokemonStats} /> */}
+        <div className={styles.row}>
           <div className={styles.statsContainer}>
             <div className={styles.stats__chart__menu}>
               <p className={styles.stats__chart__menu__header}>Chart Type</p>
@@ -85,6 +106,9 @@ class PokePageContainer extends React.Component {
             <PokeSprites pokemon={this.props.pokemonStats} />
           </div>
         </div>
+        <div className={styles.row}>
+          <EvolutionChain evolution={chain} />
+        </div>
       </div>
     );
   }
@@ -92,10 +116,18 @@ class PokePageContainer extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    pokemonEvolution: state.pokemon.evolution_chains,
+    pokemonObjs: state.pokemon.pokemonObjs,
     pokemonStats: state.pokemon.pokemonObjs[ownProps.match.params.id],
     pokeList: state.pokemon.pokemonAll.pokeList,
-    chartType: state.userPreferences.chartPreference
+    chartType: state.userPreferences.chartPreference,
   };
 };
 
-export default connect(mapStateToProps, {fetchPokeList ,fetchPokemon, fetchPokemonSpecies, setChartPreference})(PokePageContainer);
+export default connect(mapStateToProps, {
+  fetchPokeList, 
+  fetchPokemon, 
+  fetchPokemonSpecies, 
+  fetchEvolutionChain, 
+  setChartPreference
+})(PokePageContainer);
