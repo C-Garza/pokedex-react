@@ -1,0 +1,74 @@
+.evolution__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  font-family: "Oxanium";
+}
+.evolution__header {
+
+}
+.evolution__chain__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 15px 0;
+}
+.evolution__chain__column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  /* border: 1px solid black; */
+}
+.evolution__chain__box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  /* flex-wrap: wrap; */
+  /* width: 50%; */
+  width: 100%;
+}
+.evolution__chain__continue:before {
+  content: "\203A";
+  position: absolute;
+  left: -14px;
+  font-size: 7em;
+  color: #212121;
+}
+.evolution__chain__image {
+  min-height: 150px;
+}
+.evolution__chain__name {
+  margin-bottom: 15px;
+  font-weight: 700;
+  font-size: 1.3em;
+}
+.evolution__types {
+  display: flex;
+  height: 50%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1em;
+  font-weight: 600;
+}
+.evolution__types__type {
+  width: 30%;
+  padding: 2px 0px 1px 0px;
+  margin: 0 5px;
+  border: 2px solid black;
+  border-radius: 25px;
+  text-align: center;
+  color: white;
+  text-shadow:
+  -1px -1px 0 #000,  
+   1px -1px 0 #000,
+   -1px 1px 0 #000,
+    1px 1px 0 #000;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
