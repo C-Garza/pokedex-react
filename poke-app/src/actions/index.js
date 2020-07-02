@@ -4,6 +4,7 @@ import {
   FETCH_POKEMON,
   FETCH_POKEMON_SPECIES,
   FETCH_TYPE,
+  FETCH_EVOLUTION_CHAIN,
   SET_CHART_PREFERENCE
 } from "./types";
 
@@ -37,6 +38,13 @@ export const fetchTypes = (index) => async dispatch => {
   const response = await pokeAPI.get(`type/${index}`);
   console.log(response.data);
   dispatch({type: FETCH_TYPE, payload: response.data});
+};
+
+export const fetchEvolutionChain = (index) => async dispatch => {
+  const response = await pokeAPI.get(`evolution-chain/${index}`);
+  console.log(response.data);
+  dispatch({type: FETCH_EVOLUTION_CHAIN, payload: response.data});
+  return Promise.resolve(true);
 };
 
 export const setChartPreference = (chart) => {
