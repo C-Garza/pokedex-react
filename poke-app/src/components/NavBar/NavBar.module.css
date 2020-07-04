@@ -36,16 +36,16 @@ POKEDEX REACT MENU LIGHTS
   border-radius: 50%;
   width: 2.5em;
   height: 2.5em;
-  background: radial-gradient(circle at 0.65em 0.65em, #FFFFFF 3%, #28abfc 25%, #19699E 90%);
-  /* background: radial-gradient(circle at 0.65em 0.65em, #FFFFFF 3%, #1698e9); */
+  background-color: #0277BD;
   border: 3px solid #dddddd;
+  border: 3px solid white;
 }
 .lights__main__on.nav__menu__expanded {
-  background: radial-gradient(circle at 0.65em 0.65em, #FFFFFF 3%, #1680e9);
+  background-color: #4FC3F7;
   animation: flickerLightOn 0.5s ease-in-out;
 }
 .lights__main__on.nav__menu__closed {
-  background: radial-gradient(circle at 0.65em 0.65em, #FFFFFF 3%, #1680e9);
+  background-color: #4FC3F7;
   animation: flickerLightOff 0.5s ease-in-out forwards;
 }
 .lights__sub__one {
@@ -54,16 +54,15 @@ POKEDEX REACT MENU LIGHTS
   width: 1.2em;
   height: 1.2em;
   margin-left: 5px;
-  background: radial-gradient(circle at 0.33em 0.33em, #FFFFFF 3%, #e80934 25%, #9B0118 90%);
-  /* background: radial-gradient(circle at 0.33em 0.33em, #FFFFFF 3%, #c5072d); */
-  border: 2px solid #dddddd;
+  background-color: #9B0118;
+  border: 2px solid white;
 }
 .lights__sub__one__on.nav__menu__expanded {
-  background: radial-gradient(circle at 0.33em 0.33em, #FFFFFF 3%, #f60938);
+  background-color: #e80934;
   animation: flickerLightOn 0.5s ease-in-out;
 }
 .lights__sub__one__on.nav__menu__closed {
-  background: radial-gradient(circle at 0.33em 0.33em, #FFFFFF 3%, #f60938);
+  background-color: #e80934;
   animation: flickerLightOff 0.5s ease-in-out forwards;
 }
 .lights__sub__two {
@@ -72,16 +71,15 @@ POKEDEX REACT MENU LIGHTS
   width: 1.2em;
   height: 1.2em;
   margin-left: 5px;
-  background: radial-gradient(circle at 0.33em 0.33em, #FFFFFF 3%, #fbe44b 25%, #a2880f 90%);
-  /* background: radial-gradient(circle at 0.33em 0.33em, #FFFFFF 3%, #fbdf28); */
-  border: 2px solid #dddddd;
+  background-color: #a2880f;
+  border: 2px solid white;
 }
 .lights__sub__two__on.nav__menu__expanded {
-  background: radial-gradient(circle at 0.33em 0.33em, #FFFFFF 3%, #fadc19);
+  background-color: #fbe44b;
   animation: flickerLightOn 0.5s ease-in-out;
 }
 .lights__sub__two__on.nav__menu__closed {
-  background: radial-gradient(circle at 0.33em 0.33em, #FFFFFF 3%, #fadc19);
+  background-color: #fbe44b;
   animation: flickerLightOff 0.5s ease-in-out forwards;
 }
 .lights__sub__three {
@@ -90,16 +88,15 @@ POKEDEX REACT MENU LIGHTS
   width: 1.2em;
   height: 1.2em;
   margin-left: 5px;
-  background: radial-gradient(circle at 0.33em 0.33em, #FFFFFF 3%, #51a262 25%, #34693c 90%);
-  /* background: radial-gradient(circle at 0.33em 0.33em, #FFFFFF 3%, #468b55); */
-  border: 2px solid #dddddd;
+  background-color: #34693c;
+  border: 2px solid white;
 }
 .lights__sub__three__on.nav__menu__expanded {
-  background: radial-gradient(circle at 0.33em 0.33em, #FFFFFF 3%, #55aa68);
+  background-color: #51a262;
   animation: flickerLightOn 0.5s ease-in-out;
 }
 .lights__sub__three__on.nav__menu__closed {
-  background: radial-gradient(circle at 0.33em 0.33em, #FFFFFF 3%, #55aa68);
+  background-color: #51a262;
   animation: flickerLightOff 0.5s ease-in-out forwards;
 }
 /*****
@@ -121,11 +118,14 @@ HAMBURGER MENU
   margin: auto;
   margin-top: 5px;
   background-color: #212121;
-  border-radius: 15px;
+  border-radius: 25px;
   transition: all 0.15s;
 }
 .nav__menu:hover {
-  /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); */
+  background-color: #D53220;
+}
+.nav__menu:focus {
+  background-color: #D53220;
 }
 .nav__menu__expanded {
 
