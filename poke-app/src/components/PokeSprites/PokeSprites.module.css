@@ -9,6 +9,18 @@
   padding-bottom: 10px;
   width: 100%;
 }
+.sprites__header__heading {
+  margin: 0;
+  margin-top: 10px;
+  font-family: "Oxanium";
+  font-size: 1.8em;
+  text-align: center;
+}
+.sprites__header__unknown {
+  text-align: center;
+  font-family: "Oxanium";
+  font-weight: 600;
+}
 .sprites__header__bar {
   height: 20px;
   width: 50%;
@@ -48,13 +60,28 @@
   color: #ea1e63;
 }
 .sprites__sprite__container {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   margin-top: 10px;
-  background: linear-gradient(to bottom, rgba(36, 151, 235, 0.3) 50%, rgba(234, 30, 99, 0.3) 50%);
+  background: linear-gradient(to bottom, rgba(36, 151, 235, 0.25) 50%, rgba(234, 30, 99, 0.25) 50%);
+}
+.sprites__sprite__males {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sprites__sprite__females {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .symbol {
   margin-left: 0.2em;
 }
 .sprites__sprite {
   width: 50%;
+}
+.sprites__no__sprite {
+  display: none;
 }
