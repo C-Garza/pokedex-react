@@ -15,8 +15,9 @@ const PokeSprites = ({pokemon: {name, sprites, species_ext: {gender_rate}}}) => 
   return(
     <div className={styles.sprites}>
       <div className={styles.sprites__header}>
+        <h2 className={styles.sprites__header__heading}>Gender Sprites</h2>
         {gender_rate === -1 ?
-          <div className={styles.sprites__header__heading}>Unknown</div> 
+          <div className={styles.sprites__header__unknown}>Unknown</div> 
           : <React.Fragment>
               <div className={styles.sprites__header__bar}>
                 <div className={styles.sprites__header__male} style={{width: `${100 - femalePercent}%`}}></div>
@@ -36,18 +37,22 @@ const PokeSprites = ({pokemon: {name, sprites, species_ext: {gender_rate}}}) => 
         }
       </div>
       <div className={styles.sprites__sprite__container}>
-        <img className={styles.sprites__sprite} src={sprites.front_default} alt={name} />
-        <img className={styles.sprites__sprite} src={sprites.back_default} alt={name} />
-        <img 
-          className={styles.sprites__sprite} 
-          src={!sprites.front_female ? sprites.front_default : sprites.front_female} 
-          alt={name + " female"} 
-        />
-        <img 
-          className={styles.sprites__sprite} 
-          src={!sprites.back_female ? sprites.back_default : sprites.back_female} 
-          alt={name + " female"} 
-        />
+        <div className={styles.sprites__sprite__males}>
+          <img className={styles.sprites__sprite} src={sprites.front_default} alt={name} />
+          <img className={`${styles.sprites__sprite} ${sprites.back_default ? "" : styles.sprites__no__sprite}`} src={sprites.back_default} alt={name} />
+        </div>
+        <div className={styles.sprites__sprite__females}>
+          <img 
+            className={styles.sprites__sprite} 
+            src={!sprites.front_female ? sprites.front_default : sprites.front_female} 
+            alt={name + " female"} 
+          />
+          <img 
+            className={`${styles.sprites__sprite} ${sprites.back_default ? "" : styles.sprites__no__sprite}`} 
+            src={!sprites.back_female ? sprites.back_default : sprites.back_female} 
+            alt={name + " female"} 
+          />
+        </div>
       </div>
     </div>
   );
