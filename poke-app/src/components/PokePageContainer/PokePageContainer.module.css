@@ -5,6 +5,7 @@
   max-width: 75%;
   margin: auto;
   margin-top: 15px;
+  margin-bottom: 15px;
   margin-top: 65px;
 }
 .row {
@@ -52,7 +53,9 @@
   position: fixed;
   right: 5%;
   width: 7.5%;
-  height: 100%;
+  top: 50%;
+  height: 4em;
+  transform: translateY(-20%);
 }
 .container .pageControls:nth-child(1) {
   left: 5%;
