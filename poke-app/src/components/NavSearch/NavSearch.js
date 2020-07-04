@@ -54,7 +54,6 @@ class NavSearch extends React.Component {
     this.props.history.push(`/pokemon/${e.currentTarget.innerText.slice(0, -4).toLowerCase().replace(/\s/g,'')}`);
     this.setState({
       selectedTerm: 0,
-      filteredSuggestions: [],
       showSuggestions: false,
       userInput: e.currentTarget.innerText.slice(0, -4)
     });
@@ -75,7 +74,6 @@ class NavSearch extends React.Component {
     this.props.history.push(`/pokemon/${randomPoke.name}`);
     this.setState({
       selectedTerm: 0,
-      filteredSuggestions: [],
       showSuggestions: false
     });
   }
