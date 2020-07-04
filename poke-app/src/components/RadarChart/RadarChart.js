@@ -101,14 +101,20 @@ class RadarChart extends React.PureComponent {
         legend: {
           labels: {
             fontFamily: "Oxanium",
-            fontSize: 14
+            fontSize: 14,
           }
         },
         scales: {
           xAxes: [{
             ticks: {
               beginAtZero: true,
-              suggestedMax: 120
+              suggestedMax: 120,
+              fontFamily: "Oxanium"
+            }
+          }],
+          yAxes: [{
+            ticks: {
+              fontFamily: "Oxanium",
             }
           }]
         },
@@ -163,6 +169,7 @@ class RadarChart extends React.PureComponent {
   render() {
     return(
       <div className={styles.chartContainer}>
+        <h2 className={styles.stats__header__heading}>Stats</h2>
         <canvas ref={this.chartRef}></canvas>
       </div>
     );
