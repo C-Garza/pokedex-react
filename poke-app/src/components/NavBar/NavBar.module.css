@@ -17,7 +17,6 @@
 POKEDEX REACT MENU LIGHTS
 *****/
 .lights__container {
-  /* border: 1px solid green; */
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
