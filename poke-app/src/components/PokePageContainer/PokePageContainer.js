@@ -7,6 +7,7 @@ import PokeSprites from "../PokeSprites/PokeSprites";
 import EvolutionChain from "../EvolutionChain/EvolutionChain";
 import RadarChart from "../RadarChart/RadarChart";
 import {fetchPokeList, fetchPokemon, fetchPokemonSpecies, fetchEvolutionChain, setChartPreference} from "../../actions";
+import LoadingScreen from "../LoadingScreen/LoadingScreen";
 
 class PokePageContainer extends React.Component {
   componentDidMount() { //CHANGE IF CHECK TO FETCHPOKELIST FIRST
@@ -66,7 +67,11 @@ class PokePageContainer extends React.Component {
   }
   render() {
     if(!this.props.pokemonStats || !this.props.pokemonStats.species_ext || !this.getEvolutionChain() || this.props.pokeList.length === 0) {
-      return <div>Loading...</div>;
+      return(
+        <div className={styles.container}>
+          <LoadingScreen></LoadingScreen>
+        </div>
+      );
     }
     ///HANDLE MAKING STATS CONTAINER NOW
     const pageControls = this.getPageControlsLink();
