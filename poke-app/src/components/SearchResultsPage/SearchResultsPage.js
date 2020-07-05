@@ -4,11 +4,12 @@ import queryString from "query-string";
 import styles from "./SearchResultsPage.module.css";
 import PokeListContainer from "../PokeListContainer/PokeListContainer";
 import {fetchTypes} from "../../actions";
+import LoadingScreen from "../LoadingScreen/LoadingScreen";
 
 class SearchResultsPage extends React.Component {
   ////HANDLE CONDITION THAT SEARCH RETURNS NOTHING(i.e. FAIRY/DARK)
   ////CHECK IN RENDER IF TYPE IS SAME AS PREVIOUS ONE (NEW STATES TO HOLD)
-  state = {filteredPoke: [], offset: 0};
+  state = {filteredPoke: [], offset: 0, isLoading: true};
 
   componentDidMount() {
     const NUM_OF_TYPES = 19;
@@ -21,6 +22,7 @@ class SearchResultsPage extends React.Component {
     });
     Promise.all(promises).then((values) => {
       this.handleSearchType(queryString.parse(this.props.location.search));
+      this.setState({isLoading: false});
     });
   }
   componentDidUpdate(prevProps) {
@@ -117,6 +119,13 @@ class SearchResultsPage extends React.Component {
   }
   render() {
     let query = queryString.parse(this.props.location.search);
+    if(this.state.isLoading) {
+      return (
+        <div className={styles.container}>
+          <LoadingScreen></LoadingScreen>
+        </div>
+      );
+    }
     return(
       <div className={styles.search__results__container}>
         <div className={styles.search__results__header__container}>
