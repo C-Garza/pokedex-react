@@ -3,34 +3,74 @@ import {connect} from "react-redux";
 import queryString from "query-string";
 import styles from "./SearchResultsPage.module.css";
 import PokeListContainer from "../PokeListContainer/PokeListContainer";
-import {fetchTypes} from "../../actions";
 import LoadingScreen from "../LoadingScreen/LoadingScreen";
+import {fetchTypes, fetchPokeList} from "../../actions";
 
 class SearchResultsPage extends React.Component {
   ////HANDLE CONDITION THAT SEARCH RETURNS NOTHING(i.e. FAIRY/DARK)
   ////CHECK IN RENDER IF TYPE IS SAME AS PREVIOUS ONE (NEW STATES TO HOLD)
-  state = {filteredPoke: [], offset: 0, isLoading: true};
+  state = {filteredPoke: [], offset: 0, isLoading: true, hasError: false, title: ""};
+  _isMounted = false;
 
   componentDidMount() {
     const NUM_OF_TYPES = 19;
     let promises = [];
-    for(let i = 1; i < NUM_OF_TYPES; i++) {
-      promises.push(i);
+    this._isMounted = true;
+    if(!this.props.pokeList.length) {
+      this.props.fetchPokeList(807).catch(err => {
+        console.log(err);
+      });
     }
-    promises = promises.map(i => {
-      return Promise.resolve(this.props.fetchTypes(i).catch(e => {console.log(e); return e;}));
-    });
-    Promise.all(promises).then((values) => {
+    if(Object.keys(this.props.pokemonTypes).length !== NUM_OF_TYPES) {
+      for(let i = 1; i < NUM_OF_TYPES; i++) {
+        promises.push(i);
+      }
+      promises = promises.map(i => {
+        return this.props.fetchTypes(i);
+      });
+      Promise.all(promises).then((values) => {
+        if(this._isMounted) {
+          this.handleSearchType(queryString.parse(this.props.location.search));
+          this.setState({isLoading: false});
+        }
+      }).catch(err => {
+        console.log(err);
+        if(this._isMounted) {
+          this.setState({hasError: true});
+        }
+      });
+    }
+    else {
       this.handleSearchType(queryString.parse(this.props.location.search));
-      this.setState({isLoading: false});
-    });
+      if(this._isMounted) {
+        this.setState({isLoading: false});
+      }
+    }
   }
   componentDidUpdate(prevProps) {
     if(this.props.location.search !== prevProps.location.search) {
-      this.handleSearchType(queryString.parse(this.props.location.search));
+      if(this.state.hasError) {
+        let promises = this.props.pokemonTypes.error.map(err => {
+          return this.props.fetchTypes(err.id);
+        });
+        Promise.all(promises).then(values => {
+          this.handleSearchType(queryString.parse(this.props.location.search));
+        }).catch(err => {
+          console.log(err);
+        });
+      }
+      else {
+        this.handleSearchType(queryString.parse(this.props.location.search));
+      }
     }
   }
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
   handleSearchType = (query) => {
+    if(this.state.hasError) {
+      this.setState({hasError: false, isLoading: false});
+    }
     if(!Object.keys(query).length) {
       return;
     }
@@ -56,7 +96,7 @@ class SearchResultsPage extends React.Component {
       return a.indexOf(name) - b.indexOf(name);
     });
     console.log(filteredSuggestions);
-    this.setState({filteredPoke: filteredSuggestions});
+    this.setState({filteredPoke: filteredSuggestions, title: [name]});
   }
   filterByType = (types) => {
     const {pokemonTypes} = this.props;
@@ -93,11 +133,11 @@ class SearchResultsPage extends React.Component {
         }
       })];
       console.log("FILTERED POKE: ", mergedTypesArr);
-      this.setState({filteredPoke: mergedTypesArr});
+      this.setState({filteredPoke: mergedTypesArr, title: types});
     }
     else { ////SEARCH OF ONE TYPE
       console.log("FILTERED POKE: ", pokemonTypes[types]);
-      this.setState({filteredPoke: pokemonTypes[types]});
+      this.setState({filteredPoke: pokemonTypes[types], title: [types]});
     }
   }
   renderHeading = (query) => {
@@ -106,7 +146,9 @@ class SearchResultsPage extends React.Component {
       return;
     }
     else if(query.type) {
-      let typeList = Array.isArray(query.type) ? query.type.join(" & ") : query.type;
+      let typeList = Array.isArray(query.type) ? 
+      query.type.map(type => type.charAt(0).toUpperCase() + type.slice(1)).join(" & ") :
+      query.type.charAt(0).toUpperCase() + query.type.slice(1);
       return(
         <h1 className={styles.search__results__header}>Showing {filteredPoke.length} result(s) for: {typeList}</h1>
       );
@@ -118,6 +160,13 @@ class SearchResultsPage extends React.Component {
     }
   }
   render() {
+    if(this.state.hasError) {
+      return(
+        <div className={styles.container}>
+          <div>ERROR!</div>
+        </div>
+      );
+    }
     let query = queryString.parse(this.props.location.search);
     if(this.state.isLoading) {
       return (
@@ -132,7 +181,8 @@ class SearchResultsPage extends React.Component {
           {this.renderHeading(query)}
         </div>
         <PokeListContainer 
-          searchResults={this.state.filteredPoke} 
+          searchResults={this.state.filteredPoke}
+          title={this.state.title}
           handleUpdateOffset={this.handleUpdateOffset} 
           offset={this.state.offset}
         />
@@ -148,4 +198,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {fetchTypes})(SearchResultsPage);
+export default connect(mapStateToProps, {fetchTypes, fetchPokeList})(SearchResultsPage);
