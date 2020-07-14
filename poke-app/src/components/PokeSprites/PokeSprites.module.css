@@ -26,6 +26,7 @@
   width: 50%;
   margin: auto;
   margin-top: 10px;
+  background-color: #212121;
   border-radius: 25px;
   border: 3px solid #212121;
   overflow: hidden;
@@ -64,17 +65,18 @@
   flex-direction: column;
   width: 100%;
   margin-top: 10px;
-  background: linear-gradient(to bottom, rgba(36, 151, 235, 0.25) 50%, rgba(234, 30, 99, 0.25) 50%);
 }
 .sprites__sprite__males {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: rgba(36, 151, 235, 0.25);
 }
 .sprites__sprite__females {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: rgba(234, 30, 90, 0.25);
 }
 .symbol {
   margin-left: 0.2em;
