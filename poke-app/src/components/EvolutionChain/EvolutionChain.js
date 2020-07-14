@@ -7,11 +7,16 @@ import {connect} from "react-redux";
 class EvolutionChain extends React.Component {
   ////CLEAN UP CODE
   ////ADD TRIGGERS FOR EVO?
-  state = {isLoading: true, isEevee: false};
+  state = {isLoading: true, isEevee: false, hasError: false};
+  _isMounted = false;
 
   componentDidMount() {
-    console.log(this.props.evolution);
     const {evolution, pokemon} = this.props;
+    this._isMounted = true;
+    if(evolution === true && this._isMounted) {
+      this.setState({hasError: true});
+      return;
+    }
     let promises = [];
     let name = evolution.chain.species.name;
     let checkName = this.checkPokemonName(evolution.chain.species.name);
@@ -46,7 +51,14 @@ class EvolutionChain extends React.Component {
       return true;
     });
     Promise.all(promises).then(() => {
-      this.setState({isLoading: false, isEevee: evolution.id === 67 ? true : false});
+      if(this._isMounted) {
+        this.setState({isLoading: false, isEevee: evolution.id === 67 ? true : false, hasError: false});
+      }
+    })
+    .catch(err => {
+      if(this._isMounted) {
+        this.setState({hasError: true});
+      }
     });
   }
   componentDidUpdate(prevProps) {
@@ -56,6 +68,15 @@ class EvolutionChain extends React.Component {
     if(this.state.isEevee && this.props.evolution.id !== 67) {
       this.setState({isEevee: false});
     }
+    if(this.props.evolution === true && !this.state.hasError) {
+      this.setState({hasError: true});
+    }
+    if(!this.props.evolution === true && this.state.hasError) {
+      this.setState({hasError: false});
+    }
+  }
+  componentWillUnmount() {
+    this._isMounted = false;
   }
   getPokeNumber = (id) => {
     if(id < 10) {
@@ -242,6 +263,13 @@ class EvolutionChain extends React.Component {
     }
   }
   render() {
+    if(this.state.hasError) {
+      return (
+        <div className={styles.evolution__container}>
+          <div>Error!</div>
+        </div>
+      );
+    }
     if(!this.props.evolution || this.state.isLoading) {
       return <div>Loading...</div>
     }
