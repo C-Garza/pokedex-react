@@ -3,14 +3,41 @@ import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import styles from "./PokeListContainer.module.css";
 import PokeCard from "../PokeCard/PokeCard";
+import LoadingScreen from "../LoadingScreen/LoadingScreen";
 import {fetchPokeList} from "../../actions";
 
 class PokeListContainer extends React.Component {
   componentDidMount() {
-    if(!this.props.pokeList.length) {
-      this.props.fetchPokeList(807);
+    let pathName = this.props.location.pathname;
+    let searchParams = "";
+    if(this.props.title) {
+      searchParams = this.props.title.map(param => {
+        return param.charAt(0).toUpperCase() + param.slice(1);
+      }).join(" & ");
+    }
+    document.title = this.props.location.pathname === "/" ? 
+    "PokeDex React" :
+    `${pathName.charAt(1).toUpperCase() + pathName.slice(2)} · ${searchParams}`
+    if(!this.props.pokeList.length || this.props.pokeList.error) {
+      this.props.fetchPokeList(807).catch(err => {
+        console.log(err);
+      });
     }
     window.addEventListener("scroll", this.handleScroll);
+  }
+  componentDidUpdate(prevProps) {
+    if(this.props.title && prevProps.title !== this.props.title) {
+      let pathName = this.props.location.pathname;
+      let searchParams = "";
+      if(this.props.title) {
+        searchParams = this.props.title.map(param => {
+          return param.charAt(0).toUpperCase() + param.slice(1);
+        }).join(" & ");
+      }
+      document.title = this.props.location.pathname === "/" ? 
+      "PokeDex React" :
+      `${pathName.charAt(1).toUpperCase() + pathName.slice(2)} · ${searchParams}`
+    }
   }
   componentWillUnmount() {
     window.removeEventListener("scroll", this.handleScroll);
@@ -32,8 +59,19 @@ class PokeListContainer extends React.Component {
     });
   }
   render() {
-    if(!this.props.pokeList) {
-      return <div>Loading...</div>;
+    if(this.props.pokeListError) {
+      return(
+        <div className={styles.container}>
+          <div>ERROR!!!</div>
+        </div>
+      );
+    }
+    if(!this.props.pokeList.length) {
+      return(
+        <div className={styles.container}>
+          <LoadingScreen></LoadingScreen>
+        </div>
+      );
     }
     return(
       <div className={`${styles.container} ${this.props.searchResults ? styles.small__container : ""}`}>
@@ -44,7 +82,10 @@ class PokeListContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {pokeList: state.pokemon.pokemonAll.pokeList};
+  return {
+    pokeList: state.pokemon.pokemonAll.pokeList,
+    pokeListError: state.pokemon.pokemonAll.error
+  };
 };
 
 export default withRouter(connect(mapStateToProps, {fetchPokeList})(PokeListContainer));
