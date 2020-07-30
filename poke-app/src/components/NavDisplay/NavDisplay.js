@@ -1,0 +1,227 @@
+import React from "react";
+import {connect} from "react-redux";
+import {withRouter} from "react-router-dom";
+import styles from "./NavDisplay.module.css";
+import NavSearch from "../NavSearch/NavSearch";
+import NavType from "../NavType/NavType";
+import NavOptions from "../NavOptions/NavOptions";
+
+class NavDisplay extends React.Component {
+  state = {
+    userInput: "", 
+    showSuggestions: false, 
+    keyPressed: null,
+    filterHistory: [],
+    renderDisplay: "NavSearch",
+    isButtonDisabled: false
+  };
+  node = React.createRef();
+
+  componentDidMount() {
+    window.addEventListener("click", this.handleOutsideClick);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("click", this.handleOutsideClick);
+  }
+  handleOutsideClick = (e) => {
+    if(this.node.current.contains(e.target)) {
+      return;
+    }
+    this.setState({showSuggestions: false});
+  }
+  handleRandomButton = (e) => {
+    let randomPoke = this.props.pokeList[Math.floor(Math.random() * this.props.pokeList.length)];
+    this.props.history.push(`/pokemon/${randomPoke.name}`);
+    this.setState({
+      showSuggestions: false,
+      isButtonDisabled: true
+    });
+    setTimeout(() => {this.setState({isButtonDisabled: false})}, 1000);
+  }
+  ////NavSearch Methods
+  handleChange = (e) => {
+    if(this.state.renderDisplay !== "NavSearch") {
+      this.switchDisplay("NavSearch");
+    }
+    this.setState({
+      userInput: e.target.value, 
+      showSuggestions: !e.target.value ? false : true
+    });
+  }
+  handleKeyDown = (e) => {
+    this.setState({keyPressed: e.keyCode});
+  }
+  resetKeyDown = (e) => {
+    this.setState({keyPressed: null});
+  }
+  handleSearchButton = (input) => {
+    let queryPar = "";
+    if(this.state.renderDisplay === "NavSearch") {
+      if(!this.state.userInput) {
+        return;
+      }
+      queryPar = this.state.userInput;
+      this.props.history.push(`/search?name=${queryPar}`);
+      this.setState({
+        showSuggestions: false
+      });
+    }
+    if(this.state.renderDisplay === "NavType") {
+      const {filterHistory} = this.state;
+      if(!filterHistory.length) {
+        return;
+      }
+      let queryPar = "";
+      for(let i = 0; i < filterHistory.length; i++) {
+        i === 0 ? queryPar = `type=${filterHistory[i]}` : queryPar += `&type=${filterHistory[i]}`;
+      }
+      this.props.history.push(`/search?${queryPar}`);
+    }
+  }
+  handleSuggestionClick = (suggestion) => {
+    this.setState({
+      userInput: suggestion,
+      showSuggestions: false
+    });
+  }
+  ////NavType methods
+  setFilterHistory = (selectedType) => {
+    const {filterHistory} = this.state;
+    let newArr = filterHistory.filter(type => type !== selectedType);
+
+    if(newArr.length > 1) { //MORE THAN 2 TYPES
+      newArr.shift();
+      this.setState({filterHistory: [...newArr, selectedType]});
+    }
+    else if(newArr.length < filterHistory.length) { //SELECTED ACTIVE TYPE
+      this.setState({filterHistory: [...newArr]});
+    }
+    else { //SELECTED NEW TYPE
+      this.setState({filterHistory: [...newArr, selectedType]});
+    }
+  }
+  ////Display Methods
+  switchDisplay = (e) => {
+    this.setState({
+      renderDisplay: e, 
+      filterHistory: []
+    });
+  }
+  handleDisplayRender = (e) => {
+    switch(this.state.renderDisplay) {
+      case "NavSearch":
+        return (
+          <NavSearch 
+            userInput={this.state.userInput}
+            showSuggestions={this.state.showSuggestions}
+            keyPressed={this.state.keyPressed}
+            resetKeyDown={this.resetKeyDown}
+            handleSuggestionClick={this.handleSuggestionClick}
+            handleSearchButton={this.handleSearchButton}
+            pokeList={this.props.pokeList}
+            pokemonTypes={this.props.pokemonTypes}
+            pokeType={this.props.pokeType}
+          />
+        );
+      case "NavType":
+        return (
+          <NavType 
+            filterHistory={this.state.filterHistory}
+            handleSearchButton={this.handleSearchButton}
+            setFilterHistory={this.setFilterHistory}
+            switchDisplay={this.switchDisplay}
+            renderDisplay={this.state.renderDisplay}
+            pokemonTypes={this.props.pokemonTypes}
+          />
+        );
+      default:
+        return (
+          <NavSearch 
+            userInput={this.state.userInput}
+            showSuggestions={this.state.showSuggestions}
+            keyPressed={this.state.keyPressed}
+            resetKeyDown={this.resetKeyDown}
+            handleSuggestionClick={this.handleSuggestionClick}
+            handleSearchButton={this.handleSearchButton}
+            pokeList={this.props.pokeList}
+            pokemonTypes={this.props.pokemonTypes}
+            pokeType={this.props.pokeType}
+          />
+        );
+    }
+  }
+  handleDisplayHeader = (e) => {
+    switch(this.state.renderDisplay) {
+      case "NavSearch":
+        return "Search";
+      case "NavType":
+        return "Type";
+      default:
+        return "Search";
+    }
+  }
+  render() {
+    let display = `${this.state.showSuggestions ? styles.search__display__on : styles.search__display__off}`;
+    if(this.state.renderDisplay !== "NavSearch") {
+      display = `${this.state.renderDisplay !== "NavSearch" ? styles.search__display__on : styles.search__display__off}`;
+    }
+    return(
+      <React.Fragment>
+      <div className={styles.search__header__container}>
+        <h2 className={styles.search__header}>{this.handleDisplayHeader()}</h2>
+      </div>
+      <div className={styles.search__container}>
+        <div className={styles.search__display__container} ref={this.node}>
+          <div className={`${styles.search__display} ${display}`}>
+            <div className={styles.search__display__top__left__button}></div>
+            <div className={styles.search__display__top__right__button}></div>
+            {this.handleDisplayRender()}
+          </div>
+          <div className={styles.search__display__controls__container}>
+            <input className={styles.search__display__controls__input} 
+                type="text" 
+                onChange={this.handleChange}
+                onKeyDown={this.handleKeyDown}
+                value={this.state.userInput}
+            />
+            <div className={styles.search__display__controls__button__container}>
+              <button className={styles.search__display__controls__button} title="Search" onClick={this.handleSearchButton}>GO</button>
+            </div>
+          </div>
+        </div>
+        <div className={styles.search__controls__button__container}>
+          <button 
+            className={styles.search__controls__button} 
+            title="Guess that Pokemon!" 
+          >
+            <i className={`fas fa-question ${styles.random__icon}`}></i>
+          </button>
+          <button 
+            className={`${styles.search__controls__rectangle__button} ${styles.search__controls__rectangle__left}`}
+            onClick={this.handleRandomButton} 
+            disabled={this.state.isButtonDisabled}
+          >
+            Random
+          </button>
+          <button 
+            className={`${styles.search__controls__rectangle__button} ${styles.search__controls__rectangle__right}`}
+          >
+            About
+          </button>
+        </div>
+      </div>
+      <NavOptions switchDisplay={this.switchDisplay} renderDisplay={this.state.renderDisplay}/>
+      </React.Fragment>
+    );
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    pokeList: state.pokemon.pokemonAll.pokeList,
+    pokemonTypes: state.pokemon.types,
+    pokeType: state.pokemon.types.pokeType
+  };
+};
+
+export default withRouter(connect(mapStateToProps, {})(NavDisplay));

@@ -1,22 +1,52 @@
 import React from "react";
-import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import styles from "./NavSearch.module.css";
+import {getTypesClass} from "../utils/helper-functions"
 
 class NavSearch extends React.Component {
-  state = {selectedTerm: 0, filteredSuggestions: [], showSuggestions: false, userInput: ""};
+  state = {
+    selectedTerm: -1, 
+    filteredSuggestions: [], 
+    offset: 24, 
+    isButtonDisabled: false
+  };
   activeSuggestion = React.createRef();
   node = React.createRef();
 
   componentDidMount() {
-    window.addEventListener("click", this.handleOutsideClick);
+    if(this.props.userInput) {
+      this.handleChange();
+    }
   }
-  componentWillUnmount() {
-    window.removeEventListener("click", this.handleOutsideClick);
-  }
-  componentDidUpdate() {
-    if(this.activeSuggestion.current !== null && this.state.showSuggestions) {
+  componentDidUpdate(prevProps, prevState) {
+    if(prevState.offset !== this.state.offset && this.state.filteredSuggestions.length) {
+      return;
+    }
+    if(prevProps.userInput !== this.props.userInput) {
+      this.handleChange();
+    }
+    if(prevProps.keyPressed !== this.props.keyPressed && this.state.filteredSuggestions.length) {
+      this.handleKeyDown();
+    }
+    if(this.activeSuggestion.current !== null && this.props.showSuggestions) {
       this.checkSuggestionInView(this.activeSuggestion.current);
+    }
+  }
+  handleScroll = (e) => {
+    const {filteredSuggestions, offset} = this.state;
+    if(!filteredSuggestions.length) {
+      return;
+    }
+
+    let el = e.currentTarget;
+    let scrollTop = el.scrollTop;
+    let scrollHeight = el.scrollHeight;
+    let height = el.clientHeight;
+
+    if(((scrollHeight - scrollTop) === height) && offset <= filteredSuggestions.length) {
+      this.setState((state) => {
+        return {offset: state.offset + 24};
+      });
     }
   }
   handleOutsideClick = (e) => {
@@ -26,80 +56,63 @@ class NavSearch extends React.Component {
     this.setState({showSuggestions: false});
   }
   handleChange = (e) => {
-    const {pokeList} = this.props;
-    const userInput = e.target.value;
+    const {pokeList, userInput} = this.props;
+    let lowerName = userInput.toLowerCase();
     console.log(userInput);
 
-    let filteredSuggestions = pokeList.filter(suggestion => {
-      return suggestion.name.toLowerCase().indexOf(userInput.toLowerCase()) > -1;
+    let filteredSuggestions = userInput === "" ? "" : pokeList.filter(suggestion => {
+      return suggestion.name.indexOf(lowerName) > -1;
+    }).sort((a,b) => {
+      a = a.name;
+      b = b.name;
+      return a.indexOf(lowerName) - b.indexOf(lowerName);
     }).map(suggestion => {
       return {
         name: suggestion.name.charAt(0).toUpperCase() + suggestion.name.slice(1), 
         id: suggestion.url.slice(34, -1)
       }
-    }).sort((a,b) => {
-      a = a.name.toLowerCase();
-      b = b.name.toLowerCase();
-      return a.indexOf(userInput) - b.indexOf(userInput);
     });
     console.log(filteredSuggestions);
     this.setState({
-      selectedTerm: 0,
+      selectedTerm: -1,
       filteredSuggestions,
-      showSuggestions: !e.target.value ? false : true,
-      userInput: e.target.value
+      offset: 24
     });
   }
   handleSuggestionClick = (e) => {
     this.props.history.push(`/pokemon/${e.currentTarget.innerText.slice(0, -4).toLowerCase().replace(/\s/g,'')}`);
     this.setState({
-      selectedTerm: 0,
-      showSuggestions: false,
-      userInput: e.currentTarget.innerText.slice(0, -4)
+      selectedTerm: -1
     });
-  }
-  handleSearchButton = (e) => {
-    if(!this.state.userInput || !this.state.filteredSuggestions.length) {
-      return;
-    }
-    let queryPar = this.state.userInput;
-    this.props.history.push(`/search?name=${queryPar}`);
-    this.setState({
-      selectedTerm: 0,
-      showSuggestions: false
-    });
-  }
-  handleRandomButton = (e) => {
-    let randomPoke = this.props.pokeList[Math.floor(Math.random() * this.props.pokeList.length)];
-    this.props.history.push(`/pokemon/${randomPoke.name}`);
-    this.setState({
-      selectedTerm: 0,
-      showSuggestions: false
-    });
+    this.props.handleSuggestionClick(e.currentTarget.innerText.slice(0, -4));
   }
   handleKeyDown = (e) => {
     const {selectedTerm, filteredSuggestions} = this.state;
 
-    if(e.keyCode === 13 && filteredSuggestions.length) {
+    if(this.props.keyPressed === 13 && filteredSuggestions.length && selectedTerm < 0) {
+      this.props.handleSearchButton();
+    }
+
+    if(this.props.keyPressed === 13 && filteredSuggestions.length && selectedTerm >= 0) {
       this.props.history.push(`/pokemon/${filteredSuggestions[selectedTerm].name.toLowerCase()}`);
       this.setState({
-        selectedTerm: 0,
-        showSuggestions: false,
-        userInput: filteredSuggestions[selectedTerm].name
+        selectedTerm: -1
       });
+      this.props.handleSuggestionClick(filteredSuggestions[selectedTerm].name);
     }
-    else if(e.keyCode === 38) {
-      if(selectedTerm === 0) {
+    else if(this.props.keyPressed === 38) {
+      if(selectedTerm === -1) {
         return;
       }
       this.setState({selectedTerm: selectedTerm - 1});
     }
-    else if(e.keyCode === 40) {
+    else if(this.props.keyPressed === 40) {
       if(selectedTerm === filteredSuggestions.length - 1) {
         return;
       }
       this.setState({selectedTerm: selectedTerm + 1});
     }
+    this.props.resetKeyDown();
   }
   checkSuggestionInView = (e) => {
     if(!this.activeSuggestion.current) {
@@ -107,35 +120,44 @@ class NavSearch extends React.Component {
     }
     let containerTop = e.parentNode.scrollTop;
     let containerBottom = containerTop + e.parentNode.clientHeight;
-    let suggestionTop = e.offsetTop;
+    let suggestionTop = e.offsetTop + 5;
     let suggestionBottom = suggestionTop + e.clientHeight;
 
     if(suggestionTop < containerTop) {
-      e.parentNode.scrollTop -= (containerTop - suggestionTop);
+      e.parentNode.scrollTop -= (containerTop - suggestionTop) + 10;
     }
     else if(suggestionBottom > containerBottom) {
       e.parentNode.scrollTop += (suggestionBottom - containerBottom);
     }
   }
   renderSuggestions = () => {
-    const {state: {selectedTerm, filteredSuggestions, showSuggestions, userInput}} = this;
+    const {state: {selectedTerm, filteredSuggestions}} = this;
+    const {pokemonTypes, pokeType, showSuggestions, userInput} = this.props;
     let suggestionsList = "";
-
+    let hasTypes = pokemonTypes.inProgress === false && !pokemonTypes.error.length ?
+    true :
+    false;
     if(showSuggestions && userInput) {
       if(filteredSuggestions.length) {
+        let suggestionsArr = filteredSuggestions.slice(0, this.state.offset);
         suggestionsList = (
-        <React.Fragment>
-          <ul className={styles.suggestions__container}>
-            {filteredSuggestions.map((suggestion, index) => {
+          <ul className={styles.suggestions__container} onScroll={this.handleScroll}>
+            {suggestionsArr.map((suggestion, index) => {
               let selectedTermClass = styles.suggestion;
-              let indexOfInput = suggestion.name.toLowerCase().indexOf(userInput.toLowerCase());
+              let lowerName = suggestion.name.toLowerCase();
+              let indexOfInput = lowerName.indexOf(userInput.toLowerCase());
+              let suggestionID = `#${suggestion.id}`;
+              let typeClass = [];
               let suggestionHighlighted = [
                 <p key={suggestion.id} className={styles.suggestion__name}>{suggestion.name.substring(0, indexOfInput)}
                 <span className={styles.suggestion__text__hightlight}>{suggestion.name.substring(indexOfInput, indexOfInput + userInput.length)}</span>
                 {suggestion.name.substring(indexOfInput + userInput.length)}</p>
               ];
-              let suggestionID = `#${suggestion.id}`;
-
+              ////HANDLE POKEMON TYPE BACKGROUND COLORS
+              if(hasTypes) {
+                typeClass = getTypesClass([pokeType[lowerName].type]);
+              }
+              ////HANDLE ID NUMBER
               if(suggestion.id < 10) {
                 suggestionID = `#00${suggestion.id}`;
               }
@@ -157,8 +179,10 @@ class NavSearch extends React.Component {
                       src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${suggestion.id}.png`}
                       alt={suggestion.name}
                     />
-                    {suggestionHighlighted}
-                    <p className={styles.suggestion__id}>{suggestionID}</p>
+                    <div className={`${styles.suggestion__description} ${hasTypes ? typeClass[0].card : styles.no__type}`}>
+                      {suggestionHighlighted}
+                      <p className={styles.suggestion__id}>{suggestionID}</p>
+                    </div>
                   </li>
                 );
               }
@@ -174,27 +198,14 @@ class NavSearch extends React.Component {
                     src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${suggestion.id}.png`}
                     alt={suggestion.name}
                   />
-                  {suggestionHighlighted}
-                  <p className={styles.suggestion__id}>{suggestionID}</p>
+                  <div className={`${styles.suggestion__description} ${hasTypes ? typeClass[0].card : styles.no__type}`}>
+                    {suggestionHighlighted}
+                    <p className={styles.suggestion__id}>{suggestionID}</p>
+                  </div>
                 </li>
               );
             })}
           </ul>
-          <div className={`${styles.search__buttons} ${styles.search__buttons__open}`}>
-            <button 
-              className={`${styles.search__buttons__button} ${styles.search__buttons__search}`}
-              onClick={this.handleSearchButton}
-            >
-              Search
-            </button>
-            <button 
-              className={`${styles.search__buttons__button} ${styles.search__buttons__random}`}
-              onClick={this.handleRandomButton}
-            >
-              Random
-            </button>
-          </div>
-          </React.Fragment>
         );
         return suggestionsList;
       }
@@ -209,38 +220,11 @@ class NavSearch extends React.Component {
   }
   render() {
     return(
-      <div className={styles.search__container}>
-        <div className={styles.search} ref={this.node}>
-          <input 
-            className={this.state.showSuggestions ? `${styles.search__term} ${styles.search__term__closed}` : styles.search__term} 
-            type="text" 
-            onChange={this.handleChange}
-            onKeyDown={this.handleKeyDown}
-            value={this.state.userInput}
-          />
-            {this.renderSuggestions()}
-        </div>
-        <div className={`${styles.search__buttons} ${this.state.showSuggestions ? styles.tabHidden : ""}`}>
-          <button 
-            className={`${styles.search__buttons__button} ${styles.search__buttons__search}`}
-            onClick={this.handleSearchButton}
-          >
-            Search
-          </button>
-          <button 
-            className={`${styles.search__buttons__button} ${styles.search__buttons__random}`}
-            onClick={this.handleRandomButton}
-          >
-            Random
-          </button>
-        </div>
-      </div>
+      <React.Fragment>
+        {this.renderSuggestions()}
+      </React.Fragment>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  return {pokeList: state.pokemon.pokemonAll.pokeList};
-};
-
-export default withRouter(connect(mapStateToProps, {})(NavSearch));
+export default withRouter(NavSearch);
