@@ -1,11 +1,10 @@
 import React from "react";
+import {connect} from "react-redux";
 import styles from "./EvolutionChain.module.css";
 import {getTypesClass} from "../utils/helper-functions";
 import {fetchPokemon} from "../../actions";
-import {connect} from "react-redux";
 
 class EvolutionChain extends React.Component {
-  ////CLEAN UP CODE
   ////ADD TRIGGERS FOR EVO?
   state = {isLoading: true, isEevee: false, hasError: false};
   _isMounted = false;
@@ -43,9 +42,9 @@ class EvolutionChain extends React.Component {
         }
         if(!pokemon[name]) {
           promises.push(this.props.fetchPokemon(name));
-          if(poke.evolves_to[1] && !pokemon[poke.evolves_to[1].species.name]) {
-            promises.push(this.props.fetchPokemon(poke.evolves_to[1].species.name));
-          }
+        }
+        if(poke.evolves_to[1] && !pokemon[poke.evolves_to[1].species.name]) {
+          promises.push(this.props.fetchPokemon(poke.evolves_to[1].species.name));
         }
       }
       return true;
@@ -56,6 +55,7 @@ class EvolutionChain extends React.Component {
       }
     })
     .catch(err => {
+      console.log(err);
       if(this._isMounted) {
         this.setState({hasError: true});
       }
