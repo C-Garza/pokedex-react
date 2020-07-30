@@ -4,63 +4,73 @@ import queryString from "query-string";
 import styles from "./SearchResultsPage.module.css";
 import PokeListContainer from "../PokeListContainer/PokeListContainer";
 import LoadingScreen from "../LoadingScreen/LoadingScreen";
-import {fetchTypes, fetchPokeList} from "../../actions";
+import {fetchPokeList} from "../../actions";
 
 class SearchResultsPage extends React.Component {
   ////HANDLE CONDITION THAT SEARCH RETURNS NOTHING(i.e. FAIRY/DARK)
-  ////CHECK IN RENDER IF TYPE IS SAME AS PREVIOUS ONE (NEW STATES TO HOLD)
   state = {filteredPoke: [], offset: 0, isLoading: true, hasError: false, title: ""};
   _isMounted = false;
 
-  componentDidMount() {
-    const NUM_OF_TYPES = 19;
-    let promises = [];
+  async componentDidMount() {
     this._isMounted = true;
     if(!this.props.pokeList.length) {
-      this.props.fetchPokeList(807).catch(err => {
+      await this.props.fetchPokeList(807).catch(err => {
         console.log(err);
       });
     }
-    if(Object.keys(this.props.pokemonTypes).length !== NUM_OF_TYPES) {
-      for(let i = 1; i < NUM_OF_TYPES; i++) {
-        promises.push(i);
+    if(!this.props.pokeListError && queryString.parse(this.props.location.search).name) {
+      this.handleSearchType(queryString.parse(this.props.location.search));
+      if(this._isMounted) {
+        this.setState({isLoading: false});
       }
-      promises = promises.map(i => {
-        return this.props.fetchTypes(i);
-      });
-      Promise.all(promises).then((values) => {
-        if(this._isMounted) {
-          this.handleSearchType(queryString.parse(this.props.location.search));
-          this.setState({isLoading: false});
-        }
-      }).catch(err => {
-        console.log(err);
-        if(this._isMounted) {
-          this.setState({hasError: true});
-        }
-      });
+      return;
     }
-    else {
+    if(this.props.pokemonTypes.inProgress) {
+      return;
+    }
+    if(!this.props.pokemonTypes.inProgress && !this.props.pokemonTypes.error.length && this.props.pokemonTypes.inProgress !== null) {
       this.handleSearchType(queryString.parse(this.props.location.search));
       if(this._isMounted) {
         this.setState({isLoading: false});
       }
     }
+    else {
+      if(this._isMounted) {
+        this.setState({hasError: true});
+      }
+    }
   }
   componentDidUpdate(prevProps) {
-    if(this.props.location.search !== prevProps.location.search) {
-      if(this.state.hasError) {
-        let promises = this.props.pokemonTypes.error.map(err => {
-          return this.props.fetchTypes(err.id);
-        });
-        Promise.all(promises).then(values => {
-          this.handleSearchType(queryString.parse(this.props.location.search));
-        }).catch(err => {
-          console.log(err);
-        });
-      }
-      else {
+    if(queryString.parse(this.props.location.search).name) {
+      if(this.props.location.search !== prevProps.location.search && !this.props.pokeListError) {
         this.handleSearchType(queryString.parse(this.props.location.search));
+        if(this._isMounted) {
+          this.setState({isLoading: false});
+        }
+      }
+    }
+    else {
+      if(this.props.location.search !== prevProps.location.search && !this.props.pokemonTypes.inProgress && !this.props.pokemonTypes.error.length) {
+        this.handleSearchType(queryString.parse(this.props.location.search));
+      }
+      if(this.props.location.search !== prevProps.location.search && this.props.pokemonTypes.inProgress && !this.state.isLoading) {
+        if(this._isMounted) {
+          this.setState({isLoading: true});
+        }
+      }
+      if(this.state.hasError && !this.props.pokemonTypes.inProgress && !this.props.pokemonTypes.error.length) {
+        this.handleSearchType(queryString.parse(this.props.location.search));
+      }
+      if(!this.state.hasError && !this.props.pokemonTypes.inProgress && this.props.pokemonTypes.error.length) {
+        if(this._isMounted) {
+          this.setState({hasError: true, isLoading: true});
+        }
+      }
+      if(!this.state.hasError && this.props.pokemonTypes.inProgress === false && !this.props.pokemonTypes.error.length && this.state.isLoading) {
+        this.handleSearchType(queryString.parse(this.props.location.search));
+        if(this._isMounted) {
+          this.setState({isLoading: false});
+        }
       }
     }
   }
@@ -68,7 +78,10 @@ class SearchResultsPage extends React.Component {
     this._isMounted = false;
   }
   handleSearchType = (query) => {
-    if(this.state.hasError) {
+    if(!this._isMounted) {
+      return;
+    }
+    if(this.state.hasError && this._isMounted) {
       this.setState({hasError: false, isLoading: false});
     }
     if(!Object.keys(query).length) {
@@ -99,7 +112,7 @@ class SearchResultsPage extends React.Component {
     this.setState({filteredPoke: filteredSuggestions, title: [name]});
   }
   filterByType = (types) => {
-    const {pokemonTypes} = this.props;
+    const {type: pokemonTypes} = this.props.pokemonTypes;
     ////CHECK IF QUERY EXISTS IN STATE
     if(Array.isArray(types)) {
       if(!types.every(type => {
@@ -115,10 +128,12 @@ class SearchResultsPage extends React.Component {
     }
     this.handleUpdateOffset(24);
     if(Array.isArray(types)) { ////EACH POKE MUST CONTAIN THESE TYPES(NO-ORDER, CAN'T HAVE 3 TYPED POKEMON)
-      let typesArrOne = new Set(pokemonTypes[types[0]].map(poke => poke.name));
-      let mergedTypesArr = [...pokemonTypes[types[1]].filter(poke => typesArrOne.has(poke.name)).map(poke => {
+      let typesList = Object.keys(pokemonTypes[types[0]]).filter(poke => {
+        return pokemonTypes[types[1]][poke];
+      }).map(poke => {
         let slotOne = "";
         let slotTwo = "";
+        poke = pokemonTypes[types[1]][poke];
         if(poke.slot === 1) {
           slotOne = types[1];
           slotTwo = types[0];
@@ -131,13 +146,14 @@ class SearchResultsPage extends React.Component {
           ...poke,
           slotOrder: [slotOne, slotTwo]
         }
-      })];
-      console.log("FILTERED POKE: ", mergedTypesArr);
-      this.setState({filteredPoke: mergedTypesArr, title: types});
+      });
+      console.log("FILTERED POKE: ", typesList);
+      this.setState({filteredPoke: typesList, title: types});
     }
     else { ////SEARCH OF ONE TYPE
-      console.log("FILTERED POKE: ", pokemonTypes[types]);
-      this.setState({filteredPoke: pokemonTypes[types], title: [types]});
+      let typesList = Object.values(pokemonTypes[types]);
+      console.log("FILTERED POKE: ", typesList);
+      this.setState({filteredPoke: typesList, title: [types]});
     }
   }
   renderHeading = (query) => {
@@ -160,7 +176,7 @@ class SearchResultsPage extends React.Component {
     }
   }
   render() {
-    if(this.state.hasError) {
+    if(this.state.hasError && !this.props.pokemonTypes.inProgress) {
       return(
         <div className={styles.container}>
           <div>ERROR!</div>
@@ -194,8 +210,9 @@ class SearchResultsPage extends React.Component {
 const mapStateToProps = (state) => {
   return {
     pokeList: state.pokemon.pokemonAll.pokeList,
+    pokeListError: state.pokemon.pokemonAll.error,
     pokemonTypes: state.pokemon.types
   };
 };
 
-export default connect(mapStateToProps, {fetchTypes, fetchPokeList})(SearchResultsPage);
+export default connect(mapStateToProps, {fetchPokeList})(SearchResultsPage);
