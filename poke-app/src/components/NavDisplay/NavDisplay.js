@@ -4,6 +4,7 @@ import {withRouter} from "react-router-dom";
 import styles from "./NavDisplay.module.css";
 import NavSearch from "../NavSearch/NavSearch";
 import NavType from "../NavType/NavType";
+import NavGuess from "../NavGuess/NavGuess";
 import NavOptions from "../NavOptions/NavOptions";
 
 class NavDisplay extends React.Component {
@@ -134,6 +135,12 @@ class NavDisplay extends React.Component {
             pokemonTypes={this.props.pokemonTypes}
           />
         );
+      case "NavGuess":
+        return(
+          <NavGuess
+            pokeList={this.props.pokeList}
+          />
+        );
       default:
         return (
           <NavSearch 
@@ -156,6 +163,8 @@ class NavDisplay extends React.Component {
         return "Search";
       case "NavType":
         return "Type";
+      case "NavGuess":
+        return "Guess That Pokemon!"
       default:
         return "Search";
     }
@@ -193,6 +202,7 @@ class NavDisplay extends React.Component {
           <button 
             className={styles.search__controls__button} 
             title="Guess that Pokemon!" 
+            onClick={() => this.state.renderDisplay === "NavGuess" ? this.switchDisplay("NavSearch") : this.switchDisplay("NavGuess")}
           >
             <i className={`fas fa-question ${styles.random__icon}`}></i>
           </button>
