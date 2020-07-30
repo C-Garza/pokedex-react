@@ -1,11 +1,40 @@
+/*****
+NAVBAR
+*****/
 .navbar {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
+  position: relative;
+  width: 100%;
   padding: 5px;
   background-color: #df3a27;
   border-bottom: 2px solid #212121;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+.navbar:before {
+  content: "";
+  position: fixed;
+  top: 50px;
+  right: 0;
+  height: 50px;
+  width: 100px;
+  background-color: #df3a27;
+  border-bottom: 2px solid #212121;
+  box-shadow: 0 10px 6px rgba(0,0,0,0.16), 0 10px 6px rgba(0,0,0,0.23);
+  z-index: 1000;
+}
+.navbar:after {
+  content: "";
+  position: fixed;
+  top: 33px;
+  right: 73px;
+  height: 50px;
+  width: 67px;
+  background-color: #df3a27;
+  border-bottom: 2px solid #212121;
+  transform: rotate(45deg);
+  z-index: 1000;
 }
 .main__logo {
   font-family: "Oxanium";
@@ -17,10 +46,11 @@
 POKEDEX REACT MENU LIGHTS
 *****/
 .lights__container {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
+  position: relative;
+  width: 200px;
+  height: 25px;
   margin-left: auto;
+  z-index: 1001;
 }
 .lights__on {
   content: "";
@@ -28,33 +58,151 @@ POKEDEX REACT MENU LIGHTS
   width: 100%;
   height: 100%;
   border-radius: 50%;
+  overflow: hidden;
   z-index: 1;
 }
+/*****
+MAIN LIGHT
+*****/
 .lights__main {
-  position: relative;
+  position: absolute;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  top: -5px;
+  right: 20px;
+  width: 75px;
+  height: 75px;
+  background-color: #212121;
   border-radius: 50%;
-  width: 2.5em;
-  height: 2.5em;
-  background-color: #0277BD;
-  border: 3px solid #dddddd;
-  border: 3px solid white;
+  border: 6px solid white;
+  cursor: pointer;
+  outline: none;
+}
+.lights__main__light {
+  position: relative;
+  width: 57px;
+  height: 57px;
+  background-color: #0099B8;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.lights__main__light:before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background-color: #00BFE0;
+  transition: transform 0.1s;
+}
+.lights__main__light:after {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: white;
+  z-index: 10;
+  transition: transform 0.1s;
 }
 .lights__main__on.nav__menu__expanded {
-  background-color: #4FC3F7;
+  width: 57px;
+  height: 57px;
+  background-color: #00b4d7;
   animation: flickerLightOn 0.5s ease-in-out;
 }
+.lights__main__on.nav__menu__expanded:before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background-color: #01daff;
+  transition: transform 0.1s;
+}
+.lights__main__on.nav__menu__expanded:after {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: white;
+}
 .lights__main__on.nav__menu__closed {
-  background-color: #4FC3F7;
+  width: 57px;
+  height: 57px;
+  background-color: #00b4d7;
   animation: flickerLightOff 0.5s ease-in-out forwards;
 }
-.lights__sub__one {
-  position: relative;
+.lights__main__on.nav__menu__closed:before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background-color: #01daff;
+}
+.lights__main__on.nav__menu__closed:after {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: white;
+}
+.lights__main__menu {
+  position: absolute;
+  font-size: 30px;
+  opacity: 0.4;
+  z-index: 1;
+  transition: transform 0.1s;
+}
+.lights__main:hover .lights__main__menu {
+  opacity: 1;
+}
+.lights__main:focus .lights__main__menu {
+  opacity: 1;
+}
+.lights__main:active .lights__main__light:before {
+  transform: translate(-3px, -3px);
+}
+.lights__main:active .lights__main__light:after {
+  transform: translate(2px, 2px)
+}
+.lights__main:active .lights__main__menu {
+  transform: scale(0.9);
+}
+.lights__main:active .lights__main__on.nav__menu__expanded:before {
+  transform: translate(-3px, -3px);
+}
+/*****
+SUB LIGHTS
+*****/
+.lights__sub__one, .lights__sub__two, .lights__sub__three {
+  position: absolute;
   border-radius: 50%;
   width: 1.2em;
   height: 1.2em;
-  margin-left: 5px;
+  margin-right: 5px;
+  border: 2px solid #212121;
+}
+.lights__sub__one {
+  right: 105px;
   background-color: #9B0118;
-  border: 2px solid white;
 }
 .lights__sub__one__on.nav__menu__expanded {
   background-color: #e80934;
@@ -65,13 +213,8 @@ POKEDEX REACT MENU LIGHTS
   animation: flickerLightOff 0.5s ease-in-out forwards;
 }
 .lights__sub__two {
-  position: relative;
-  border-radius: 50%;
-  width: 1.2em;
-  height: 1.2em;
-  margin-left: 5px;
+  right: 130px;
   background-color: #a2880f;
-  border: 2px solid white;
 }
 .lights__sub__two__on.nav__menu__expanded {
   background-color: #fbe44b;
@@ -82,13 +225,19 @@ POKEDEX REACT MENU LIGHTS
   animation: flickerLightOff 0.5s ease-in-out forwards;
 }
 .lights__sub__three {
-  position: relative;
-  border-radius: 50%;
-  width: 1.2em;
-  height: 1.2em;
-  margin-left: 5px;
+  right: 155px;
   background-color: #34693c;
-  border: 2px solid white;
+}
+.lights__sub__one:before, .lights__sub__two:before, .lights__sub__three:before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background-color: white;
+  z-index: 100;
 }
 .lights__sub__three__on.nav__menu__expanded {
   background-color: #51a262;
@@ -97,58 +246,6 @@ POKEDEX REACT MENU LIGHTS
 .lights__sub__three__on.nav__menu__closed {
   background-color: #51a262;
   animation: flickerLightOff 0.5s ease-in-out forwards;
-}
-/*****
-HAMBURGER MENU
-*****/
-.nav__menu {
-  height: 40px;
-  width: 40px;
-  margin-right: 25px;
-  margin-left: 25px;
-  border-radius: 5px;
-  border: 2px solid #212121;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  cursor: pointer;
-}
-.nav__menu__bar {
-  width: 28px;
-  height: 5px;
-  margin: auto;
-  margin-top: 5px;
-  background-color: #212121;
-  border-radius: 25px;
-  transition: all 0.15s;
-}
-.nav__menu:hover {
-  background-color: #D53220;
-}
-.nav__menu:focus {
-  background-color: #D53220;
-}
-.nav__menu__expanded {
-
-}
-.nav__menu__closed {
-
-}
-.nav__menu__closed .nav__menu__bar__one {
-  animation: navBarOneClose 0.5s ease forwards;
-}
-.nav__menu__closed .nav__menu__bar__two {
-  animation: navBarTwoClose 0.5s ease forwards;
-}
-.nav__menu__closed .nav__menu__bar__three {
-  animation: navBarThreeClose 0.5s ease forwards;
-}
-.nav__menu__expanded .nav__menu__bar__one {
-  animation: navBarOneOpen 0.5s ease forwards;
-}
-.nav__menu__expanded .nav__menu__bar__two {
-  animation: navBarTwoOpen 0.5s ease forwards;
-}
-.nav__menu__expanded .nav__menu__bar__three {
-  animation: navBarThreeOpen 0.5s ease forwards;
 }
 /*****
 NAV SIDEBAR
@@ -160,17 +257,16 @@ NAV SIDEBAR
   right: 0;
   bottom: 0;
   visibility: hidden;
-  background-color: #212121;
+  background-color: #C6210E;
+  background-color: #D22D1A;
   border: 2px solid #212121;
+  z-index: -1;
   transform: translateX(105%);
   transition: all 0.5s ease;
 }
 .nav__menu__list__expanded {
   visibility: visible;
   transform: translateX(0);
-}
-.nav__menu__list__collapsible {
-  margin-top: 165px;
 }
 /*****
 MEDIA QUERIES
@@ -219,65 +315,5 @@ ANIMATIONS
   }
   100% {
     opacity: 0;
-  }
-}
-@keyframes navBarOneOpen {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(198%);
-  }
-  100% {
-    transform: translateY(198%) rotate(45deg);
-  }
-}
-@keyframes navBarTwoOpen {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-@keyframes navBarThreeOpen {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-198%);
-  }
-  100% {
-    transform: translateY(-198%) rotate(-45deg);
-  }
-}
-@keyframes navBarOneClose {
-  0% {
-    transform: translateY(198%) rotate(45deg);
-  }
-  50% {
-    transform: translateY(198%);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-@keyframes navBarTwoClose {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@keyframes navBarThreeClose {
-  0% {
-    transform: translateY(-198%) rotate(-45deg);
-  }
-  50% {
-    transform: translateY(-198%);
-  }
-  100% {
-    transform: translateY(0);
   }
 }
