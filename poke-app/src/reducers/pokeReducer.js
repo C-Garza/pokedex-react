@@ -9,6 +9,9 @@ import {
   FETCH_POKEMON_SPECIES_ERROR,
   FETCH_EVOLUTION_CHAIN_ERROR,
   FETCH_TYPE_ERROR,
+  FETCH_TYPE_ALL_PROGRESS,
+  FETCH_TYPE_ALL_DONE,
+  GET_POKEMON_TYPES,
 } from "../actions/types";
 
 const INIT_STATE = {
@@ -23,6 +26,9 @@ const INIT_STATE = {
     error: null
   },
   types: {
+    inProgress: null,
+    type: {},
+    pokeType: {},
     error: []
   }
 };
@@ -86,16 +92,11 @@ export default (state=INIT_STATE, action) => {
           }
         }
       }
-    case FETCH_TYPE:
-      ////FILTER OUT POKE FORMS AND
-      ////RETURN SINGLE OBJECT WITH POKEMON AND SLOT NUM
+    case FETCH_TYPE: {
+      ////CONVERT ARRAY OF OBJECTS TO SINGLE OBJECT WITH POKE NAME AS KEY
       let pokeList = action.payload.pokemon.filter(poke => {
-        ////TO-DO: CHANGE 807 TO state.pokeList WITHOUT RACE CONDITION
         return parseInt(poke.pokemon.url.slice(34, -1), 10) <= 807;
-      }).map(poke => {
-        poke.pokemon.slot = poke.slot;
-        return poke.pokemon;
-      });
+      }).reduce((obj, item) => (obj[item.pokemon.name] = {slot: item.slot, name: item.pokemon.name, url: item.pokemon.url}, obj), {});
       let errors = [];
       if(state.types.error.length > 0) {
         errors = state.types.error.filter(type => {
@@ -106,10 +107,30 @@ export default (state=INIT_STATE, action) => {
         ...state,
         types: {
           ...state.types,
-          [action.payload.name]: [...pokeList],
+          type: {
+            ...state.types.type,
+            [action.payload.name]: pokeList
+          },
           error: errors
         }
       };
+    }
+    case FETCH_TYPE_ALL_PROGRESS:
+      return {
+        ...state,
+        types: {
+          ...state.types,
+          inProgress: action.payload
+        }
+      }
+    case FETCH_TYPE_ALL_DONE:
+      return {
+        ...state,
+        types: {
+          ...state.types,
+          inProgress: action.payload
+        }
+      }
     case FETCH_TYPE_ERROR:
       let hasError = -1;
       if(state.types.error.length) {
@@ -131,6 +152,29 @@ export default (state=INIT_STATE, action) => {
           error: [...state.types.error, {err: action.payload.err, id: action.payload.id}]
         }
       }
+    case GET_POKEMON_TYPES: {
+      let pokeList = action.payload.pokemon.filter(poke => {
+        let inList = parseInt(poke.pokemon.url.slice(34, -1), 10) <= 807;
+        if(poke.slot === 1 && inList) {
+          return true;
+        }
+        return false;
+      }).reduce((obj, item) => {
+        return (obj[item.pokemon.name] = {
+          slot: item.slot,
+          name: item.pokemon.name,
+          url: item.pokemon.url,
+          type: action.payload.name
+        }, obj)
+      }, {});
+      return {
+        ...state,
+        types: {
+          ...state.types,
+          pokeType: {...state.types.pokeType, ...pokeList}
+        }
+      };
+    }
     case FETCH_EVOLUTION_CHAIN:
       return {
         ...state,

@@ -7,7 +7,10 @@ import {
   FETCH_POKEMON_SPECIES,
   FETCH_POKEMON_SPECIES_ERROR,
   FETCH_TYPE,
+  FETCH_TYPE_ALL_PROGRESS,
+  FETCH_TYPE_ALL_DONE,
   FETCH_TYPE_ERROR,
+  GET_POKEMON_TYPES,
   FETCH_EVOLUTION_CHAIN,
   FETCH_EVOLUTION_CHAIN_ERROR,
   SET_CHART_PREFERENCE
@@ -102,14 +105,28 @@ export const fetchTypes = (index) => async dispatch => {
     const response = await pokeAPI.get(`type/${index}`);
     console.log(response.data);
     dispatch({type: FETCH_TYPE, payload: response.data});
+    dispatch(getPokemonTypes(response.data));
   } catch (err) {
     handleError(err, fetchTypesError, dispatch, index);
     return Promise.reject(err);
   }
 };
 
+export const fetchTypesAllProgress = () => {
+  console.log("I RAN");
+  return {type: FETCH_TYPE_ALL_PROGRESS, payload: true};
+};
+
+export const fetchTypesAllDone = () => {
+  return {type: FETCH_TYPE_ALL_DONE, payload: false};
+};
+
 export const fetchTypesError = (err, id) => {
   return {type: FETCH_TYPE_ERROR, payload: {err: err, id: id}};
+};
+
+export const getPokemonTypes = (types) => {
+  return {type: GET_POKEMON_TYPES, payload: types};
 };
 
 export const fetchEvolutionChain = (index) => async dispatch => {
