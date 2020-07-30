@@ -1,76 +1,19 @@
-.types__container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: white;
-  border: 2px solid #FBF5F3;
-  border-left: none;
-  border-right: none;
-  overflow: hidden;
-}
-.types__container__header {
-  background-color: #df3a27;
-  font-family: "Oxanium";
-  font-weight: 400;
-}
-.types__container__header:hover {
-  background-color: #D53220;
-}
-.types__container__header:focus {
-  background-color: #D53220;
-}
-.row__one {
-  border-bottom: none;
-}
-.types__container__header__open {
-  border-bottom: 2px solid #212121;
-}
-.types__collapsible {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #FBF5F3;
-  /* background-color: #ecf0f1; */
-  color: black;
-  transition: all 0.5s;
-}
-.types__collapsible__open {
-  max-height: 400px;
-  transition: all 0.15s ease-in-out;
-}
-.types__collapsible__hidden {
-  max-height: 0;
-  visibility: hidden;
-  transition: all 0.15s ease-in-out;
-}
-.types__container__header {
-  width: 100%;
-  text-align: center;
-  user-select: none;
-  cursor: pointer;
-}
-.types__filter__heading {
-  font-family: "Oxanium";
-}
 .types__filter__container {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-}
-.types__checkbox {
-  position: relative;
+  opacity: 0;
+  animation: screenOnWait 1.2s ease-in-out 0.35s forwards;
 }
 .types__checkbox {
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  min-width: 25%;
+  min-width: 31%;
   padding: 4px 5px;
-  /* margin: 15px; */
-  margin: 5px;
-  /* background: linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%); */
+  margin: 5px 3px;
   color: white;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 5px;
@@ -93,6 +36,7 @@
   margin-right: auto;
   font-family: "Oxanium";
   font-weight: 600;
+  font-size: 0.9em;
   text-transform: uppercase;
 }
 .types__filter__button {
@@ -382,4 +326,15 @@ SELECTED FILTER TYPES
 }
 .types__checkbox__fairy__active:hover {
   background-color: rgba(255, 205, 210, 0.9);
+}
+/*****
+ANIMATIONS
+*****/
+@keyframes screenOnWait {
+  0% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 1;
+  }
 }
