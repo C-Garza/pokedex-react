@@ -1,70 +1,73 @@
-.search__container {
-  position: absolute;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  font-family: "Oxanium";
-}
-.search {
-  display: flex;
-  position: relative;
-  width: 100%;
-  align-items: center;
-  flex-direction: column;
-}
-.search__term {
-  display: block;
-  position: relative;
-  width: 95%;
-  padding: 5px 15px;
-  margin-top: 15px;
-  border: 3px solid #212121;
-  border-bottom: none;
-  border-radius: 25px;
-  font-weight: bold;
-  font-size: 1.2em;
-  outline:none;
-  z-index: 1;
-}
-.search__term__closed {
-  border-radius: 25px 25px 0 0;
-}
 /*****
 SUGGESTIONS
 *****/
 .suggestions__container {
-  width: 95%;
-  border: 3px solid #212121;
-  border-top: none;
-  border-bottom: none;
+  width: 100%;
+  opacity: 0;
   overflow-x: hidden;
-  max-height: 240px;
-  background-color: white;
+  max-height: 234px;
+  animation: screenOnWait 1.2s ease-in-out 0.35s forwards;
 }
 .suggestion {
+  position: relative;
   display: flex;
   align-items: center;
   height: 60px;
   font-size: 1.3em;
   overflow: hidden;
   cursor: pointer;
-  border-top: 2px solid #212121;
+  margin: 5px;
 }
-.suggestion:hover {
+.suggestion:hover .suggestion__description {
   background-color: #2196F3;
   color: white;
 }
-.suggestion__active {
+.suggestion__active .suggestion__description {
   background-color: #2196F3;
   color: white;
 }
 .suggestion__img {
+  position: relative;
   height: 60px;
+  width: 60px;
+  z-index: 1;
+}
+.suggestion:before {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 60px;
+  width: 60px;
+  border-radius: 10px;
+  background-color: white;
+}
+.suggestion:after {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 60px;
+  width: 60px;
+  background-image: url(/static/media/pokeLogo.aebd3ef2.svg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+  opacity: 0.3;
+}
+.suggestion__description {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: calc(100% - 65px);
+  border-radius: 10px;
+  margin-left: 5px;
+}
+.no__type {
+  background-color: white;
 }
 .suggestion__name {
-  margin-left: auto;
+  margin-right: auto;
+  margin-left: 10px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -80,66 +83,29 @@ SUGGESTIONS
 /**********
 TEMP FIX UNTIL MOUSEOVER FUNCTION IS MADE
 **********/
-.suggestions__container:hover .suggestion__active {
+.suggestions__container:hover .suggestion__active .suggestion__description {
   background-color: white;
   color: black;
 }
-.suggestions__container:hover .suggestion__active:hover {
+.suggestions__container:hover .suggestion__active:hover .suggestion__description {
   background-color: #2196F3;
   color: white;
 }
 .suggestions__none {
+  margin-top: 5px;
+  color: white;
   text-align: center;
-  border-top: 2px solid #212121;
-  border-radius: 0 0 25px 25px;
   font-size: 1.2em;
   font-weight: 700;
 }
 /*****
-SEARCH BUTTONS
+ANIMATIONS
 *****/
-.search__buttons {
-  width: 100%;
-  text-align: center;
-}
-.search__buttons__open {
-  width: 95%;
-  background-color: white;
-  border: 3px solid #212121;
-  border-top: 2px solid #212121;
-  border-radius: 0 0 25px 25px;
-}
-.search__buttons__open .search__buttons__button {
-  margin-top: 10px;
-  margin-bottom: 12px;
-}
-.search__buttons__button {
-  margin: 15px;
-  padding: 8px 10px;
-  background: linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
-  color: #363636;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  /* border: 1px solid #212121; */
-  border-radius: 5px;
-  box-shadow: 0 4px 0px #a6a6a6, 0 10px 10px rgba(0, 0, 0, 0.2);
-  font-weight: 600;
-  cursor: pointer;
-  transition: box-shadow 0.1s, transform 0.1s;
-}
-.search__buttons__button:hover {
-  background: linear-gradient(to bottom, #f2f2f2 5%, #e6e6e6 100%);
-  color: black;
-}
-.search__buttons__button:active {
-  box-shadow: 0 2px 0px #8c8c8c, 0 7px 10px rgba(0, 0, 0, 0.2);
-  transform: translateY(2px);
-}
-.search__buttons__search {
-
-}
-.search__buttons__random {
-
-}
-.tabHidden {
-  visibility: hidden;
+@keyframes screenOnWait {
+  0% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 1;
+  }
 }
