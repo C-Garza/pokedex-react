@@ -13,6 +13,8 @@ import {
   GET_POKEMON_TYPES,
   FETCH_EVOLUTION_CHAIN,
   FETCH_EVOLUTION_CHAIN_ERROR,
+  SET_GUESS_SCORE,
+  SET_GUESS_HIGH_SCORE,
   SET_CHART_PREFERENCE
 } from "./types";
 
@@ -143,6 +145,16 @@ export const fetchEvolutionChain = (index) => async dispatch => {
 
 export const fetchEvolutionChainError = (err, index) => {
   return {type: FETCH_EVOLUTION_CHAIN_ERROR, payload: {err: err, id: index}};
+};
+
+////USER ACTIONS
+
+export const setGuessScore = (score) => {
+  return {type: SET_GUESS_SCORE, payload: score};
+};
+
+export const setGuessHighScore = (score) => {
+  return {type: SET_GUESS_HIGH_SCORE, payload: score};
 };
 
 export const setChartPreference = (chart) => {
