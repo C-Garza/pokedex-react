@@ -10,7 +10,7 @@
   min-height: 100px;
   background-color: #212121;
   margin: 15px;
-  padding: 15px;
+  padding: 12px 10px;
   color: white;
   border-radius: 5px;
   border: 4px solid #424242;
@@ -94,4 +94,92 @@
   background-color: #008BCC;
   border-top: 4px solid #26C3E3;
   transform: translateY(1px);
+}
+/*****
+NAVGUESS
+*****/
+.guess__header {
+  margin-bottom: 2px;
+}
+.score__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 5px;
+  text-align: center;
+}
+.score {
+  width: 50%;
+}
+.highscore {
+  
+}
+.answers__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.answer, .answer__final {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  min-height: 35px;
+  font-size: 1.1em;
+  width: calc(50% - 4px);
+  margin: 2px;
+  text-align: center;
+  border: 3px solid #424242;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+.answer__test {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.answer:hover {
+  border-color: white;
+}
+.answer__final {
+  cursor: default;
+}
+.answer__correct {
+  border-color: #4CAF50;
+}
+.answer__correct:hover {
+  border-color: #4CAF50;
+}
+.answer__incorrect {
+  border-color: #F44336;
+}
+.answer__incorrect:hover {
+  border-color: #F44336;
+}
+.results__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 5px;
+}
+.results {
+  font-size: 1.1em;
+}
+.results__yes {
+  cursor: pointer;
+}
+.results__yes:hover {
+  color: #4CAF50;
+}
+.results__no {
+  cursor: pointer;
+}
+.results__no:hover {
+  color: #F44336;
+}
+.hidden {
+  display: none;
 }
