@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 import styles from "./NavBar.module.css";
 import NavDisplay from "../NavDisplay/NavDisplay";
@@ -6,6 +6,18 @@ import NavDisplay from "../NavDisplay/NavDisplay";
 const NavBar = () => {
   const [active, isActive] = useState(false);
   const [loaded, hasLoaded] = useState(false);
+
+  useEffect(() => {
+    const handleEscKey = (e) => {
+      if(e.keyCode === 27 && active) {
+        isActive(!active);
+      }
+    }
+    window.addEventListener("keyup", handleEscKey);
+    return () => {
+      window.removeEventListener("keyup", handleEscKey);
+    };
+  }, [active]);
 
   const handleNavExpanded = () => {
     if(active && !loaded) {
@@ -53,7 +65,7 @@ const NavBar = () => {
         </div>
       </div>
       <div className={`${styles.nav__menu__list} ${active ? styles.nav__menu__list__expanded : ""}`}>
-        <NavDisplay />
+        <NavDisplay isOpen={active} />
       </div>
     </nav>
   );
