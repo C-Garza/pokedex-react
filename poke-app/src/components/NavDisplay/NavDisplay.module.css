@@ -23,6 +23,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
   width: 100%;
   font-family: "Oxanium";
   overflow: hidden;
@@ -64,6 +65,7 @@ SUGGESTIONS DISPLAY
   background-color: #212121;
   border-top: 6px solid #9fa195;
   border-left: 6px solid #9fa195;
+  overflow: hidden;
 }
 .search__display__on {
   background-color: #424242;
@@ -94,7 +96,7 @@ SUGGESTIONS DISPLAY
 }
 .search__display__top__left__button {
   position: absolute;
-  top: -26px;
+  top: 20px;
   left: 45%;
   width: 15px;
   height: 15px;
@@ -103,10 +105,11 @@ SUGGESTIONS DISPLAY
   border: 2px solid #212121;
   box-shadow: 0 1px 1px #212121;
   transform: translateX(-45%);
+  z-index: 1;
 }
 .search__display__top__right__button {
   position: absolute;
-  top: -26px;
+  top: 20px;
   left: 55%;
   width: 15px;
   height: 15px;
@@ -115,6 +118,7 @@ SUGGESTIONS DISPLAY
   border: 2px solid #212121;
   box-shadow: 0 1px 1px #212121;
   transform: translateX(-55%);
+  z-index: 1;
 }
 .search__display__controls__container {
   display: flex;
