@@ -262,7 +262,7 @@ NAV SIDEBAR
   border: 2px solid #212121;
   z-index: -1;
   transform: translateX(105%);
-  transition: all 0.5s ease;
+  transition: transform 0.5s ease, visibility 0.5s ease;
 }
 .nav__menu__list__expanded {
   visibility: visible;
