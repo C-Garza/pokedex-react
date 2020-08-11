@@ -6,6 +6,7 @@ import NavSearch from "../NavSearch/NavSearch";
 import NavType from "../NavType/NavType";
 import NavGuess from "../NavGuess/NavGuess";
 import NavOptions from "../NavOptions/NavOptions";
+import {setGuessScore, setGuessHighScore} from "../../actions";
 
 class NavDisplay extends React.Component {
   state = {
@@ -13,6 +14,8 @@ class NavDisplay extends React.Component {
     showSuggestions: false, 
     keyPressed: null,
     filterHistory: [],
+    pokeGuessAnswer: null,
+    hasWon: null,
     renderDisplay: "NavSearch",
     isButtonDisabled: false
   };
@@ -20,6 +23,17 @@ class NavDisplay extends React.Component {
 
   componentDidMount() {
     window.addEventListener("click", this.handleOutsideClick);
+  }
+  componentDidUpdate(prevProps) {
+    if(prevProps.isOpen && !this.props.isOpen) {
+      this.setState({
+        renderDisplay: "NavSearch",
+        showSuggestions: false,
+        filterHistory: [],
+        hasWon: null,
+        pokeGuessAnswer: null
+      });
+    }
   }
   componentWillUnmount() {
     window.removeEventListener("click", this.handleOutsideClick);
@@ -101,11 +115,30 @@ class NavDisplay extends React.Component {
       this.setState({filterHistory: [...newArr, selectedType]});
     }
   }
+  ////NavGuess methods
+  setPokeGuess = (poke) => {
+    this.setState({pokeGuessAnswer: poke});
+  }
+  handleWin = (hasWon) => {
+    if(hasWon) {
+      let score = this.props.score === null ? 0 : this.props.score;
+      this.props.setGuessScore(score + 1);
+    }
+    if(hasWon !== null && hasWon === false) {
+      if(this.props.score > this.props.highScore || this.props.highScore === null) {
+        this.props.setGuessHighScore(this.props.score);
+      }
+      this.props.setGuessScore(0);
+    }
+    this.setState({hasWon: hasWon});
+  }
   ////Display Methods
   switchDisplay = (e) => {
     this.setState({
       renderDisplay: e, 
-      filterHistory: []
+      filterHistory: [],
+      hasWon: null,
+      pokeGuessAnswer: null
     });
   }
   handleDisplayRender = (e) => {
@@ -139,6 +172,10 @@ class NavDisplay extends React.Component {
         return(
           <NavGuess
             pokeList={this.props.pokeList}
+            pokeGuess={this.state.pokeGuessAnswer}
+            setPokeGuess={this.setPokeGuess}
+            handleWin={this.handleWin}
+            hasWon={this.state.hasWon}
           />
         );
       default:
@@ -180,10 +217,10 @@ class NavDisplay extends React.Component {
         <h2 className={styles.search__header}>{this.handleDisplayHeader()}</h2>
       </div>
       <div className={styles.search__container}>
+        <div className={styles.search__display__top__left__button}></div>
+        <div className={styles.search__display__top__right__button}></div>
         <div className={styles.search__display__container} ref={this.node}>
           <div className={`${styles.search__display} ${display}`}>
-            <div className={styles.search__display__top__left__button}></div>
-            <div className={styles.search__display__top__right__button}></div>
             {this.handleDisplayRender()}
           </div>
           <div className={styles.search__display__controls__container}>
@@ -220,7 +257,17 @@ class NavDisplay extends React.Component {
           </button>
         </div>
       </div>
-      <NavOptions switchDisplay={this.switchDisplay} renderDisplay={this.state.renderDisplay}/>
+      <NavOptions 
+        switchDisplay={this.switchDisplay} 
+        renderDisplay={this.state.renderDisplay} 
+        pokeGuess={this.state.pokeGuessAnswer} 
+        setPokeGuess={this.setPokeGuess}
+        handleWin={this.handleWin}
+        hasWon={this.state.hasWon}
+        pokeList={this.props.pokeList}
+        score={this.props.score}
+        highScore={this.props.highScore}
+      />
       </React.Fragment>
     );
   }
@@ -230,8 +277,10 @@ const mapStateToProps = (state) => {
   return {
     pokeList: state.pokemon.pokemonAll.pokeList,
     pokemonTypes: state.pokemon.types,
-    pokeType: state.pokemon.types.pokeType
+    pokeType: state.pokemon.types.pokeType,
+    score: state.userPreferences.score,
+    highScore: state.userPreferences.highScore
   };
 };
 
-export default withRouter(connect(mapStateToProps, {})(NavDisplay));
+export default withRouter(connect(mapStateToProps, {setGuessScore, setGuessHighScore})(NavDisplay));
