@@ -1,3 +1,46 @@
 .guess__container {
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100%;
+  background-color: #00BFE0;
+  opacity: 0;
+  animation: screenOnWait 1.2s ease-in-out 0.35s forwards;
+}
+.guess__header__container {
+  max-height: 18%;
+  z-index: 1;
+  color: #FFCB04;
+  text-shadow:
+  -1px -1px 0 #3764b2,  
+   1px -1px 0 #3764b2,
+   -1px 1px 0 #3764b2,
+    1px 1px 0 #3764b2;
+}
+.guess__header {
+  margin: 0;
+  font-family: "Oxanium";
+  font-size: 2em;
+}
+.guess__image__container {
+  width: 100%;
+  height: 64%;
+}
+.guess__image__canvas {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+/*****
+ANIMATIONS
+*****/
+@keyframes screenOnWait {
+  0% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 1;
+  }
 }
