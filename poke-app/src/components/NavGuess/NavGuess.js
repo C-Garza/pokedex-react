@@ -103,7 +103,7 @@ class NavGuess extends React.Component {
       offset: this.getRandomNum(0, 100),
       edge: width,
       age: this.getRandomNum(400,700),
-      alpha: this.getRandomNum(0.25, 1)
+      alpha: this.getRandomNum(0.3, 1)
     };
   }
   updateCanvas = () => {
