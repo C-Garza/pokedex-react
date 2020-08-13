@@ -5,6 +5,7 @@ import styles from "./NavDisplay.module.css";
 import NavSearch from "../NavSearch/NavSearch";
 import NavType from "../NavType/NavType";
 import NavGuess from "../NavGuess/NavGuess";
+import NavAbout from "../NavAbout/NavAbout";
 import NavOptions from "../NavOptions/NavOptions";
 import {setGuessScore, setGuessHighScore} from "../../actions";
 
@@ -134,6 +135,15 @@ class NavDisplay extends React.Component {
   }
   ////Display Methods
   switchDisplay = (e) => {
+    if(e === "NavAbout" && e === this.state.renderDisplay) {
+      this.setState({
+        renderDisplay: "NavSearch", 
+        filterHistory: [],
+        hasWon: null,
+        pokeGuessAnswer: null
+      });
+      return;
+    }
     this.setState({
       renderDisplay: e, 
       filterHistory: [],
@@ -178,6 +188,13 @@ class NavDisplay extends React.Component {
             hasWon={this.state.hasWon}
           />
         );
+      case "NavAbout":
+        return(
+          <NavAbout 
+            switchDisplay={this.switchDisplay}
+            renderDisplay={this.state.renderDisplay}
+          />
+        );
       default:
         return (
           <NavSearch 
@@ -201,7 +218,9 @@ class NavDisplay extends React.Component {
       case "NavType":
         return "Type";
       case "NavGuess":
-        return "Guess That Pokemon!"
+        return "Guess Who!";
+      case "NavAbout":
+        return "About";
       default:
         return "Search";
     }
@@ -252,6 +271,7 @@ class NavDisplay extends React.Component {
           </button>
           <button 
             className={`${styles.search__controls__rectangle__button} ${styles.search__controls__rectangle__right}`}
+            onClick={(e) => this.switchDisplay("NavAbout")}
           >
             About
           </button>
