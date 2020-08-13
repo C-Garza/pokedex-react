@@ -13,7 +13,9 @@ class NavOptions extends React.PureComponent {
     window.addEventListener("keyup", this.handleShortcutKeys);
   }
   componentDidUpdate(prevProps) {
-    if((this.props.renderDisplay === "NavSearch" || this.props.renderDisplay === "NavGuess") && this.state.activeButton !== null) {
+    if((this.props.renderDisplay === "NavSearch" || this.props.renderDisplay === "NavGuess" || this.props.renderDisplay === "NavAbout") 
+        && this.state.activeButton !== null
+      ) {
       this.setState({activeButton: null});
     }
     if(prevProps.renderDisplay !== this.props.renderDisplay && prevProps.renderDisplay === "NavGuess") {
