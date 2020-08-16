@@ -7,6 +7,8 @@ import LoadingScreen from "../LoadingScreen/LoadingScreen";
 import {fetchPokeList} from "../../actions";
 
 class PokeListContainer extends React.Component {
+  state = {width: 0};
+
   componentDidMount() {
     let pathName = this.props.location.pathname;
     let searchParams = "";
@@ -24,6 +26,7 @@ class PokeListContainer extends React.Component {
       });
     }
     window.addEventListener("scroll", this.handleScroll);
+    window.addEventListener("resize", this.handleResize);
   }
   componentDidUpdate(prevProps) {
     if(this.props.title && prevProps.title !== this.props.title) {
@@ -41,6 +44,12 @@ class PokeListContainer extends React.Component {
   }
   componentWillUnmount() {
     window.removeEventListener("scroll", this.handleScroll);
+    window.removeEventListener("resize", this.handleResize);
+  }
+  handleResize = (e) => {
+    this.setState({
+      width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+    });
   }
   handleScroll = (e) => {
     let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
@@ -55,7 +64,7 @@ class PokeListContainer extends React.Component {
       cards = this.props.searchResults.slice(0, this.props.offset);
     }
     return cards.map((pokemon) => {
-      return <PokeCard key={pokemon.name} pokemon={pokemon} />;
+      return <PokeCard key={pokemon.name} pokemon={pokemon} width={this.state.width} />;
     });
   }
   render() {
