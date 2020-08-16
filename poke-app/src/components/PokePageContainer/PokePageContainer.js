@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import styles from "./PokePageContainer.module.css";
 import PokeCardExtended from "../PokeCardExtended/PokeCardExtended";
 import PokeSprites from "../PokeSprites/PokeSprites";
@@ -13,7 +13,7 @@ class PokePageContainer extends React.Component {
   state = {hasError: false, hasEvoError: false};
   currentRequest = null;
 
-  async componentDidMount() { //CHANGE IF CHECK TO FETCHPOKELIST FIRST
+  async componentDidMount() {
     let id = this.props.match.params.id;
     document.title = "Pokemon · " + id.charAt(0).toUpperCase() + id.slice(1);
     this.currentRequest = "MOUNT";
@@ -37,7 +37,12 @@ class PokePageContainer extends React.Component {
         }
       }).catch(err => {
         console.log(err);
+        console.log(err.response.status);
         if(this.currentRequest === "MOUNT") {
+          if(err.response.status === 404) {
+            this.handle404Pokemon(err, id);
+            return;
+          }
           this.setState({hasError: true});
         }
       }); ////FIX EXTRA CALL WHEN HAS STATS BUT NO SPECIES
@@ -112,6 +117,9 @@ class PokePageContainer extends React.Component {
   }
   componentWillUnmount() {
     this.currentRequest = false;
+  }
+  handle404Pokemon = (err, id) => {
+    this.props.history.push(`/404/${id}`);
   }
   handleChange = (e) => {
     this.props.setChartPreference(e.target.value);
@@ -227,10 +235,10 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, {
+export default withRouter(connect(mapStateToProps, {
   fetchPokeList, 
   fetchPokemon, 
   fetchPokemonSpecies, 
   fetchEvolutionChain, 
   setChartPreference
-})(PokePageContainer);
+})(PokePageContainer));
