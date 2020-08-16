@@ -172,3 +172,78 @@ BORDER COLORS FOR POKECARDS TYPES
 .pokeTypeLogoDarkCardBorder {
   border: 7px solid #7a695d;
 }
+/***
+BACKGROUND COLORS FOR GRADIENT POKECARDS TYPES
+***/
+.pokeTypeLogoGradFireCard {
+  background: linear-gradient(to bottom, #EF9A9A 65%, #F44336);
+  background-color: #EF9A9A;
+}
+.pokeTypeLogoGradWaterCard {
+  background: linear-gradient(to bottom, #90CAF9 65%, #2196F3);
+  background-color: #90CAF9;
+}
+.pokeTypeLogoGradGrassCard {
+  background: linear-gradient(to bottom, #A5D6A7 65%, #4CAF50);
+  background-color: #A5D6A7;
+}
+.pokeTypeLogoGradPoisonCard {
+  background: linear-gradient(to bottom, #CE93D8 65%, #9C27B0);
+  background-color: #CE93D8;
+}
+.pokeTypeLogoGradBugCard {
+  background: linear-gradient(to bottom, #E6EE9C 65%, #CDDC39);
+  background-color: #E6EE9C;
+}
+.pokeTypeLogoGradNormalCard {
+  background: linear-gradient(to bottom, #EEEEEE 65%, #9E9E9E);
+  background-color: #EEEEEE;
+}
+.pokeTypeLogoGradFlyingCard {
+  background: linear-gradient(to bottom, #9bb1eb 65%, #93a5f2);
+  background-color: #9bb1eb;
+}
+.pokeTypeLogoGradElectricCard {
+  background: linear-gradient(to bottom, #FFEE58 65%, #fdbe1b);
+  background-color: #FFEE58;
+}
+.pokeTypeLogoGradGroundCard {
+  background: linear-gradient(to bottom, #dcc481 65%, #ccac51);
+  background-color: #dcc481;
+}
+.pokeTypeLogoGradFairyCard {
+  background: linear-gradient(to bottom, #FFCDD2 65%, #f6b4f6);
+  background-color: #FFCDD2;
+}
+.pokeTypeLogoGradFightingCard {
+  background: linear-gradient(to bottom, #BCAAA4 65%, #80341d);
+  background-color: #BCAAA4;
+}
+.pokeTypeLogoGradPsychicCard {
+  background: linear-gradient(to bottom, #F8BBD0 65%, #db326a);
+  background-color: #F8BBD0;
+}
+.pokeTypeLogoGradRockCard {
+  background: linear-gradient(to bottom, #c8b476 65%, #9e863d);
+  background-color: #c8b476;
+}
+.pokeTypeLogoGradSteelCard {
+  background: linear-gradient(to bottom, #c5c5d0 65%, #8e8e9f);
+  background-color: #c5c5d0;
+}
+.pokeTypeLogoGradIceCard {
+  background: linear-gradient(to bottom, #B3E5FC 65%, #80D8FF);
+  background-color: #B3E5FC;
+}
+.pokeTypeLogoGradGhostCard {
+  background: linear-gradient(to bottom, #6e5896 65%, #5e60b1);
+  background-color: #6e5896;
+}
+.pokeTypeLogoGradDragonCard {
+  background: linear-gradient(to bottom, #B39DDB 65%, #6e57d3);
+  background-color: #B39DDB;
+}
+.pokeTypeLogoGradDarkCard {
+  background: linear-gradient(to bottom, #7a695d 65%, #513c2e);
+  background-color: #7a695d;
+}
