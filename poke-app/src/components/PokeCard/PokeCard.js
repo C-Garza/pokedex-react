@@ -8,7 +8,7 @@ import {getTypesClass} from "../utils/helper-functions"
 import PokeDescription from "../PokeDescription/PokeDescription";
 
 class PokeCard extends React.Component {
-  state = {isFocus: false};
+  state = {isFocus: false, hasEntered: false};
 
   componentDidMount() {
     if(!this.props.pokemonStats) {
@@ -32,6 +32,9 @@ class PokeCard extends React.Component {
   handleFocus = () => {
     this.setState({isFocus: !this.state.isFocus});
   }
+  handleOnHover = (e) => {
+    this.setState({hasEntered: e});
+  }
   render() {
     if(!this.props.pokemonStats) {
       return(
@@ -45,11 +48,17 @@ class PokeCard extends React.Component {
     const physicalChars = this.getPhysicalChars();
     const types = this.getTypes();
     let typesClassArr = getTypesClass(types);
-    const cardClasses = `${styles.card} ${typesClassArr[0].card} ${styles.nav} ${this.state.isFocus ? styles.cardFocus : ""}`
+    const cardClasses = `${styles.card} ${typesClassArr[0].gradCard} ${styles.nav} ${this.state.isFocus ? styles.cardFocus : ""}`
     return(
-      <div className={cardClasses}>
+      <div className={cardClasses} onMouseEnter={() => this.handleOnHover(true)} onMouseLeave={() => this.handleOnHover()}>
         <Link to={`/pokemon/${this.props.pokemon.name}`} className={styles.nav} onFocus={this.handleFocus} onBlur={this.handleFocus}>
-          <PokeHeader id={this.props.pokemonStats.id} name={nameCapitalized} typeClass={typesClassArr[0]} />
+          <PokeHeader 
+            id={this.props.pokemonStats.id} 
+            name={nameCapitalized} 
+            typeClass={typesClassArr[0]} 
+            hasEntered={this.state.hasEntered}
+            width={this.props.width}
+          />
           <PokeDescription physicalChars={physicalChars} types={types} name={nameCapitalized} />
         </Link>
       </div>
