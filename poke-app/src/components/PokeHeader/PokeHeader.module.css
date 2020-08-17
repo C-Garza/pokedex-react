@@ -79,6 +79,9 @@
   font-weight: 700;
   z-index: 1;
 }
+.load__border {
+  border: 7px solid white;
+}
 /*****
 HEADER EXTENDED
 *****/
@@ -132,11 +135,32 @@ HEADER EXTENDED
   font-weight: 700;
   z-index: 1;
 }
+.loading__spinner {
+  width: 55px;
+  height: 55px;
+  border-radius: 100%;
+  border-top: 8px solid rgb(33, 33, 33, 0.4);
+  border-bottom: 8px solid rgb(33, 33, 33, 0.4);
+  border-left: 8px solid rgb(33, 33, 33, 0.4);
+  border-right: 8px solid red;
+  animation: rotateSpinner 1s linear infinite;
+}
 @media(max-width: 800px) {
   .header__ext {
     min-width: 30%;
   }
   .header__ext__id {
     font-size: 1.8em;
+  }
+}
+/*****
+ANIMATIONS
+*****/
+@keyframes rotateSpinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
