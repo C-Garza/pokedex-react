@@ -37,9 +37,8 @@ class PokePageContainer extends React.Component {
         }
       }).catch(err => {
         console.log(err);
-        console.log(err.response.status);
         if(this.currentRequest === "MOUNT") {
-          if(err.response.status === 404) {
+          if(err.response && err.response.status === 404) {
             this.handle404Pokemon(err, id);
             return;
           }
