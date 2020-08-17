@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./PokeDescription.module.css";
 import {getTypesClass} from "../utils/helper-functions"
 
-const PokeDescription = ({physicalChars = {height: "Loading", weight: "Loading"}, types, name="Pokemon"}) => {
+const PokeDescription = ({physicalChars = {height: "?", weight: "?"}, types, name="Loading..."}) => {
   const renderTypes = () => {
     const typesClassArr = getTypesClass(types);
     return types.map((type,i) => {
