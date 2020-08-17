@@ -12,7 +12,9 @@ class PokeCard extends React.Component {
 
   componentDidMount() {
     if(!this.props.pokemonStats) {
-      this.props.fetchPokemon(this.props.pokemon.name);
+      this.props.fetchPokemon(this.props.pokemon.name).catch(err => {
+        console.log(err);
+      });
     }
   }
   getPhysicalChars = () => {
@@ -38,9 +40,11 @@ class PokeCard extends React.Component {
   render() {
     if(!this.props.pokemonStats) {
       return(
-        <div className={styles.card}>
-          <PokeHeader />
-          <PokeDescription />
+        <div className={`${styles.card} ${styles.nav}`}>
+          <Link to={`/pokemon/${this.props.pokemon.name}`} className={styles.nav} onFocus={this.handleFocus} onBlur={this.handleFocus}>
+            <PokeHeader />
+            <PokeDescription />
+          </Link>
         </div>
       );
     }
