@@ -10,6 +10,9 @@ const PokeHeader = ({name = "Pokemon", id=null, typeClass = "grass", extended = 
   }, [height, width]);
 
   const getPokeNumber = () => {
+    if(id === null) {
+      return "000";
+    }
     if(id < 10) {
       id = `00${id}`;
     }
@@ -29,11 +32,17 @@ const PokeHeader = ({name = "Pokemon", id=null, typeClass = "grass", extended = 
   }
   return(
     <React.Fragment>
-    <div className={extended ? `${styles.header__ext}` : `${styles.header} ${typeClass.border}`} ref={imgContainerRef}>
+    <div 
+      className={
+        extended ? `${styles.header__ext}` : `${styles.header} ${typeClass.border ? typeClass.border : styles.load__border}`
+      } 
+      ref={imgContainerRef}
+    >
       <div 
         className={`${styles.img__container} ${hasEntered ? `${styles.hasEntered}` : `${styles.hasLeft}`}`}
         style={hasEntered ? getScale() : {}}
       >
+      {id ?
       <img 
         className={
           `${extended ? `${styles.header__ext__image} img-hover` : `${styles.header__image} img-hover`} 
@@ -43,6 +52,8 @@ const PokeHeader = ({name = "Pokemon", id=null, typeClass = "grass", extended = 
         alt={name}
         data-hoverable="true"
       />
+      : <div className={styles.loading__spinner}></div>
+      }
       <img 
         className={
           `${extended ? `${styles.header__ext__image} img-hover` : `${styles.header__image} img-hover`} 
