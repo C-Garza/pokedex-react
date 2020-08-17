@@ -13,6 +13,7 @@ class SearchResultsPage extends React.Component {
 
   async componentDidMount() {
     this._isMounted = true;
+    document.title = "Search";
     if(!this.props.pokeList.length) {
       await this.props.fetchPokeList(807).catch(err => {
         console.log(err);
@@ -40,7 +41,17 @@ class SearchResultsPage extends React.Component {
       }
     }
   }
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
+    if(prevState.title !== this.state.title) {
+      let pathName = "Search";
+      let searchParams = [];
+      if(this.state.title) {
+        searchParams = this.state.title.map(param => {
+          return param.charAt(0).toUpperCase() + param.slice(1);
+        }).join(" & ");
+      }
+      document.title = `${pathName} · ${searchParams}`;
+    }
     if(queryString.parse(this.props.location.search).name) {
       if(this.props.location.search !== prevProps.location.search && !this.props.pokeListError) {
         this.handleSearchType(queryString.parse(this.props.location.search));
@@ -198,7 +209,6 @@ class SearchResultsPage extends React.Component {
         </div>
         <PokeListContainer 
           searchResults={this.state.filteredPoke}
-          title={this.state.title}
           handleUpdateOffset={this.handleUpdateOffset} 
           offset={this.state.offset}
         />

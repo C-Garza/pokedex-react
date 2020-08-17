@@ -1,6 +1,5 @@
 import React from "react";
 import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
 import styles from "./PokeListContainer.module.css";
 import PokeCard from "../PokeCard/PokeCard";
 import LoadingScreen from "../LoadingScreen/LoadingScreen";
@@ -10,16 +9,6 @@ class PokeListContainer extends React.Component {
   state = {width: 0};
 
   componentDidMount() {
-    let pathName = this.props.location.pathname;
-    let searchParams = "";
-    if(this.props.title) {
-      searchParams = this.props.title.map(param => {
-        return param.charAt(0).toUpperCase() + param.slice(1);
-      }).join(" & ");
-    }
-    document.title = this.props.location.pathname === "/" ? 
-    "PokeDex React" :
-    `${pathName.charAt(1).toUpperCase() + pathName.slice(2)} · ${searchParams}`
     if(!this.props.pokeList.length || this.props.pokeList.error) {
       this.props.fetchPokeList(807).catch(err => {
         console.log(err);
@@ -27,20 +16,6 @@ class PokeListContainer extends React.Component {
     }
     window.addEventListener("scroll", this.handleScroll);
     window.addEventListener("resize", this.handleResize);
-  }
-  componentDidUpdate(prevProps) {
-    if(this.props.title && prevProps.title !== this.props.title) {
-      let pathName = this.props.location.pathname;
-      let searchParams = "";
-      if(this.props.title) {
-        searchParams = this.props.title.map(param => {
-          return param.charAt(0).toUpperCase() + param.slice(1);
-        }).join(" & ");
-      }
-      document.title = this.props.location.pathname === "/" ? 
-      "PokeDex React" :
-      `${pathName.charAt(1).toUpperCase() + pathName.slice(2)} · ${searchParams}`
-    }
   }
   componentWillUnmount() {
     window.removeEventListener("scroll", this.handleScroll);
@@ -97,4 +72,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, {fetchPokeList})(PokeListContainer));
+export default connect(mapStateToProps, {fetchPokeList})(PokeListContainer);
