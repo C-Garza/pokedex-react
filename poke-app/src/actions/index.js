@@ -115,7 +115,6 @@ export const fetchTypes = (index) => async dispatch => {
 };
 
 export const fetchTypesAllProgress = () => {
-  console.log("I RAN");
   return {type: FETCH_TYPE_ALL_PROGRESS, payload: true};
 };
 
