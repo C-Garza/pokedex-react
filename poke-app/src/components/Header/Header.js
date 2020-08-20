@@ -9,9 +9,9 @@ class Header extends React.Component {
   componentDidMount() {
     const NUM_OF_TYPES = 19;
     let promises = [];
-    if(Object.keys(this.props.pokemonTypes).length !== NUM_OF_TYPES) {
+    if(Object.keys(this.props.allTypes).length !== NUM_OF_TYPES) {
       this.props.fetchTypesAllProgress();
-      console.log(this.props.pokemonTypes);
+      console.log(this.props.allTypes);
       for(let i = 1; i < NUM_OF_TYPES; i++) {
         promises.push(i);
       }
@@ -51,7 +51,8 @@ class Header extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    pokemonTypes: state.pokemon.types
+    pokemonTypes: state.pokemon.types,
+    allTypes: state.pokemon.types.type
   };
 };
 
