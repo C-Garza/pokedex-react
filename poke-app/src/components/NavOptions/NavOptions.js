@@ -142,8 +142,8 @@ class NavOptions extends React.PureComponent {
     return(
       <div className={styles.answers__container}>
         <div className={styles.score__container}>
-          <p className={`${styles.score}`}>Score: {this.props.score}</p>
-          <p className={`${styles.score} ${styles.highscore}`}>High Score: {this.props.highScore}</p>
+          <p className={`${styles.score}`}>Score: {this.props.score || 0}</p>
+          <p className={`${styles.score} ${styles.highscore}`}>High Score: {this.props.highScore || 0}</p>
         </div>
         {randomPokeList.map((ans, i) => {
           let checkAns = null;
