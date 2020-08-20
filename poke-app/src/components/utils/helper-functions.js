@@ -171,3 +171,25 @@ export const saveState = (state) => {
     console.log(err);
   }
 };
+
+export const getPokeList = (store) => {
+  const INIT_STATE = {
+    pokemonAll: {
+      pokeList: store.getState().pokemon.pokemonAll.pokeList,
+      error: null
+    },
+    pokemonObjs: {
+      error: null
+    },
+    evolution_chains: {
+      error: null
+    },
+    types: {
+      inProgress: null,
+      type: store.getState().pokemon.types.type,
+      pokeType: store.getState().pokemon.types.pokeType,
+      error: []
+    }
+  };
+  return INIT_STATE;
+};
