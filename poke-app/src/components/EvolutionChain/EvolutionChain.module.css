@@ -44,12 +44,12 @@
   color: #212121;
 }
 .evolution__chain__column.evolution__chain__continue:before {
-  top: 44%;
+  top: 45.5%;
   left: -25px;
-  transform: translateY(-44%);
+  transform: translateY(-45.5%);
 }
 .evolution__chain__eevee {
-  width: 25%;
+  width: 50%;
 }
 .evolution__chain__image__container {
   border: 3px solid #212121;
@@ -84,7 +84,7 @@
   width: 60%;
 }
 .evolution__types__type {
-  width: 30%;
+  width: 33%;
   padding: 2px 0px 1px 0px;
   margin: 0 5px;
   border: 2px solid black;
@@ -97,4 +97,82 @@
    -1px 1px 0 #000,
     1px 1px 0 #000;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+@media(max-width: 1000px) {
+  .evolution__chain__column.evolution__chain__continue:before {
+    left: -10px;
+  }
+  .evolution__types__type {
+    width: 40%;
+  }
+}
+@media(max-width: 700px) {
+  .evolution__chain__container {
+    flex-direction: column;
+    width: 100%;
+  }
+  .evolution__chain__column {
+    flex-wrap: nowrap;
+  }
+  .evolution__chain__column__eevee {
+    width: 100%;
+  }
+  .evolution__chain__column:not(:last-child) {
+    margin-bottom: 7em;
+  }
+  .evolution__chain__continue:before {
+    top: -50%;
+    left: 50%;
+    transform: translate(-50%, 0) rotate(90deg);
+  }
+  .evolution__chain__continue {
+    flex-wrap: wrap;
+  }
+  .evolution__chain__column.evolution__chain__continue:before {
+    top: -115px;
+    left: 50%;
+    transform: translate(-50%, 0) rotate(90deg);
+  }
+  .evolution__types__type {
+    width: 33%;
+  }
+}
+@media(max-width: 500px) {
+  .evolution__types__type {
+    width: 40%;
+  }
+}
+@media(max-width: 400px) {
+  .evolution__chain__eevee {
+    width: 100%;
+  }
+  .evolution__chain__column.evolution__chain__continue:before {
+    top: -150px;
+  }
+  .evolution__chain__continue:before {
+    top: -65%;
+    left: 50%;
+    transform: translate(-65%, 0) rotate(90deg);
+  }
+  .evolution__chain__image__container {
+    border: 3px solid #212121;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    border-radius: 50%;
+    width: 130px;
+    height: 130px;
+  }
+  .evolution__chain__image {
+    min-height: 115px;
+  }
+  .evolution__chain__name {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 1.05em;
+  }
+  .evolution__types {
+    font-size: 1em;
+  }
+  .evolution__types__type {
+    width: 50%;
+  }
 }
