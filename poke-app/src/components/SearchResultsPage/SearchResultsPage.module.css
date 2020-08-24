@@ -1,13 +1,3 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 75%;
-  margin: auto;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  margin-top: 65px;
-}
 .search__results__container {
 
 }
@@ -20,4 +10,18 @@
 }
 .search__results__header {
   margin: 0;
+}
+@media(max-width: 1000px) {
+  .search__results__header__container {
+    max-width: 95%;
+    text-align: center;
+  }
+}
+@media(max-width: 600px) {
+  .container {
+    margin-top: 1000px;
+  }
+  .search__results__header__container {
+    margin-top: 100px;
+  }
 }
