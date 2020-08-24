@@ -87,3 +87,40 @@
 .sprites__no__sprite {
   display: none;
 }
+@media(max-width: 1000px) {
+  .sprites__header__heading {
+    font-size: 1.5em;
+  }
+  .sprites__header__bar__heading {
+    font-size: 0.9em;
+  }
+}
+@media(max-width: 700px) {
+  .sprites__header {
+    height: 15%;
+  }
+  .sprites__header__heading {
+    font-size: 1.6em;
+  }
+  .sprites__sprite__container {
+    height: 85%;
+    margin-top: 0;
+    padding-top: 20px;
+  }
+  .sprites__sprite__males {
+    height: 50%;
+  }
+  .sprites__sprite__females {
+    height: 50%;
+  }
+  .sprites__sprite {
+    height: 100%;
+    width: auto;
+  }
+}
+@media(max-width: 500px) {
+  .sprites__sprite {
+    height: auto;
+    width: 50%;
+  }
+}

@@ -338,3 +338,17 @@ ANIMATIONS
     opacity: 1;
   }
 }
+@media(max-width: 400px) {
+  .types__checkbox {
+    min-width: 29%;
+    padding: 6px 4px 2px 4px;
+    margin: 6px 3px;
+  }
+  .types__filter__icon {
+    font-size: 0.7em;
+    margin-bottom: 4px;
+  }
+  .types__filter__label {
+    font-size: 0.8em;
+  }
+}

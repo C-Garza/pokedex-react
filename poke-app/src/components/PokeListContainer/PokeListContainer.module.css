@@ -4,7 +4,6 @@
   flex-wrap: wrap;
   max-width: 75%;
   margin: auto;
-  margin-top: 15px;
   margin-top: 65px;
 }
 .small__container {
@@ -14,5 +13,10 @@
 @media(max-width: 1400px) {
   .container {
     max-width: 100%;
+  }
+}
+@media(max-width: 500px) {
+  .container {
+    margin-top: 80px;
   }
 }

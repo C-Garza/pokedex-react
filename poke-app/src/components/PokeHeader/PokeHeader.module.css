@@ -153,6 +153,28 @@ HEADER EXTENDED
     font-size: 1.8em;
   }
 }
+@media(max-width: 700px) {
+  .header__ext {
+    border-right: none;
+    border-bottom: 3px solid #212121;
+  }
+  .header__ext__image {
+    width: 50%;
+  }
+}
+@media(max-width: 500px) {
+  .header__ext__image {
+    width: 60%;
+  }
+  .header__ext__id {
+    font-size: 1.4em;
+  }
+}
+@media(max-width: 400px) {
+  .header__ext__image {
+    width: 75%;
+  }
+}
 /*****
 ANIMATIONS
 *****/
