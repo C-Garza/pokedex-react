@@ -8,3 +8,15 @@
   font-family: "Oxanium";
   font-size: 1.8em;
 }
+@media(max-width: 1000px) {
+  .stats__header__heading {
+    font-size: 1.7em;
+  }
+}
+@media(max-width: 700px) {
+  .chartContainer {
+    height: calc(100% - 85px);
+    width: 98%;
+    margin: auto;
+  }
+}
