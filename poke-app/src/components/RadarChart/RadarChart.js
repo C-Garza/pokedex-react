@@ -4,13 +4,47 @@ import Chart from "chart.js";
 let currentChart;
 
 class RadarChart extends React.PureComponent {
+  state = {width: 0};
+  hasAspectRatio = Chart.defaults.global.maintainAspectRatio;
   chartRef = React.createRef();
 
   componentDidMount() {
+    if((window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth) <= 700) {
+      Chart.defaults.global.maintainAspectRatio = false;
+      this.hasAspectRatio = Chart.defaults.global.maintainAspectRatio;
+    }
+    this.initChart();
+    this.setState({width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth});
+    window.addEventListener("resize", this.handleResize);
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if(prevState.width !== this.state.width && this.state.width <= 700 && this.hasAspectRatio) {
+      Chart.defaults.global.maintainAspectRatio = false;
+      this.hasAspectRatio = Chart.defaults.global.maintainAspectRatio;
+    }
+    if(prevState.width !== this.state.width && this.state.width > 700 && !this.hasAspectRatio) {
+      Chart.defaults.global.maintainAspectRatio = true;
+      this.hasAspectRatio = Chart.defaults.global.maintainAspectRatio;
+    }
     this.initChart();
   }
-  componentDidUpdate() {
-    this.initChart();
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.handleResize);
+  }
+  handleResize = (e) => {
+    if(
+      (window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth) >= 700 &&
+      !this.hasAspectRatio
+      ) {
+      this.setState({width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth});
+      return;
+    }
+    if(
+      (window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth) <= 700 &&
+      this.hasAspectRatio
+      ) {
+      this.setState({width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth});
+    }
   }
   initChart = () => {
     const chart = this.chartRef.current.getContext("2d");
@@ -33,7 +67,7 @@ class RadarChart extends React.PureComponent {
           pointBorderColor: "#36a2eb",
           pointBorderWidth: 2,
           // pointHoverRadius: 4,
-          pointHitRadius: 3,
+          pointHitRadius: 5,
           pointHoverBackgroundColor: "#ffffff",
           pointHoverBorderColor: "#36a2eb",
           lineTension: 0.1,
@@ -79,7 +113,7 @@ class RadarChart extends React.PureComponent {
             title: (tooltipItem, data) => data.labels[tooltipItem[0].index]
           }
           // displayColors: false
-        }
+        },
       };
     }
     if(this.props.chartType === "horizontalBar") {
@@ -126,7 +160,7 @@ class RadarChart extends React.PureComponent {
           callbacks: {
             title: (tooltipItem, data) => data.labels[tooltipItem[0].index]
           }
-        }
+        },
       };
     }
     currentChart = new Chart(chart, {
