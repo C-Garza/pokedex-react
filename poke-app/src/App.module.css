@@ -7,6 +7,11 @@ body {
   min-height: 100%;
   margin: 0;
   padding: 0;
+  background-image:
+  repeating-linear-gradient(#ccc 0 1px, transparent 1px 100%),
+  repeating-linear-gradient(90deg, #ccc 0 1px, transparent 1px 100%);
+  background-size: 80px 80px;
+  background-size: 120px 120px;
 }
 *, *:after, *:before {
   box-sizing: inherit;
@@ -33,4 +38,14 @@ ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
+}
+@media(min-width: 2500px) {
+  html {
+    font-size: 17px;
+  }
+}
+@media(min-width: 3500px) {
+  html {
+    font-size: 20px;
+  }
 }
