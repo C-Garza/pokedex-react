@@ -182,22 +182,26 @@ class PokePageContainer extends React.Component {
     }
     const pageControls = this.getPageControlsLink();
     const chain = this.getEvolutionChain();
+    const pageControlLeft = (
+      <div className={styles.pageControls}>
+        <div className={styles.pageControls__left}>
+          <Link to={pageControls.prev} className={`${styles.pageControls__left__button} ${styles.pageControls__hover}`}>
+            <span className={`${styles.pageControls__left__chevron} ${styles.pageControls__hover}`}></span>
+          </Link>
+        </div>
+      </div>
+    );
+    const pageControlRight = (
+      <div className={styles.pageControls}>
+        <div className={styles.pageControls__right}>
+          <Link to={pageControls.next} className={`${styles.pageControls__right__button} ${styles.pageControls__hover}`}>
+            <span className={`${styles.pageControls__right__chevron} ${styles.pageControls__hover}`}></span>
+          </Link>
+        </div>
+      </div>
+    );
     return(
       <div className={styles.container}>
-        <div className={styles.pageControls}>
-          <div className={styles.pageControls__left}>
-            <Link to={pageControls.prev} className={`${styles.pageControls__left__button} ${styles.pageControls__hover}`}>
-              <span className={`${styles.pageControls__left__chevron} ${styles.pageControls__hover}`}></span>
-            </Link>
-          </div>
-        </div>
-        <div className={styles.pageControls}>
-          <div className={styles.pageControls__right}>
-            <Link to={pageControls.next} className={`${styles.pageControls__right__button} ${styles.pageControls__hover}`}>
-              <span className={`${styles.pageControls__right__chevron} ${styles.pageControls__hover}`}></span>
-            </Link>
-          </div>
-        </div>
         <div className={styles.row}>
           <PokeCardExtended pokemonStats={this.props.pokemonStats} />
         </div>
@@ -218,6 +222,10 @@ class PokePageContainer extends React.Component {
         </div>
         <div className={styles.row}>
           <EvolutionChain evolution={chain} key={chain.id} />
+        </div>
+        <div className={styles.page__controls__container}>
+          {pageControlLeft}
+          {pageControlRight}
         </div>
       </div>
     );
