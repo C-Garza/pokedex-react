@@ -48,6 +48,12 @@ class NavDisplay extends React.Component {
   handleRandomButton = (e) => {
     let randomPoke = this.props.pokeList[Math.floor(Math.random() * this.props.pokeList.length)];
     this.props.history.push(`/pokemon/${randomPoke.name}`);
+    if(this.props.width <= 700) {
+      const event = new KeyboardEvent("keyup",{
+        "keyCode": "27"
+        });
+      window.dispatchEvent(event);
+    }
     this.setState({
       showSuggestions: false,
       isButtonDisabled: true
@@ -78,6 +84,12 @@ class NavDisplay extends React.Component {
       }
       queryPar = this.state.userInput;
       this.props.history.push(`/search?name=${queryPar}`);
+      if(this.props.width <= 700) {
+        const event = new KeyboardEvent("keyup",{
+          "keyCode": "27"
+          });
+        window.dispatchEvent(event);
+      }
       this.setState({
         showSuggestions: false
       });
@@ -91,10 +103,22 @@ class NavDisplay extends React.Component {
       for(let i = 0; i < filterHistory.length; i++) {
         i === 0 ? queryPar = `type=${filterHistory[i]}` : queryPar += `&type=${filterHistory[i]}`;
       }
+      if(this.props.width <= 700) {
+        const event = new KeyboardEvent("keyup",{
+          "keyCode": "27"
+          });
+        window.dispatchEvent(event);
+      }
       this.props.history.push(`/search?${queryPar}`);
     }
   }
   handleSuggestionClick = (suggestion) => {
+    if(this.props.width <= 700) {
+      const event = new KeyboardEvent("keyup",{
+        "keyCode": "27"
+        });
+      window.dispatchEvent(event);
+    }
     this.setState({
       userInput: suggestion,
       showSuggestions: false
