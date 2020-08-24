@@ -51,7 +51,7 @@ class EvolutionChain extends React.Component {
     });
     Promise.all(promises).then(() => {
       if(this._isMounted) {
-        this.setState({isLoading: false, isEevee: evolution.id === 67 ? true : false, hasError: false});
+        this.setState({isLoading: false, isEevee: (evolution.id === 67 ||  evolution.id === 47) ? true : false, hasError: false});
       }
     })
     .catch(err => {
@@ -62,10 +62,10 @@ class EvolutionChain extends React.Component {
     });
   }
   componentDidUpdate(prevProps) {
-    if(prevProps.evolution.id !== this.props.evolution.id && this.props.evolution.id === 67) {
+    if(prevProps.evolution.id !== this.props.evolution.id && (this.props.evolution.id === 67 || this.props.evolution.id === 47)) {
       this.setState({isEevee: true});
     }
-    if(this.state.isEevee && this.props.evolution.id !== 67) {
+    if((this.props.evolution.id !== 67 && this.props.evolution.id !== 47) && this.state.isEevee) {
       this.setState({isEevee: false});
     }
     if(this.props.evolution === true && !this.state.hasError) {
