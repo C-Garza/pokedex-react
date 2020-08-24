@@ -60,6 +60,9 @@ class NavGuess extends React.Component {
     img.crossOrigin = "anonymous";
     img.onload = (e) => {
       if(loaded) {
+        if(!this.canvasRef.current) {
+          return;
+        }
         for(let i = 0; i < this.SPEED_LINES_LENGTH; i++) {
           this.SPEED_LINES[i] = this.speedLine(canvas.width, canvas.height);
         }
