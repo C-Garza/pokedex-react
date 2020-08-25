@@ -138,17 +138,18 @@ SUGGESTIONS DISPLAY
   margin-left: 50px;
   border-radius: 100%;
   border: 3px solid #212121;
-  background-color: #E80934;
+  background-color: #FF5252;
   color: #363636;
   box-shadow: 0 4px 0px #a6a6a6, 0 10px 10px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   font-family: "Oxanium";
   font-weight: 600;
+  line-height: 2.2;
   outline: none;
   transition: box-shadow 0.1s, transform 0.1s;
 }
 .search__display__controls__button:hover {
-  background-color: #D90832;
+  background-color: #E80934;
   color: black;
 }
 .search__display__controls__button:focus {
