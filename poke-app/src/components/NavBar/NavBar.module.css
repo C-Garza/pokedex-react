@@ -254,7 +254,7 @@ NAV SIDEBAR
 .nav__menu__list {
   position: fixed;
   height: calc(100% - 50px);
-  width: 400px;
+  width: 412px;
   max-width: 500px;
   right: 0;
   bottom: 0;
