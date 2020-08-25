@@ -40,10 +40,10 @@
   width: 90%;
 }
 .option {
-  width: 20%;
+  width: 33%;
   padding: 5px 0;
   background-color: #00aaf7;
-  border-radius: 6px 0 0 0;
+  border-radius: 6px 0 0 6px;
   border: 1px solid #212121;
   border-top: 4px solid #40c9e6;
   text-align: center;
@@ -60,7 +60,7 @@
   border-radius: 0;
 }
 .option:nth-child(3) {
-  border-radius: 0;
+  border-radius: 0 6px 6px 0;
 }
 .option:nth-child(4) {
   border-radius: 0;
