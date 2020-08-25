@@ -11,7 +11,6 @@ class Header extends React.Component {
     let promises = [];
     if(Object.keys(this.props.allTypes).length !== NUM_OF_TYPES) {
       this.props.fetchTypesAllProgress();
-      console.log(this.props.allTypes);
       for(let i = 1; i < NUM_OF_TYPES; i++) {
         promises.push(i);
       }
