@@ -51,7 +51,11 @@ class EvolutionChain extends React.Component {
     });
     Promise.all(promises).then(() => {
       if(this._isMounted) {
-        this.setState({isLoading: false, isEevee: (evolution.id === 67 ||  evolution.id === 47) ? true : false, hasError: false});
+        this.setState({
+          isLoading: false, 
+          isEevee: (evolution.id === 67 ||  evolution.id === 47) ? true : false, 
+          hasError: false
+        });
       }
     })
     .catch(err => {
@@ -95,6 +99,7 @@ class EvolutionChain extends React.Component {
     });
     return arr;
   }
+  ////CONVERTS POKEMON NAME TO FULL FORM NAME
   checkPokemonName = (name) => {
     switch(name) {
       case "deoxys": ////386
