@@ -56,7 +56,6 @@ export const fetchPokeList = (limit, offset) => async dispatch => {
       limit: limit,
       offset: offset
     }});
-    console.log(response.data.results);
     dispatch({type: FETCH_POKE_LIST, payload: response.data.results});
     return Promise.resolve({next: response.data.next, prev: response.data.previous});
   } catch (err) {
@@ -72,7 +71,6 @@ export const fetchPokeListError = (err) => {
 export const fetchPokemon = (name, isExtended = false) => async dispatch => {
   try {
     const response = await pokeAPI.get(`pokemon/${name}`);
-    console.log(response.data);
     dispatch({type: FETCH_POKEMON, payload: response.data});
     if(isExtended) {
       return dispatch(fetchPokemonSpecies(response.data.id, response.data.name));
@@ -90,7 +88,6 @@ export const fetchPokemonError = (err, name) => {
 export const fetchPokemonSpecies = (id, name) => async dispatch => {
   try {
     const response = await pokeAPI.get(`pokemon-species/${id}`);
-    console.log(response.data);
     dispatch({type: FETCH_POKEMON_SPECIES, payload: response.data});
   } catch (err) {
     handleError(err, fetchPokemonSpeciesError, dispatch, name);
@@ -105,7 +102,6 @@ export const fetchPokemonSpeciesError = (err, name) => {
 export const fetchTypes = (index) => async dispatch => {
   try {
     const response = await pokeAPI.get(`type/${index}`);
-    console.log(response.data);
     dispatch({type: FETCH_TYPE, payload: response.data});
     dispatch(getPokemonTypes(response.data));
   } catch (err) {
@@ -133,7 +129,6 @@ export const getPokemonTypes = (types) => {
 export const fetchEvolutionChain = (index) => async dispatch => {
   try {
     const response = await pokeAPI.get(`evolution-chain/${index}`);
-    console.log(response.data);
     dispatch({type: FETCH_EVOLUTION_CHAIN, payload: response.data});
     return Promise.resolve(true);
   } catch (err) {
