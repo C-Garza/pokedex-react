@@ -65,7 +65,6 @@ ANIMATIONS
 @media(max-width: 400px) {
   .about__header {
     min-height: 10%;
-    margin: 10px 0 5px 0;
   }
   .header {
     font-size: 1.4em;
