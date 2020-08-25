@@ -13,7 +13,7 @@ const NavAbout = () => {
             Pokedex React is a pokedex web app project made with React/Redux. 
             The pokemon data is served by <a href="https://github.com/PokeAPI/pokeapi" className={styles.external__link} target="_blank" rel="noopener noreferrer">
               PokeAPI
-            </a> via Axios.
+            </a>.
           </p>
         </div>
         <div className={styles.about__authors__container}>
