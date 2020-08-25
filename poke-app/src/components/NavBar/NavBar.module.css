@@ -190,6 +190,9 @@ MAIN LIGHT
 .lights__main:active .lights__main__on.nav__menu__expanded:before {
   transform: translate(-3px, -3px);
 }
+.lights__main:active .lights__main__on.nav__menu__expanded:after {
+  visibility: hidden;
+}
 /*****
 SUB LIGHTS
 *****/
