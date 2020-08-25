@@ -89,7 +89,14 @@ const NavBar = () => {
         <div className={`${styles.lights__sub__three} ${handleNavExpanded()}`}>
           <div className={`${styles.lights__sub__three__on} ${styles.lights__on} ${handleNavExpanded()}`}></div>
         </div>
-        <div className={`${styles.lights__main} ${handleNavExpanded()}`} onClick={handleNavClick} onKeyDown={handleNavKey} tabIndex="0">
+        <div 
+          className={`${styles.lights__main} ${handleNavExpanded()}`} 
+          onClick={handleNavClick} 
+          onKeyDown={handleNavKey} 
+          tabIndex="0"
+          role="button"
+          aria-label="Navigation Menu"
+        >
           <div className={`${styles.lights__main__light}`}></div>
           <div className={`${styles.lights__main__on} ${styles.lights__on} ${handleNavExpanded()}`}></div>
           <i className={`fas fa-search ${styles.lights__main__menu}`}></i>
