@@ -42,6 +42,9 @@ class NavOptions extends React.PureComponent {
     if(option === "Type") {
       this.props.switchDisplay("NavType");
     }
+    if(option === "Region" || option === "Moves") {
+      this.props.switchDisplay("ComingSoon");
+    }
     this.setState({activeButton: i});
   }
   handleGuessClick = (i) => {
@@ -224,7 +227,7 @@ class NavOptions extends React.PureComponent {
           <div className={styles.options__header__desc}>{this.renderHeaderDesc()}</div>
         </div>
         <div className={styles.options__buttons__container}>
-          {this.renderButtons(10)}
+          {this.renderButtons(3)}
         </div>
       </div>
     )

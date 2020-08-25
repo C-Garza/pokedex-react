@@ -8,6 +8,7 @@ import NavGuess from "../NavGuess/NavGuess";
 import NavAbout from "../NavAbout/NavAbout";
 import NavOptions from "../NavOptions/NavOptions";
 import {setGuessScore, setGuessHighScore} from "../../actions";
+import ComingSoon from "../ComingSoon/ComingSoon";
 
 class NavDisplay extends React.Component {
   state = {
@@ -219,6 +220,10 @@ class NavDisplay extends React.Component {
             renderDisplay={this.state.renderDisplay}
           />
         );
+      case "ComingSoon":
+        return(
+          <ComingSoon />
+        );
       default:
         return (
           <NavSearch 
@@ -245,6 +250,8 @@ class NavDisplay extends React.Component {
         return "Guess Who!";
       case "NavAbout":
         return "About";
+      case "ComingSoon":
+        return "WIP!";
       default:
         return "Search";
     }
