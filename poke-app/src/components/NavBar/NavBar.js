@@ -21,7 +21,7 @@ const NavBar = () => {
   }, [active]);
 
   useEffect(() => {
-    const handleResize = (e) => {
+    const handleResize = () => {
       handleWidth(window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth);
     };
     if(width === 0) {
