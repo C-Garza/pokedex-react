@@ -22,9 +22,18 @@ const PokeHeader = ({name = "Pokemon", id=null, typeClass = "grass", extended = 
     return id;
   };
   const getScale = (e) =>  {
+    if(id >= 722) {
+      return {transform: `scale(1.2)`};
+    }
+    if(id >= 650) {
+      return {transform: `scale(1.5)`};
+    }
     return {transform: `scale(${height / 90})`};
   };
   const getGif = (e) => {
+    if(id >= 650) {
+      return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+    }
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${id}.gif`
   };
   const getPng = (e) => {
