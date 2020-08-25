@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from "react";
 import styles from "./PokeHeader.module.css";
 
-const PokeHeader = ({name = "Pokemon", id=null, typeClass = "grass", extended = false, hasEntered, width}) => {
+const PokeHeader = ({name = "Pokemon", id=null, typeClass = "grass", extended = false, hasEntered, isFocus, width}) => {
   const [height, setHeight] = useState(0);
   const imgContainerRef = useRef(null);
 
@@ -48,14 +48,14 @@ const PokeHeader = ({name = "Pokemon", id=null, typeClass = "grass", extended = 
       ref={imgContainerRef}
     >
       <div 
-        className={`${styles.img__container} ${hasEntered ? `${styles.hasEntered}` : `${styles.hasLeft}`}`}
-        style={hasEntered ? getScale() : {}}
+        className={`${styles.img__container} ${hasEntered || isFocus ? `${styles.hasEntered}` : `${styles.hasLeft}`}`}
+        style={hasEntered || isFocus ? getScale() : {}}
       >
       {id ?
       <img 
         className={
           `${extended ? `${styles.header__ext__image} img-hover` : `${styles.header__image} img-hover`} 
-          ${hasEntered ? styles.hidden : ""}`
+          ${hasEntered || isFocus ? styles.hidden : ""}`
         }
         src={id ? getPng() : ""}
         alt={name}
@@ -66,9 +66,9 @@ const PokeHeader = ({name = "Pokemon", id=null, typeClass = "grass", extended = 
       <img 
         className={
           `${extended ? `${styles.header__ext__image} img-hover` : `${styles.header__image} img-hover`} 
-          ${hasEntered ? styles.img__gif : styles.img__gif__hidden}`
+          ${hasEntered ||isFocus ? styles.img__gif : styles.img__gif__hidden}`
         }
-        src={id ? hasEntered ? getGif() : getPng() : ""}
+        src={id ? hasEntered || isFocus ? getGif() : getPng() : ""}
         alt={name}
         data-hoverable="true"
         style={extended ? {display: "none"} : {}}

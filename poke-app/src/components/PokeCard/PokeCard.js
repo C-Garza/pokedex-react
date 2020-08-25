@@ -61,6 +61,7 @@ class PokeCard extends React.Component {
             name={nameCapitalized} 
             typeClass={typesClassArr[0]} 
             hasEntered={this.state.hasEntered}
+            isFocus={this.state.isFocus}
             width={this.props.width}
           />
           <PokeDescription physicalChars={physicalChars} types={types} name={nameCapitalized} />
