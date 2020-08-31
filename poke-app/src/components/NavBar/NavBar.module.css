@@ -256,13 +256,12 @@ NAV SIDEBAR
 *****/
 .nav__menu__list {
   position: fixed;
-  height: calc(100% - 50px);
+  height: 100vh;
   width: 412px;
   max-width: 500px;
   right: 0;
-  bottom: 0;
+  top: 0;
   visibility: hidden;
-  background-color: #C6210E;
   background-color: #D22D1A;
   border: 2px solid #212121;
   overflow-y: auto;
@@ -427,8 +426,6 @@ MEDIA QUERIES
     margin-right: 3px;
   }
   .nav__menu__list {
-    height: calc(100% - 65px);
-    overflow-y: scroll;
     padding-bottom: 30px;
   }
 }

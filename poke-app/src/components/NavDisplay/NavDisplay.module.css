@@ -2,6 +2,7 @@
   width: 60%;
   background-color: #212121;
   margin: 15px;
+  margin-top: 65px;
   padding-left: 15px;
   margin-bottom: 0;
   color: white;
@@ -283,6 +284,11 @@ ANIMATIONS
   }
   100% {
     opacity: 1;
+  }
+}
+@media(max-width: 500px) {
+  .search__header__container {
+    margin-top: 80px;
   }
 }
 @media(max-width: 400px) {
