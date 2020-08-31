@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./NavGuess.module.css";
 
 class NavGuess extends React.Component {
-  state = {width: 0, height: 0, xOffset: 0, yOffset: 0};
+  state = {width: 0, xOffset: 0, yOffset: 0};
 
   SPEED_LINES = [];
   SPEED_LINES_LENGTH = 300;
@@ -41,8 +41,7 @@ class NavGuess extends React.Component {
   }
   handleResize = (e) => {
     this.setState({
-      width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
-      height: Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+      width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
     });
   }
   initGuessCanvas = (e) => {
