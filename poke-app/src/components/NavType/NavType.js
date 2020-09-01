@@ -28,6 +28,7 @@ class NavType extends React.Component {
           }
           key={type}
           tabIndex="0"
+          role="button"
           onClick={this.handleTypeClick}
           onKeyDown={this.handleTypeKey}
         >
