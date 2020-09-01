@@ -3,9 +3,9 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import styles from "./PokeCard.module.css";
 import PokeHeader from "../PokeHeader/PokeHeader";
+import PokeDescription from "../PokeDescription/PokeDescription";
 import {fetchPokemon} from "../../actions";
 import {getTypesClass} from "../utils/helper-functions"
-import PokeDescription from "../PokeDescription/PokeDescription";
 
 class PokeCard extends React.Component {
   state = {isFocus: false, hasEntered: false};
@@ -40,7 +40,7 @@ class PokeCard extends React.Component {
   render() {
     if(!this.props.pokemonStats) {
       return(
-        <div className={`${styles.card} ${styles.nav}`}>
+        <div className={`${styles.card}`}>
           <Link to={`/pokemon/${this.props.pokemon.name}`} className={styles.nav} onFocus={this.handleFocus} onBlur={this.handleFocus}>
             <PokeHeader />
             <PokeDescription />
@@ -52,7 +52,7 @@ class PokeCard extends React.Component {
     const physicalChars = this.getPhysicalChars();
     const types = this.getTypes();
     let typesClassArr = getTypesClass(types);
-    const cardClasses = `${styles.card} ${typesClassArr[0].gradCard} ${styles.nav} ${this.state.isFocus ? styles.cardFocus : ""}`
+    const cardClasses = `${styles.card} ${typesClassArr[0].gradCard} ${this.state.isFocus ? styles.cardFocus : ""}`
     return(
       <div className={cardClasses} onMouseEnter={() => this.handleOnHover(true)} onMouseLeave={() => this.handleOnHover()}>
         <Link to={`/pokemon/${this.props.pokemon.name}`} className={styles.nav} onFocus={this.handleFocus} onBlur={this.handleFocus}>
