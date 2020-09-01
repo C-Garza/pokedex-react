@@ -100,25 +100,7 @@ class NavOptions extends React.PureComponent {
     if(e.keyCode === 32) {
       e.preventDefault();
     }
-    if(newGame) {
-      this.setState({
-        userGuess: null,
-        isGameOver: false,
-        ansPos: Math.floor(Math.random() * this.state.randomPokeList.length),
-        randomPokeList: this.state.randomPokeList.map(poke => {
-          return this.props.pokeList[Math.floor(Math.random() * this.props.pokeList.length)].name;
-        }),
-      })
-    }
-    else {
-      this.setState({
-        userGuess: null,
-        isGameOver: false
-      })
-      this.props.switchDisplay("NavSearch");
-    }
-    this.props.setPokeGuess(null);
-    this.props.handleWin(null);
+    this.handleNewGameClick(newGame);
   }
   renderButtons = (e) => {
     let options = ["Type", "Region", "Moves"];
@@ -141,12 +123,12 @@ class NavOptions extends React.PureComponent {
   }
   renderGuessButtons = (e) => {
     const {userGuess, randomPokeList, ansPos, isGameOver} = this.state;
-    const {hasWon} = this.props;
+    const {hasWon, score, highScore, pokeGuess} = this.props;
     return(
       <div className={styles.answers__container}>
         <div className={styles.score__container}>
-          <p className={`${styles.score}`}>Score: {this.props.score || 0}</p>
-          <p className={`${styles.score} ${styles.highscore}`}>High Score: {this.props.highScore || 0}</p>
+          <p className={`${styles.score}`}>Score: {score || 0}</p>
+          <p className={`${styles.score} ${styles.highscore}`}>High Score: {highScore || 0}</p>
         </div>
         {randomPokeList.map((ans, i) => {
           let checkAns = null;
@@ -170,7 +152,7 @@ class NavOptions extends React.PureComponent {
               onKeyDown={userGuess !== null ? null : (e) => {this.handleGuessKeyDown(e,i)}}
               tabIndex="0"
             >
-              <p className={styles.answer__text}>{ansPos === i ? this.props.pokeGuess : randomPokeList[i]}</p>
+              <p className={styles.answer__text}>{ansPos === i ? pokeGuess : randomPokeList[i]}</p>
             </div>
           );
         })}
