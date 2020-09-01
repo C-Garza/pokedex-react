@@ -122,7 +122,7 @@ HEADER EXTENDED
   z-index: -1;
 }
 .header__ext__image {
-  width: 100%;
+  width: 75%;
   transition: transform 0.15s ease;
 }
 .header__ext__id {
@@ -144,6 +144,11 @@ HEADER EXTENDED
   border-left: 8px solid rgb(33, 33, 33, 0.4);
   border-right: 8px solid red;
   animation: rotateSpinner 1s linear infinite;
+}
+@media(max-width: 1500px) {
+  .header__ext__image {
+    width: 100%;
+  }
 }
 @media(max-width: 800px) {
   .header__ext {
