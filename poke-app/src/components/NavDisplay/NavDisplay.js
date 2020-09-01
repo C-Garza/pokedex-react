@@ -197,11 +197,7 @@ class NavDisplay extends React.Component {
         return (
           <NavType 
             filterHistory={this.state.filterHistory}
-            handleSearchButton={this.handleSearchButton}
             setFilterHistory={this.setFilterHistory}
-            switchDisplay={this.switchDisplay}
-            renderDisplay={this.state.renderDisplay}
-            pokemonTypes={this.props.pokemonTypes}
           />
         );
       case "NavGuess":
