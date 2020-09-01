@@ -1,5 +1,4 @@
 import React from "react";
-import {withRouter} from "react-router-dom";
 import styles from "./NavSearch.module.css";
 import {getTypesClass} from "../utils/helper-functions"
 
@@ -11,7 +10,6 @@ class NavSearch extends React.Component {
     isButtonDisabled: false
   };
   activeSuggestion = React.createRef();
-  node = React.createRef();
 
   componentDidMount() {
     if(this.props.userInput) {
@@ -49,16 +47,9 @@ class NavSearch extends React.Component {
       });
     }
   }
-  handleOutsideClick = (e) => {
-    if(this.node.current.contains(e.target)) {
-      return;
-    }
-    this.setState({showSuggestions: false});
-  }
   handleChange = (e) => {
     const {pokeList, userInput} = this.props;
     let lowerName = userInput.toLowerCase();
-    console.log(userInput);
 
     let filteredSuggestions = userInput === "" ? "" : pokeList.filter(suggestion => {
       return suggestion.name.indexOf(lowerName) > -1;
@@ -72,7 +63,6 @@ class NavSearch extends React.Component {
         id: suggestion.url.slice(34, -1)
       }
     });
-    console.log(filteredSuggestions);
     this.setState({
       selectedTerm: -1,
       filteredSuggestions,
@@ -80,11 +70,10 @@ class NavSearch extends React.Component {
     });
   }
   handleSuggestionClick = (e) => {
-    this.props.history.push(`/pokemon/${e.currentTarget.innerText.slice(0, -4).toLowerCase().replace(/\s/g,'')}`);
     this.setState({
       selectedTerm: -1
     });
-    this.props.handleSuggestionClick(e.currentTarget.innerText.slice(0, -4));
+    this.props.handleSuggestionClick(e.currentTarget ? e.currentTarget.innerText.slice(0, -4) : e);
   }
   handleKeyDown = (e) => {
     const {selectedTerm, filteredSuggestions} = this.state;
@@ -94,11 +83,7 @@ class NavSearch extends React.Component {
     }
 
     if(this.props.keyPressed === 13 && filteredSuggestions.length && selectedTerm >= 0) {
-      this.props.history.push(`/pokemon/${filteredSuggestions[selectedTerm].name.toLowerCase()}`);
-      this.setState({
-        selectedTerm: -1
-      });
-      this.props.handleSuggestionClick(filteredSuggestions[selectedTerm].name);
+      this.handleSuggestionClick(filteredSuggestions[selectedTerm].name);
     }
     else if(this.props.keyPressed === 38) {
       if(selectedTerm === -1) {
@@ -131,7 +116,7 @@ class NavSearch extends React.Component {
     }
   }
   renderSuggestions = () => {
-    const {state: {selectedTerm, filteredSuggestions}} = this;
+    const {selectedTerm, filteredSuggestions} = this.state;
     const {pokemonTypes, pokeType, showSuggestions, userInput} = this.props;
     let suggestionsList = "";
     let hasTypes = pokemonTypes.inProgress === false && !pokemonTypes.error.length ?
@@ -148,6 +133,7 @@ class NavSearch extends React.Component {
               let indexOfInput = lowerName.indexOf(userInput.toLowerCase());
               let suggestionID = `#${suggestion.id}`;
               let typeClass = [];
+              ////HIGHLIGHT LETTERS IN SUGGESTION
               let suggestionHighlighted = [
                 <p key={suggestion.id} className={styles.suggestion__name}>{suggestion.name.substring(0, indexOfInput)}
                 <span className={styles.suggestion__text__hightlight}>{suggestion.name.substring(indexOfInput, indexOfInput + userInput.length)}</span>
@@ -227,4 +213,4 @@ class NavSearch extends React.Component {
   }
 }
 
-export default withRouter(NavSearch);
+export default NavSearch;
