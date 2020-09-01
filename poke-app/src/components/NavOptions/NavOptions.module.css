@@ -62,27 +62,6 @@
 .option:nth-child(3) {
   border-radius: 0 6px 6px 0;
 }
-.option:nth-child(4) {
-  border-radius: 0;
-}
-.option:nth-child(5) {
-  border-radius: 0 6px 0 0;
-}
-.option:nth-child(6) {
-  border-radius: 0 0 0 6px;
-}
-.option:nth-child(7) {
-  border-radius: 0;
-}
-.option:nth-child(8) {
-  border-radius: 0;
-}
-.option:nth-child(9) {
-  border-radius: 0;
-}
-.option:nth-child(10) {
-  border-radius: 0 0 6px 0;
-}
 .option:hover {
   background-color: #0099E0;
 }
@@ -112,9 +91,6 @@ NAVGUESS
 .score {
   width: 50%;
 }
-.highscore {
-  
-}
 .answers__container {
   display: flex;
   justify-content: center;
@@ -125,11 +101,10 @@ NAVGUESS
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50%;
-  min-height: 35px;
-  font-size: 1.1em;
   width: calc(50% - 4px);
+  min-height: 35px;
   margin: 2px;
+  font-size: 1.1em;
   text-align: center;
   border: 3px solid #424242;
   text-transform: capitalize;
