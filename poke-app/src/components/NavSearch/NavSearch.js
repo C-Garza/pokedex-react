@@ -162,7 +162,7 @@ class NavSearch extends React.Component {
                   >
                     <img 
                       className={styles.suggestion__img}
-                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${suggestion.id}.png`}
+                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-vii/icons/${suggestion.id}.png`}
                       alt={suggestion.name}
                     />
                     <div className={`${styles.suggestion__description} ${hasTypes ? typeClass[0].card : styles.no__type}`}>
@@ -181,7 +181,7 @@ class NavSearch extends React.Component {
                 >
                   <img 
                     className={styles.suggestion__img}
-                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${suggestion.id}.png`}
+                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-vii/icons/${suggestion.id}.png`}
                     alt={suggestion.name}
                   />
                   <div className={`${styles.suggestion__description} ${hasTypes ? typeClass[0].card : styles.no__type}`}>

@@ -28,9 +28,11 @@ SUGGESTIONS
 }
 .suggestion__img {
   position: relative;
-  height: 60px;
-  width: 60px;
+  width: 40px;
+  height: 30px;
+  margin: auto;
   z-index: 1;
+  animation: bobbing 0.28s ease-out infinite alternate;
 }
 .suggestion:before {
   content: "";
@@ -101,6 +103,14 @@ TEMP FIX UNTIL MOUSEOVER FUNCTION IS MADE
 /*****
 ANIMATIONS
 *****/
+@keyframes bobbing {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(3px);
+  }
+}
 @keyframes screenOnWait {
   0% {
     opacity: 0.15;
