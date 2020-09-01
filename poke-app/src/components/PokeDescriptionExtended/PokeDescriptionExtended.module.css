@@ -11,7 +11,6 @@
 .desc__ext__name {
   width: 100%;
   font-family: "Oxanium";
-  font-size: 1.6em;
   font-size: 2em;
   margin: 0;
   margin-bottom: 5px;
@@ -20,7 +19,6 @@
 .desc__ext__genera {
   width: 100%;
   font-family: "Oxanium";
-  font-size: 1em;
   font-size: 1.1em;
   margin: 0;
   margin-bottom: 15px;
@@ -42,11 +40,11 @@
   margin-left: 10%;
 }
 .desc__ext__physical__trait_heading {
-  padding: 5px 5px;
+  padding: 5px;
   font-weight: 700;
 }
 .desc__ext__physical__trait {
-  padding: 5px 5px;
+  padding: 5px;
 }
 .desc__ext__physical__trait__bold {
   font-weight: 700;
