@@ -120,6 +120,7 @@ class NavDisplay extends React.Component {
         });
       window.dispatchEvent(event);
     }
+    this.props.history.push(`/pokemon/${suggestion.toLowerCase().replace(/\s/g,'')}`);
     this.setState({
       userInput: suggestion,
       showSuggestions: false
