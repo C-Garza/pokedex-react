@@ -41,7 +41,7 @@ class NavSearch extends React.Component {
     let scrollHeight = el.scrollHeight;
     let height = el.clientHeight;
 
-    if(((scrollHeight - scrollTop) === height) && offset <= filteredSuggestions.length) {
+    if(((scrollHeight - scrollTop) <= (height)) && offset <= filteredSuggestions.length) {
       this.setState((state) => {
         return {offset: state.offset + 24};
       });
