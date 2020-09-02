@@ -7,7 +7,6 @@ import LoadingScreen from "../LoadingScreen/LoadingScreen";
 import {fetchPokeList} from "../../actions";
 
 class SearchResultsPage extends React.Component {
-  ////HANDLE CONDITION THAT SEARCH RETURNS NOTHING(i.e. FAIRY/DARK)
   state = {filteredPoke: [], offset: 0, isLoading: true, hasError: false, title: ""};
   _isMounted = false;
 
@@ -111,7 +110,6 @@ class SearchResultsPage extends React.Component {
   filterByName = (name) => {
     const {pokeList} = this.props;
     this.handleUpdateOffset(24);
-    console.log(name);
     let filteredSuggestions = pokeList.filter(suggestion => {
       return suggestion.name.toLowerCase().indexOf(name.toLowerCase()) > -1;
     }).sort((a,b) => {
@@ -119,7 +117,6 @@ class SearchResultsPage extends React.Component {
       b = b.name.toLowerCase();
       return a.indexOf(name) - b.indexOf(name);
     });
-    console.log(filteredSuggestions);
     this.setState({filteredPoke: filteredSuggestions, title: [name]});
   }
   filterByType = (types) => {
@@ -158,12 +155,10 @@ class SearchResultsPage extends React.Component {
           slotOrder: [slotOne, slotTwo]
         }
       });
-      console.log("FILTERED POKE: ", typesList);
       this.setState({filteredPoke: typesList, title: types});
     }
     else { ////SEARCH OF ONE TYPE
       let typesList = Object.values(pokemonTypes[types]);
-      console.log("FILTERED POKE: ", typesList);
       this.setState({filteredPoke: typesList, title: [types]});
     }
   }
