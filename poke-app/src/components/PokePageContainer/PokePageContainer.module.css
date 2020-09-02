@@ -241,4 +241,7 @@
   .container {
     margin-top: 80px;
   }
+  .row {
+    width: 95%;
+  }
 }
