@@ -10,7 +10,6 @@ body {
   background-image:
   repeating-linear-gradient(#ccc 0 1px, transparent 1px 100%),
   repeating-linear-gradient(90deg, #ccc 0 1px, transparent 1px 100%);
-  background-size: 80px 80px;
   background-size: 120px 120px;
 }
 *, *:after, *:before {
