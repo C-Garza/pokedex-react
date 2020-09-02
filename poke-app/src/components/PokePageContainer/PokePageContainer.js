@@ -155,18 +155,20 @@ class PokePageContainer extends React.Component {
       let pageControls = this.getPageControlsLink();
       return(
         <div className={styles.container}>
-          <div className={styles.pageControls}>
-            <div className={styles.pageControls__left}>
-              <Link to={pageControls.prev} className={`${styles.pageControls__left__button} ${styles.pageControls__hover}`}>
-                <span className={`${styles.pageControls__left__chevron} ${styles.pageControls__hover}`}></span>
-              </Link>
+          <div className={styles.page__controls__container}>
+            <div className={styles.pageControls}>
+              <div className={styles.pageControls__left}>
+                <Link to={pageControls.prev} className={`${styles.pageControls__left__button} ${styles.pageControls__hover}`}>
+                  <span className={`${styles.pageControls__left__chevron} ${styles.pageControls__hover}`}></span>
+                </Link>
+              </div>
             </div>
-          </div>
-          <div className={styles.pageControls}>
-            <div className={styles.pageControls__right}>
-              <Link to={pageControls.next} className={`${styles.pageControls__right__button} ${styles.pageControls__hover}`}>
-                <span className={`${styles.pageControls__right__chevron} ${styles.pageControls__hover}`}></span>
-              </Link>
+            <div className={styles.pageControls}>
+              <div className={styles.pageControls__right}>
+                <Link to={pageControls.next} className={`${styles.pageControls__right__button} ${styles.pageControls__hover}`}>
+                  <span className={`${styles.pageControls__right__chevron} ${styles.pageControls__hover}`}></span>
+                </Link>
+              </div>
             </div>
           </div>
           <div>ERROR!</div>
