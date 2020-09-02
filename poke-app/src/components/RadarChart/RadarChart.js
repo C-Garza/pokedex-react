@@ -66,7 +66,6 @@ class RadarChart extends React.PureComponent {
           pointBackgroundColor: "#36a2eb",
           pointBorderColor: "#36a2eb",
           pointBorderWidth: 2,
-          // pointHoverRadius: 4,
           pointHitRadius: 5,
           pointHoverBackgroundColor: "#ffffff",
           pointHoverBorderColor: "#36a2eb",
@@ -76,9 +75,6 @@ class RadarChart extends React.PureComponent {
       };
       chartOptions = {
         legend: {
-          // onHover: {
-          //   ////CHANGE OPACITY TO FULL
-          // },
           labels: {
             fontFamily: "Oxanium",
             fontSize: 14
@@ -105,14 +101,13 @@ class RadarChart extends React.PureComponent {
           }
         },
         tooltips: {
-          titleFontFamily: "Oxanium", ////CHANGE
+          titleFontFamily: "Oxanium",
           titleFontSize: 14,
           titleFontStyle: "normal",
           bodyFontFamily: "Oxanium",
           callbacks: {
             title: (tooltipItem, data) => data.labels[tooltipItem[0].index]
           }
-          // displayColors: false
         },
       };
     }
@@ -153,7 +148,7 @@ class RadarChart extends React.PureComponent {
           }]
         },
         tooltips: {
-          titleFontFamily: "Oxanium", ////CHANGE
+          titleFontFamily: "Oxanium",
           titleFontSize: 14,
           titleFontStyle: "normal",
           bodyFontFamily: "Oxanium",
