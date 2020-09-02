@@ -32,7 +32,7 @@ SUGGESTIONS
   height: 30px;
   margin: auto;
   z-index: 1;
-  animation: bobbing 0.28s ease-out infinite alternate;
+  animation: bobbing 0.24s ease-out infinite alternate;
 }
 .suggestion:before {
   content: "";
