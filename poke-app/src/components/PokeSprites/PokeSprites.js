@@ -3,8 +3,6 @@ import styles from "./PokeSprites.module.css";
 
 const PokeSprites = ({pokemon: {name, sprites, species_ext: {gender_rate}}}) => {
   //CHANCE AT FEMALE: GENDER-RATE / 0.08
-  console.log(sprites);
-  console.log(gender_rate);
   const getGenderWidth = (rate) => {
     if(rate === -1) {
       return;
@@ -57,7 +55,6 @@ const PokeSprites = ({pokemon: {name, sprites, species_ext: {gender_rate}}}) => 
     </div>
   );
 };
-
 
 
 export default PokeSprites;
