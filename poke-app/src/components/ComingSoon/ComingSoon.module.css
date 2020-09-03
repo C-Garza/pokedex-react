@@ -4,4 +4,17 @@
   align-items: center;
   color: white;
   font-size: 1.5em;
+  opacity: 0;
+  animation: screenOnWait 1.2s ease-in-out 0.35s forwards;
+}
+/*****
+ANIMATIONS
+*****/
+@keyframes screenOnWait {
+  0% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 1;
+  }
 }
