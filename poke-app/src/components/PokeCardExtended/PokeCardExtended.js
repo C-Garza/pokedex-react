@@ -42,7 +42,6 @@ class PokeCardExtended extends React.Component {
     const types = this.getTypes();
     let typesClassArr = getTypesClass(types);
     const cardClasses = `${styles.card} ${typesClassArr[0].card}`
-    console.log(this.props.pokemonStats);
     return(
       <div className={cardClasses}>
         <PokeHeader id={this.props.pokemonStats.id} name={nameCapitalized} typeClass={typesClassArr[0]} extended={true} />

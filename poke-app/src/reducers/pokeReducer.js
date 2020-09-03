@@ -68,7 +68,7 @@ export default (state=INIT_STATE, action) => {
           ...state.pokemonObjs,
           error: action.payload
         }
-      }
+      };
     case FETCH_POKEMON_SPECIES:
       return {
         ...state,
@@ -91,7 +91,7 @@ export default (state=INIT_STATE, action) => {
             error: action.payload.err
           }
         }
-      }
+      };
     case FETCH_TYPE: {
       ////CONVERT ARRAY OF OBJECTS TO SINGLE OBJECT WITH POKE NAME AS KEY
       let pokeList = action.payload.pokemon.filter(poke => {
@@ -122,7 +122,7 @@ export default (state=INIT_STATE, action) => {
           ...state.types,
           inProgress: action.payload
         }
-      }
+      };
     case FETCH_TYPE_ALL_DONE:
       return {
         ...state,
@@ -130,7 +130,7 @@ export default (state=INIT_STATE, action) => {
           ...state.types,
           inProgress: action.payload
         }
-      }
+      };
     case FETCH_TYPE_ERROR:
       let hasError = -1;
       if(state.types.error.length) {
@@ -143,7 +143,7 @@ export default (state=INIT_STATE, action) => {
             ...state.types,
             error: [...state.types.error]
           }
-        }
+        };
       }
       return {
         ...state,
@@ -151,7 +151,7 @@ export default (state=INIT_STATE, action) => {
           ...state.types,
           error: [...state.types.error, {err: action.payload.err, id: action.payload.id}]
         }
-      }
+      };
     case GET_POKEMON_TYPES: {
       let pokeList = action.payload.pokemon.filter(poke => {
         let inList = parseInt(poke.pokemon.url.slice(34, -1), 10) <= 807;
@@ -184,27 +184,8 @@ export default (state=INIT_STATE, action) => {
       return {
         ...state,
         evolution_chains: {...state.evolution_chains, error: action.payload}
-      }
+      };
     default:
       return state;
   }
 };
-
-// store = {
-//   pokemonAll: {
-//     pokeList: [],
-//   },
-//  pokemonObjs: {
-//    pokemon: {
-//      ...pokemon,
-//      evolution_chain: {}
-//      species.ext{}
-//    }
-//  }
-//  evolution-chains: [
-//    {},{},...
-//  ]
-//  types: {
-//    fighting: []
-//  }
-// }
