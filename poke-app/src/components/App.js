@@ -1,6 +1,6 @@
 import React from "react";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import "../App.module.css";
+import "./App.module.css";
 import ScrollToTop from "./ScrollToTop/ScrollToTop";
 import Header from "./Header/Header";
 import HomePage from "./HomePage/HomePage";
