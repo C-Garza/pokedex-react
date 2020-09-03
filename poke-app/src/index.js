@@ -8,7 +8,8 @@ import reducers from "./reducers";
 import throttle from "lodash/throttle";
 import {loadState, saveState, getPokeList} from "./components/utils/helper-functions";
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = compose;
 const persistedState = loadState();
 const store = createStore(
   reducers,
