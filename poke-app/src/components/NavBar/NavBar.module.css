@@ -79,7 +79,6 @@ MAIN LIGHT
   border-radius: 50%;
   border: 6px solid white;
   cursor: pointer;
-  outline: none;
 }
 .lights__main__light {
   position: relative;
@@ -172,11 +171,16 @@ MAIN LIGHT
   z-index: 1;
   transition: transform 0.1s;
 }
+.lights__main:focus {
+  outline: thin dotted;
+}
 .lights__main:hover .lights__main__menu {
   opacity: 1;
+  animation: onFocus 0.1s linear;
 }
 .lights__main:focus .lights__main__menu {
   opacity: 1;
+  animation: onFocus 0.15s linear;
 }
 .lights__main:active .lights__main__light:before {
   transform: translate(-3px, -3px);
@@ -458,5 +462,16 @@ ANIMATIONS
   }
   100% {
     opacity: 0;
+  }
+}
+@keyframes onFocus {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
   }
 }
