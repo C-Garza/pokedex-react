@@ -5,7 +5,7 @@ class HomePage extends React.Component {
   state = {offset: 0};
 
   componentDidMount() {
-    document.title = this.props.location.pathname = "PokeDex React";
+    document.title = this.props.location.pathname = "Pokedex React";
     this.handleUpdateOffset(24);
   }
   handleUpdateOffset = (offset) => {
