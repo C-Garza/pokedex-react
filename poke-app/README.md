@@ -1,6 +1,6 @@
 # Pokedex React
 -----------------
-### Live Demo can be found here.
+### Live Demo can be found [here](https://pokedex-react.surge.sh/).
 
 ## About
 Pokedex React is a pokedex web app project made with React/Redux. The pokemon data is served with [PokeAPI](https://github.com/PokeAPI/pokeapi). The project was bootstrapped with [Create React App v3.4.0](https://github.com/facebook/create-react-app).
