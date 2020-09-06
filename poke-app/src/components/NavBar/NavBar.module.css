@@ -85,6 +85,7 @@ MAIN LIGHT
   border-radius: 50%;
   border: 6px solid white;
   cursor: pointer;
+  overflow: hidden;
 }
 .lights__main__light {
   position: relative;
