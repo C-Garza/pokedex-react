@@ -14,10 +14,14 @@
   z-index: 1;
   color: #FFCB04;
   text-shadow:
-  -1px -1px 0 #3764b2,  
-   1px -1px 0 #3764b2,
-   -1px 1px 0 #3764b2,
-    1px 1px 0 #3764b2;
+  -1px -1px 0 #3764b2,
+  0   -1px 0 #3764b2,
+  1px -1px 0 #3764b2,
+  1px  0   0 #3764b2,
+  1px  1px 0 #3764b2,
+  0    1px 0 #3764b2,
+  -1px  1px 0 #3764b2,
+  -1px  0   0 #3764b2;
 }
 .guess__header {
   margin: 0;
