@@ -55,8 +55,6 @@ class NavGuess extends React.Component {
     this.props.setPokeGuess(this.props.pokeList[randomPokeId - 1].name);
     let img = new Image();
     let loaded = false;
-    img.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${randomPokeId}.png`
-    img.crossOrigin = "anonymous";
     img.onload = (e) => {
       if(loaded) {
         if(!this.canvasRef.current) {
@@ -91,6 +89,8 @@ class NavGuess extends React.Component {
       loaded = true;
       img.src = canvas.toDataURL();
     }
+    img.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${randomPokeId}.png`
+    img.crossOrigin = "anonymous";
   }
   getRandomNum = (min,max) => {
     return (Math.random() * (max - min)) + min;
