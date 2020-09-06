@@ -16,13 +16,13 @@ NAVBAR
 .navbar:before {
   content: "";
   position: fixed;
-  top: 50px;
+  top: -50px;
   right: 0;
-  height: 50px;
+  height: 150px;
   width: 100px;
   background-color: #df3a27;
   border-bottom: 2px solid #212121;
-  box-shadow: 0 10px 6px rgba(0,0,0,0.16), 0 10px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 0px 6px 6px rgba(0,0,0,0.16), 0 0px 6px 6px rgba(0,0,0,0.23);
   z-index: 1000;
 }
 .navbar:after {
@@ -34,13 +34,14 @@ NAVBAR
   width: 67px;
   background-color: #df3a27;
   border-bottom: 2px solid #212121;
+  box-shadow: 0 12px 6px -6px rgba(0,0,0,0.16), 0 12px 6px -6px rgba(0,0,0,0.23);
   transform: rotate(45deg);
   z-index: 1000;
 }
 .main__logo {
   font-family: "Oxanium";
   font-size: 2em;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
 }
 /*****
@@ -48,10 +49,15 @@ POKEDEX REACT MENU LIGHTS
 *****/
 .lights__container {
   position: relative;
+  display: flex;
+  align-items: center;
   width: 200px;
-  height: 25px;
+  height: 60px;
   margin-left: auto;
+  padding-top: 10px;
+  margin-bottom: 15px;
   z-index: 1001;
+  background-color: #df3a27;
 }
 .lights__on {
   content: "";
@@ -71,7 +77,7 @@ MAIN LIGHT
   flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
-  top: -5px;
+  top: 20px;
   right: 20px;
   width: 75px;
   height: 75px;
@@ -287,7 +293,8 @@ MEDIA QUERIES
 }
 @media(max-width: 1000px) {
   .navbar:before {
-    height: 30px;
+    top: -20px;
+    height: 100px;
     width: 83px;
   }
   .navbar:after {
@@ -302,7 +309,6 @@ MEDIA QUERIES
   .lights__container {
     position: relative;
     width: 200px;
-    height: 25px;
     margin-left: auto;
     z-index: 1001;
   }
@@ -320,7 +326,7 @@ MEDIA QUERIES
   *****/
   .lights__main {
     right: 12px;
-    top: -7px;
+    top: 18px;
     height: 65px;
     width: 65px;
   }
@@ -402,8 +408,8 @@ MEDIA QUERIES
 }
 @media(max-width: 500px) {
   .navbar:before {
-    top: 60px;
-    height: 29px;
+    top: -11px;
+    height: 100px;
     width: 84px;
   }
   .navbar:after {
@@ -411,6 +417,9 @@ MEDIA QUERIES
     right: 61px;
     height: 50px;
     width: 34px;
+  }
+  .lights__container {
+    padding-top: 8px;
   }
   .main__logo {
     font-size: 1.6em;
