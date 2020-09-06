@@ -44,6 +44,40 @@ class NavGuess extends React.Component {
       width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
     });
   }
+  handleLoadedImage = (img, loaded, canvas, originalCanvas, ctx) => {
+    if(loaded) {
+      if(!this.canvasRef.current) {
+        return;
+      }
+      for(let i = 0; i < this.SPEED_LINES_LENGTH; i++) {
+        this.SPEED_LINES[i] = this.speedLine(canvas.width, canvas.height);
+      }
+      this.RUN_ANIMATION = true;
+      this.canvasDraw(img, originalCanvas);
+      return;
+    }
+    img.width = this.IMG_SIZE;
+    img.height = this.IMG_SIZE;
+    ctx.drawImage(img, (canvas.width - img.width) / 2, (canvas.height - img.height) / 2, img.width, img.height);
+
+    originalCanvas = document.createElement("canvas");
+    originalCanvas.width = canvas.width;
+    originalCanvas.height = canvas.height;
+    let origCtx = originalCanvas.getContext("2d");
+    origCtx.drawImage(canvas, 0, 0);
+
+    let imgData = ctx.getImageData(0,0, canvas.width, canvas.height);
+    let data = imgData.data;
+    for(let i = 0; i < data.length; i+=4) {
+      data[i] = 0;
+      data[i+1] = 0;
+      data[i+2] = 0;
+      data[i+3] = data[i+3];
+    }
+    ctx.putImageData(imgData, 0, 0);
+    img.src = canvas.toDataURL();
+    return {img: img, origCanvas: originalCanvas};
+  }
   initGuessCanvas = (e) => {
     const canvas = this.canvasRef.current;
     const ctx = this.canvasRef.current.getContext("2d");
@@ -55,42 +89,22 @@ class NavGuess extends React.Component {
     this.props.setPokeGuess(this.props.pokeList[randomPokeId - 1].name);
     let img = new Image();
     let loaded = false;
-    img.onload = (e) => {
-      if(loaded) {
-        if(!this.canvasRef.current) {
-          return;
-        }
-        for(let i = 0; i < this.SPEED_LINES_LENGTH; i++) {
-          this.SPEED_LINES[i] = this.speedLine(canvas.width, canvas.height);
-        }
-        this.RUN_ANIMATION = true;
-        this.canvasDraw(img, originalCanvas);
-        return;
-      }
-      img.width = this.IMG_SIZE;
-      img.height = this.IMG_SIZE;
-      ctx.drawImage(img, (canvas.width - img.width) / 2, (canvas.height - img.height) / 2, img.width, img.height);
 
-      originalCanvas = document.createElement("canvas");
-      originalCanvas.width = canvas.width;
-      originalCanvas.height = canvas.height;
-      let origCtx = originalCanvas.getContext("2d");
-      origCtx.drawImage(canvas, 0, 0);
-
-      let imgData = ctx.getImageData(0,0, canvas.width, canvas.height);
-      let data = imgData.data;
-      for(let i = 0; i < data.length; i+=4) {
-        data[i] = 0;
-        data[i+1] = 0;
-        data[i+2] = 0;
-        data[i+3] = data[i+3];
-      }
-      ctx.putImageData(imgData, 0, 0);
-      loaded = true;
-      img.src = canvas.toDataURL();
-    }
     img.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${randomPokeId}.png`
     img.crossOrigin = "anonymous";
+
+    let newImg = null;
+    if(img.complete) {
+      img.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${randomPokeId}.png?` + new Date().getTime();
+    }
+    img.onload = (e) => {
+      if(loaded) {
+        this.handleLoadedImage(newImg.img, loaded, canvas, newImg.origCanvas, ctx);
+        return;
+      }
+      newImg = this.handleLoadedImage(img, loaded, canvas, originalCanvas, ctx);
+      loaded = true;
+    }
   }
   getRandomNum = (min,max) => {
     return (Math.random() * (max - min)) + min;
