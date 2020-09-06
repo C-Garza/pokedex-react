@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import styles from "./EvolutionChain.module.css";
 import {getTypesClass} from "../utils/helper-functions";
 import {fetchPokemon} from "../../actions";
+import {Link} from "react-router-dom";
 
 class EvolutionChain extends React.Component {
   ////ADD TRIGGERS FOR EVO?
@@ -163,7 +164,7 @@ class EvolutionChain extends React.Component {
       }
       return(
         <div className={styles.evolution__chain__column}>
-          <div className={styles.evolution__chain__box}>
+          <div className={`${styles.evolution__chain__box} ${styles.no__evolution__box}`}>
             <img 
               className={styles.evolution__chain__image}
               src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} 
@@ -188,19 +189,21 @@ class EvolutionChain extends React.Component {
       return (
         <React.Fragment>
           <div className={`${styles.evolution__chain__column} ${isEevee ? styles.evolution__chain__column__eevee : ""}`}>
-            <div className={styles.evolution__chain__box}>
-              <div className={styles.evolution__chain__image__container}>
-                <img 
-                  className={styles.evolution__chain__image}
-                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} 
-                  alt={displayName}
-                />
+            <Link to={`/pokemon/${name}`} className={`${styles.evolution__chain__link} ${isEevee ? styles.evolution__chain__column__link__eevee : ""}`}>
+              <div className={styles.evolution__chain__box}>
+                <div className={styles.evolution__chain__image__container}>
+                  <img 
+                    className={styles.evolution__chain__image}
+                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} 
+                    alt={displayName}
+                  />
+                </div>
+                <p className={styles.evolution__chain__name}>{displayName} #{ext_id}</p>
+                <div className={styles.evolution__types}>
+                  {this.renderTypes(this.getTypes(this.props.pokemon[name].types))}
+                </div>
               </div>
-              <p className={styles.evolution__chain__name}>{displayName} #{ext_id}</p>
-              <div className={styles.evolution__types}>
-                {this.renderTypes(this.getTypes(this.props.pokemon[name].types))}
-              </div>
-            </div>
+            </Link>
           </div>
           <div className={`${styles.evolution__chain__column} ${isEevee ? styles.evolution__chain__continue : ""}`}>
             {evolution.chain.evolves_to.map(pokemon => {
@@ -213,22 +216,23 @@ class EvolutionChain extends React.Component {
                 name = checkName;
               }
               return(
-                <div 
-                  key={pokemon.species.name} 
-                  className={`${styles.evolution__chain__box} ${isEevee ? styles.evolution__chain__eevee : styles.evolution__chain__continue}`}
-                >
-                  <div className={styles.evolution__chain__image__container}>
-                    <img 
-                      className={styles.evolution__chain__image}
-                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} 
-                      alt={displayName}
-                    />
+                <Link to={`/pokemon/${name}`} key={pokemon.species.name} className={`${styles.evolution__chain__link} ${isEevee ? styles.evolution__chain__link__eevee : ""}`}>
+                  <div  
+                    className={`${styles.evolution__chain__box} ${isEevee ? styles.evolution__chain__eevee : styles.evolution__chain__continue}`}
+                  >
+                    <div className={styles.evolution__chain__image__container}>
+                      <img 
+                        className={styles.evolution__chain__image}
+                        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} 
+                        alt={displayName}
+                      />
+                    </div>
+                    <p className={styles.evolution__chain__name}>{displayName} #{ext_id}</p>
+                    <div className={styles.evolution__types}>
+                      {this.renderTypes(this.getTypes(this.props.pokemon[name].types))}
+                    </div>
                   </div>
-                  <p className={styles.evolution__chain__name}>{displayName} #{ext_id}</p>
-                  <div className={styles.evolution__types}>
-                    {this.renderTypes(this.getTypes(this.props.pokemon[name].types))}
-                  </div>
-                </div>
+                </Link>
               );
             })}
           </div>
@@ -245,19 +249,21 @@ class EvolutionChain extends React.Component {
                     name = checkName;
                   }
                   return(
-                    <div key={pokemon.species.name} className={`${styles.evolution__chain__box} ${styles.evolution__chain__continue}`}>
-                      <div className={styles.evolution__chain__image__container}>
-                        <img 
-                          className={styles.evolution__chain__image}
-                          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} 
-                          alt={displayName}
-                        />
+                    <Link to={`/pokemon/${name}`} key={pokemon.species.name} className={styles.evolution__chain__link}>
+                      <div className={`${styles.evolution__chain__box} ${styles.evolution__chain__continue}`}>
+                        <div className={styles.evolution__chain__image__container}>
+                          <img 
+                            className={styles.evolution__chain__image}
+                            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} 
+                            alt={displayName}
+                          />
+                        </div>
+                        <p className={styles.evolution__chain__name}>{displayName} #{ext_id}</p>
+                        <div className={styles.evolution__types}>
+                          {this.renderTypes(this.getTypes(this.props.pokemon[name].types))}
+                        </div>
                       </div>
-                      <p className={styles.evolution__chain__name}>{displayName} #{ext_id}</p>
-                      <div className={styles.evolution__types}>
-                        {this.renderTypes(this.getTypes(this.props.pokemon[name].types))}
-                      </div>
-                    </div>
+                    </Link>
                   );
                 });
               })}

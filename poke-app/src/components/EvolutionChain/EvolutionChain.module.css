@@ -25,6 +25,30 @@
 .evolution__chain__column__eevee {
   width: 50%;
 }
+.evolution__chain__link {
+  width: 100%;
+  margin-bottom: 15px;
+}
+.evolution__chain__column__link__eevee {
+  width: 100%;
+}
+.evolution__chain__link__eevee {
+  width: 50%;
+}
+.evolution__chain__link:hover .evolution__chain__image__container {
+  transform: scale(1.05);
+}
+.evolution__chain__link:hover .evolution__chain__name {
+  color: #007bff;
+  text-decoration: underline;
+}
+.evolution__chain__link:focus .evolution__chain__name {
+  color: #007bff;
+  text-decoration: underline;
+}
+.no__evolution__box {
+  margin-bottom: 15px;
+}
 .evolution__chain__box {
   display: flex;
   flex-direction: column;
@@ -32,7 +56,6 @@
   justify-content: center;
   position: relative;
   width: 100%;
-  margin-bottom: 15px;
 }
 .evolution__chain__continue:before {
   content: "\203A";
@@ -49,7 +72,7 @@
   transform: translateY(-45.5%);
 }
 .evolution__chain__eevee {
-  width: 50%;
+  width: 100%;
 }
 .evolution__chain__image__container {
   border: 3px solid #212121;
@@ -60,9 +83,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  transform: translateZ(0);
+  transition: transform 0.15s ease;
 }
 .evolution__chain__image {
   min-height: 150px;
+  transform: translateZ(0);
 }
 .evolution__chain__name {
   text-align: center;
@@ -92,10 +119,14 @@
   text-align: center;
   color: white;
   text-shadow:
-  -1px -1px 0 #000,  
-   1px -1px 0 #000,
-   -1px 1px 0 #000,
-    1px 1px 0 #000;
+  -1px -1px 0 #000,
+  0   -1px 0 #000,
+  1px -1px 0 #000,
+  1px  0   0 #000,
+  1px  1px 0 #000,
+  0    1px 0 #000,
+  -1px  1px 0 #000,
+  -1px  0   0 #000;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 @media(max-width: 1000px) {
