@@ -85,12 +85,10 @@ class NavDisplay extends React.Component {
       }
       queryPar = this.state.userInput;
       this.props.history.push(`/search?name=${queryPar}`);
-      if(this.props.width <= 700) {
-        const event = new KeyboardEvent("keyup",{
-          "keyCode": "27"
-          });
-        window.dispatchEvent(event);
-      }
+      const event = new KeyboardEvent("keyup",{
+        "keyCode": "27"
+        });
+      window.dispatchEvent(event);
       this.setState({
         showSuggestions: false
       });
@@ -104,22 +102,24 @@ class NavDisplay extends React.Component {
       for(let i = 0; i < filterHistory.length; i++) {
         i === 0 ? queryPar = `type=${filterHistory[i]}` : queryPar += `&type=${filterHistory[i]}`;
       }
-      if(this.props.width <= 700) {
-        const event = new KeyboardEvent("keyup",{
-          "keyCode": "27"
-          });
-        window.dispatchEvent(event);
-      }
-      this.props.history.push(`/search?${queryPar}`);
-    }
-  }
-  handleSuggestionClick = (suggestion) => {
-    if(this.props.width <= 700) {
       const event = new KeyboardEvent("keyup",{
         "keyCode": "27"
         });
       window.dispatchEvent(event);
+      this.props.history.push(`/search?${queryPar}`);
     }
+    if(this.state.renderDisplay === "NavGuess") {
+      if(this.state.hasWon !== null) {
+        let pokemon = this.state.pokeGuessAnswer.charAt(0).toUpperCase() + this.state.pokeGuessAnswer.slice(1);
+        this.handleSuggestionClick(pokemon);
+      }
+    }
+  }
+  handleSuggestionClick = (suggestion) => {
+    const event = new KeyboardEvent("keyup",{
+      "keyCode": "27"
+      });
+    window.dispatchEvent(event);
     this.props.history.push(`/pokemon/${suggestion.toLowerCase().replace(/\s/g,'')}`);
     this.setState({
       userInput: suggestion,
