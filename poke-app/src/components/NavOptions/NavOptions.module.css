@@ -31,6 +31,7 @@
 .options__header__desc {
   text-align: left;
   font-weight: 400;
+  letter-spacing: 0.5px;
 }
 .options__buttons__container {
   display: flex;
@@ -55,6 +56,10 @@
   box-shadow: 0 4px 0px #757575, 0 10px 10px rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.1s, transform 0.1s;
   z-index: 1;
+}
+.option:nth-child(1) {
+  border-left: 4px solid #40c9e6;
+  padding-right: 4px;
 }
 .option:nth-child(2) {
   border-radius: 0;
