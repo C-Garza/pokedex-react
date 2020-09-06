@@ -4,7 +4,8 @@
   justify-content: center;
   flex-wrap: wrap;
   opacity: 0;
-  animation: screenOnWait 1.2s ease-in-out 0.35s forwards;
+  -webkit-animation: screenOnWait 1.2s ease-in-out 0.35s forwards;
+          animation: screenOnWait 1.2s ease-in-out 0.35s forwards;
 }
 .types__checkbox {
   display: flex;
@@ -312,6 +313,14 @@ SELECTED FILTER TYPES
 /*****
 ANIMATIONS
 *****/
+@-webkit-keyframes screenOnWait {
+  0% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 @keyframes screenOnWait {
   0% {
     opacity: 0.15;

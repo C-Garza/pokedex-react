@@ -7,7 +7,8 @@
   padding: 3px 10px;
   background-color: white;
   opacity: 0;
-  animation: screenOnWait 1.2s ease-in-out 0.35s forwards;
+  -webkit-animation: screenOnWait 1.2s ease-in-out 0.35s forwards;
+          animation: screenOnWait 1.2s ease-in-out 0.35s forwards;
 }
 .about__header {
   min-height: 15%;
@@ -54,6 +55,14 @@
 /*****
 ANIMATIONS
 *****/
+@-webkit-keyframes screenOnWait {
+  0% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 @keyframes screenOnWait {
   0% {
     opacity: 0.15;

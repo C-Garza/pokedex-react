@@ -80,7 +80,9 @@ SUGGESTIONS DISPLAY
   opacity: 0;
   background-color: white;
   transform-origin: center;
-  animation: screenOn 0.35s ease-in-out;
+  transform-box: fill-box;
+  -webkit-animation: screenOn 0.35s ease-in-out;
+          animation: screenOn 0.35s ease-in-out;
   z-index: 1;
   pointer-events: none;
 }
@@ -92,7 +94,8 @@ SUGGESTIONS DISPLAY
   opacity: 0;
   background-color: white;
   transform-origin: center;
-  animation: screenOn 0.35s ease-in-out reverse;
+  -webkit-animation: screenOn 0.35s ease-in-out reverse;
+          animation: screenOn 0.35s ease-in-out reverse;
   z-index: 1;
   pointer-events: none;
 }
@@ -278,6 +281,19 @@ SUGGESTIONS DISPLAY
 /*****
 ANIMATIONS
 *****/
+@-webkit-keyframes screenOn {
+  0% {
+    opacity: 1;
+    transform: scale(0.1, 0);
+  }
+  25% {
+    transform: scale(1, 0.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+}
 @keyframes screenOn {
   0% {
     opacity: 1;
@@ -289,6 +305,14 @@ ANIMATIONS
   100% {
     opacity: 1;
     transform: scale(1, 1);
+  }
+}
+@-webkit-keyframes screenOnWait {
+  0% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 1;
   }
 }
 @keyframes screenOnWait {

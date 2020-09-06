@@ -143,7 +143,8 @@ HEADER EXTENDED
   border-bottom: 8px solid rgb(33, 33, 33, 0.4);
   border-left: 8px solid rgb(33, 33, 33, 0.4);
   border-right: 8px solid red;
-  animation: rotateSpinner 1s linear infinite;
+  -webkit-animation: rotateSpinner 1s linear infinite;
+          animation: rotateSpinner 1s linear infinite;
 }
 @media(max-width: 1500px) {
   .header__ext__image {
@@ -183,6 +184,14 @@ HEADER EXTENDED
 /*****
 ANIMATIONS
 *****/
+@-webkit-keyframes rotateSpinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 @keyframes rotateSpinner {
   0% {
     transform: rotate(0deg);

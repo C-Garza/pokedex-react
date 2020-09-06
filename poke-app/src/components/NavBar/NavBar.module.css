@@ -121,7 +121,8 @@ MAIN LIGHT
   width: 57px;
   height: 57px;
   background-color: #00b4d7;
-  animation: flickerLightOn 0.5s ease-in-out;
+  -webkit-animation: flickerLightOn 0.5s ease-in-out;
+          animation: flickerLightOn 0.5s ease-in-out;
 }
 .lights__main__on.nav__menu__expanded:before {
   content: "";
@@ -148,7 +149,8 @@ MAIN LIGHT
   width: 57px;
   height: 57px;
   background-color: #00b4d7;
-  animation: flickerLightOff 0.5s ease-in-out forwards;
+  -webkit-animation: flickerLightOff 0.5s ease-in-out forwards;
+          animation: flickerLightOff 0.5s ease-in-out forwards;
 }
 .lights__main__on.nav__menu__closed:before {
   content: "";
@@ -182,11 +184,13 @@ MAIN LIGHT
 }
 .lights__main:hover .lights__main__menu {
   opacity: 1;
-  animation: onFocus 0.1s linear;
+  -webkit-animation: onFocus 0.1s linear;
+          animation: onFocus 0.1s linear;
 }
 .lights__main:focus .lights__main__menu {
   opacity: 1;
-  animation: onFocus 0.15s linear;
+  -webkit-animation: onFocus 0.15s linear;
+          animation: onFocus 0.15s linear;
 }
 .lights__main:active .lights__main__light:before {
   transform: translate(-3px, -3px);
@@ -220,11 +224,13 @@ SUB LIGHTS
 }
 .lights__sub__one__on.nav__menu__expanded {
   background-color: #e80934;
-  animation: flickerLightOn 0.5s ease-in-out;
+  -webkit-animation: flickerLightOn 0.5s ease-in-out;
+          animation: flickerLightOn 0.5s ease-in-out;
 }
 .lights__sub__one__on.nav__menu__closed {
   background-color: #e80934;
-  animation: flickerLightOff 0.5s ease-in-out forwards;
+  -webkit-animation: flickerLightOff 0.5s ease-in-out forwards;
+          animation: flickerLightOff 0.5s ease-in-out forwards;
 }
 .lights__sub__two {
   right: 130px;
@@ -232,11 +238,13 @@ SUB LIGHTS
 }
 .lights__sub__two__on.nav__menu__expanded {
   background-color: #fbe44b;
-  animation: flickerLightOn 0.5s ease-in-out;
+  -webkit-animation: flickerLightOn 0.5s ease-in-out;
+          animation: flickerLightOn 0.5s ease-in-out;
 }
 .lights__sub__two__on.nav__menu__closed {
   background-color: #fbe44b;
-  animation: flickerLightOff 0.5s ease-in-out forwards;
+  -webkit-animation: flickerLightOff 0.5s ease-in-out forwards;
+          animation: flickerLightOff 0.5s ease-in-out forwards;
 }
 .lights__sub__three {
   right: 155px;
@@ -255,11 +263,13 @@ SUB LIGHTS
 }
 .lights__sub__three__on.nav__menu__expanded {
   background-color: #51a262;
-  animation: flickerLightOn 0.5s ease-in-out;
+  -webkit-animation: flickerLightOn 0.5s ease-in-out;
+          animation: flickerLightOn 0.5s ease-in-out;
 }
 .lights__sub__three__on.nav__menu__closed {
   background-color: #51a262;
-  animation: flickerLightOff 0.5s ease-in-out forwards;
+  -webkit-animation: flickerLightOff 0.5s ease-in-out forwards;
+          animation: flickerLightOff 0.5s ease-in-out forwards;
 }
 /*****
 NAV SIDEBAR
@@ -445,6 +455,26 @@ MEDIA QUERIES
 /*****
 ANIMATIONS
 *****/
+@-webkit-keyframes flickerLightOn {
+  0% {
+    opacity: 0;
+  }
+  2% {
+    opacity: 0.25;
+  }
+  40% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 0.75;
+  }
+  80% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 @keyframes flickerLightOn {
   0% {
     opacity: 0;
@@ -465,12 +495,31 @@ ANIMATIONS
     opacity: 1;
   }
 }
+@-webkit-keyframes flickerLightOff {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 @keyframes flickerLightOff {
   0% {
     opacity: 1;
   }
   100% {
     opacity: 0;
+  }
+}
+@-webkit-keyframes onFocus {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 @keyframes onFocus {

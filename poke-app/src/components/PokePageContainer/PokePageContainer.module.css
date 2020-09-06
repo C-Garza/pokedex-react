@@ -119,11 +119,33 @@
 }
 .pageControls__hover:hover .pageControls__left__chevron:after {
   transform: translate(-57%, -50%) rotate(45deg);
-  animation: onLeftButtonHover 1.35s ease-in-out infinite;
+  -webkit-animation: onLeftButtonHover 1.35s ease-in-out infinite;
+          animation: onLeftButtonHover 1.35s ease-in-out infinite;
 }
 .pageControls__hover:hover .pageControls__right__chevron:after {
   transform: translate(-43%, -50%) rotate(-45deg);
-  animation: onRightButtonHover 1.35s ease-in-out infinite;
+  -webkit-animation: onRightButtonHover 1.35s ease-in-out infinite;
+          animation: onRightButtonHover 1.35s ease-in-out infinite;
+}
+@-webkit-keyframes onLeftButtonHover {
+  0% {
+    transform: translate(-57%, -50%) rotate(45deg);
+  }
+  10% {
+    transform: translate(-67%, -50%) rotate(45deg);
+  }
+  20% {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  30% {
+    transform: translate(-64%, -50%) rotate(45deg);
+  }
+  40% {
+    transform: translate(-53%, -50%) rotate(45deg);
+  }
+  50% {
+    transform: translate(-57%, -50%) rotate(45deg);
+  }
 }
 @keyframes onLeftButtonHover {
   0% {
@@ -143,6 +165,26 @@
   }
   50% {
     transform: translate(-57%, -50%) rotate(45deg);
+  }
+}
+@-webkit-keyframes onRightButtonHover {
+  0% {
+    transform: translate(-43%, -50%) rotate(-45deg);
+  }
+  10% {
+    transform: translate(-33%, -50%) rotate(-45deg);
+  }
+  20% {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+  30% {
+    transform: translate(-36%, -50%) rotate(-45deg);
+  }
+  40% {
+    transform: translate(-47%, -50%) rotate(-45deg);
+  }
+  50% {
+    transform: translate(-43%, -50%) rotate(-45deg);
   }
 }
 @keyframes onRightButtonHover {

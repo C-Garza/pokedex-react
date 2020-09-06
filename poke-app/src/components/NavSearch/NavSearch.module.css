@@ -6,7 +6,8 @@ SUGGESTIONS
   opacity: 0;
   overflow-x: hidden;
   max-height: 234px;
-  animation: screenOnWait 1.2s ease-in-out 0.35s forwards;
+  -webkit-animation: screenOnWait 1.2s ease-in-out 0.35s forwards;
+          animation: screenOnWait 1.2s ease-in-out 0.35s forwards;
 }
 .suggestion {
   position: relative;
@@ -32,7 +33,8 @@ SUGGESTIONS
   height: 30px;
   margin: auto;
   z-index: 1;
-  animation: bobbing 0.24s ease-out infinite alternate;
+  -webkit-animation: bobbing 0.24s ease-out infinite alternate;
+          animation: bobbing 0.24s ease-out infinite alternate;
 }
 .suggestion:before {
   content: "";
@@ -103,12 +105,28 @@ TEMP FIX UNTIL MOUSEOVER FUNCTION IS MADE
 /*****
 ANIMATIONS
 *****/
+@-webkit-keyframes bobbing {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(3px);
+  }
+}
 @keyframes bobbing {
   0% {
     transform: translateY(0);
   }
   100% {
     transform: translateY(3px);
+  }
+}
+@-webkit-keyframes screenOnWait {
+  0% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 1;
   }
 }
 @keyframes screenOnWait {
