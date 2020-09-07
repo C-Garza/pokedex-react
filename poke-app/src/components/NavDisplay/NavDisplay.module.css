@@ -57,6 +57,7 @@ SUGGESTIONS DISPLAY
   height: 50px;
   background-color: #D22D1A;
   transform: rotate(45deg);
+  z-index: 1;
 }
 .search__display {
   position: relative;
@@ -94,6 +95,7 @@ SUGGESTIONS DISPLAY
   opacity: 0;
   background-color: white;
   transform-origin: center;
+  transform-box: fill-box;
   -webkit-animation: screenOn 0.35s ease-in-out reverse;
           animation: screenOn 0.35s ease-in-out reverse;
   z-index: 1;
@@ -208,6 +210,7 @@ SUGGESTIONS DISPLAY
   font-family: "Oxanium";
   font-weight: 600;
   outline: none;
+  z-index: 2;
   transition: box-shadow 0.1s, transform 0.1s;
 }
 .search__controls__button:hover {
@@ -305,22 +308,6 @@ ANIMATIONS
   100% {
     opacity: 1;
     transform: scale(1, 1);
-  }
-}
-@-webkit-keyframes screenOnWait {
-  0% {
-    opacity: 0.15;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@keyframes screenOnWait {
-  0% {
-    opacity: 0.15;
-  }
-  100% {
-    opacity: 1;
   }
 }
 @media(max-width: 500px) {
