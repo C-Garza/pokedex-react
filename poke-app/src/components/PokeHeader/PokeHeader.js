@@ -47,6 +47,7 @@ const PokeHeader = ({name = "Pokemon", id=null, typeClass = "grass", extended = 
       } 
       ref={imgContainerRef}
     >
+      <div className={extended ? styles.hidden : styles.header__border}></div>
       <div 
         className={`${styles.img__container} ${hasEntered || isFocus ? `${styles.hasEntered}` : `${styles.hasLeft}`}`}
         style={hasEntered || isFocus ? getScale() : {}}
