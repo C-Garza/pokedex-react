@@ -73,8 +73,7 @@ SUGGESTIONS DISPLAY
 .search__display__on {
   background-color: #424242;
 }
-.search__display__on:before {
-  content: "";
+.search__display__animate {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -82,24 +81,16 @@ SUGGESTIONS DISPLAY
   background-color: white;
   transform-origin: center;
   transform-box: fill-box;
-  -webkit-animation: screenOn 0.35s ease-in-out;
-          animation: screenOn 0.35s ease-in-out;
   z-index: 1;
   pointer-events: none;
 }
-.search__display__off:after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  background-color: white;
-  transform-origin: center;
-  transform-box: fill-box;
-  -webkit-animation: screenOn 0.35s ease-in-out reverse;
-          animation: screenOn 0.35s ease-in-out reverse;
-  z-index: 1;
-  pointer-events: none;
+.search__display__animate__on {
+  -webkit-animation: screenOn 0.35s ease-in-out;
+          animation: screenOn 0.35s ease-in-out;
+}
+.search__display__animate__off {
+  -webkit-animation: screenOff 0.35s ease-in-out;
+          animation: screenOff 0.35s ease-in-out;
 }
 .search__display__top__left__button {
   position: absolute;
@@ -284,6 +275,32 @@ SUGGESTIONS DISPLAY
 /*****
 ANIMATIONS
 *****/
+@-webkit-keyframes screenOff {
+  0% {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+  75% {
+    transform: scale(1, 0.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(0.1, 0);
+  }
+}
+@keyframes screenOff {
+  0% {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+  75% {
+    transform: scale(1, 0.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(0.1, 0);
+  }
+}
 @-webkit-keyframes screenOn {
   0% {
     opacity: 1;

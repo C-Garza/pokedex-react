@@ -255,8 +255,10 @@ class NavDisplay extends React.Component {
   }
   render() {
     let display = `${this.state.showSuggestions ? styles.search__display__on : styles.search__display__off}`;
+    let isOn = this.state.showSuggestions ? true : false;
     if(this.state.renderDisplay !== "NavSearch") {
       display = `${this.state.renderDisplay !== "NavSearch" ? styles.search__display__on : styles.search__display__off}`;
+      isOn = this.state.renderDisplay !== "NavSearch" ? true : false;
     }
     return(
       <React.Fragment>
@@ -268,6 +270,7 @@ class NavDisplay extends React.Component {
         <div className={styles.search__display__top__right__button}></div>
         <div className={styles.search__display__container} ref={this.node}>
           <div className={`${styles.search__display} ${display}`}>
+            <div className={`${styles.search__display__animate} ${isOn ? styles.search__display__animate__on : styles.search__display__animate__off}`}></div>
             {this.handleDisplayRender()}
           </div>
           <div className={styles.search__display__controls__container}>
