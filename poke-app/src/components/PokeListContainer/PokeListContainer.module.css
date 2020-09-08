@@ -9,7 +9,64 @@
 .small__container {
   margin-top: 15px;
 }
-
+.scroll__top__container {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 5%;
+  right: 5%;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background-color: white;
+  z-index: 1;
+  animation: popIn 0.3s linear;
+}
+.scroll__top {
+  color: #df3a27;
+  font-size: 2.5em;
+  font-size: 3em;
+  cursor: pointer;
+}
+.scroll__top:hover {
+  color: #E80934;
+}
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0.3s;
+  animation: popOut 0.3s linear;
+}
+/*****
+ANIMATIONS
+*****/
+@keyframes popIn {
+  0% {
+    transform: scale(0);
+  }
+  25% {
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  75% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes popOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
 @media(max-width: 1400px) {
   .container {
     max-width: 100%;

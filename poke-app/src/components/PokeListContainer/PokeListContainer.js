@@ -6,7 +6,7 @@ import LoadingScreen from "../LoadingScreen/LoadingScreen";
 import {fetchPokeList} from "../../actions";
 
 class PokeListContainer extends React.Component {
-  state = {width: 0};
+  state = {width: 0, showScrollTop: false};
 
   componentDidMount() {
     if(!this.props.pokeList.length || this.props.pokeList.error) {
@@ -28,10 +28,30 @@ class PokeListContainer extends React.Component {
   }
   handleScroll = (e) => {
     let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    if(scrollTop >= 500 && !this.state.showScrollTop) {
+      console.log("I RAN TRUE");
+      this.setState({showScrollTop: true});
+    }
+    if(scrollTop < 500 && this.state.showScrollTop) {
+      console.log("I RAN FALSE");
+      this.setState({showScrollTop: false});
+    }
     if((window.innerHeight + scrollTop) >= document.body.offsetHeight - 200) {
       ////CHECK WHERE IN OFFSET WE ARE AND RENDER CARDS
       this.props.handleUpdateOffset(this.props.offset + 24);
     }
+  }
+  handleScrollToTop = (e) => {
+    window.scrollTo(0,0);
+  }
+  handleKeyDown = (e) => {
+    if(e.keyCode !== 13 && e.keyCode !== 32) {
+      return;
+    }
+    if(e.keyCode === 32) {
+      e.preventDefault();
+    }
+    this.handleScrollToTop();
   }
   renderCards = () => {
     let cards = this.props.pokeList.slice(0, this.props.offset);
@@ -63,6 +83,14 @@ class PokeListContainer extends React.Component {
         style={this.props.searchResults ? {marginTop: "35px"} : {}}
       >
         {this.renderCards()}
+        <div 
+          className={`${styles.scroll__top__container} ${this.state.showScrollTop ? "" : styles.hidden}`} 
+          tabIndex="0"
+          onClick={this.handleScrollToTop}
+          onKeyDown={this.handleKeyDown}
+        >
+        <i className={`fas fa-arrow-circle-up ${styles.scroll__top} ${this.state.showScrollTop ? "" : styles.hidden}`}></i>
+        </div>
       </div>
     );
   }
