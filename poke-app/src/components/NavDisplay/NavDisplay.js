@@ -83,7 +83,7 @@ class NavDisplay extends React.Component {
       if(!this.state.userInput) {
         return;
       }
-      queryPar = this.state.userInput;
+      queryPar = this.state.userInput.toLowerCase();
       this.props.history.push(`/search?name=${queryPar}`);
       const event = new KeyboardEvent("keyup",{
         "keyCode": "27"
