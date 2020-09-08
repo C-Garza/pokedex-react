@@ -282,7 +282,7 @@ class EvolutionChain extends React.Component {
       );
     }
     if(!this.props.evolution || this.state.isLoading) {
-      return <div>Loading...</div>
+      return <div className={styles.loading}>Loading...</div>
     }
     return(
       <div className={styles.evolution__container}>

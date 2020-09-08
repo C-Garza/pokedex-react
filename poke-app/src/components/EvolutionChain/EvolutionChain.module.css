@@ -129,6 +129,10 @@
   -1px  0   0 #000;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
+.loading {
+  padding: 15px;
+  font-family: "Oxanium";
+}
 @media(max-width: 1000px) {
   .evolution__chain__column.evolution__chain__continue:before {
     left: -10px;
