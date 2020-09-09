@@ -90,8 +90,8 @@ class NavGuess extends React.Component {
     let img = new Image();
     let loaded = false;
 
-    img.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${randomPokeId}.png`
     img.crossOrigin = "anonymous";
+    img.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${randomPokeId}.png`
 
     let newImg = null;
     if(img.complete) {
