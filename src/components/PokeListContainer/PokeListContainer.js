@@ -29,11 +29,9 @@ class PokeListContainer extends React.Component {
   handleScroll = (e) => {
     let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
     if(scrollTop >= 500 && !this.state.showScrollTop) {
-      console.log("I RAN TRUE");
       this.setState({showScrollTop: true});
     }
     if(scrollTop < 500 && this.state.showScrollTop) {
-      console.log("I RAN FALSE");
       this.setState({showScrollTop: false});
     }
     if((window.innerHeight + scrollTop) >= document.body.offsetHeight - 200) {
