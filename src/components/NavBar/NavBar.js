@@ -75,7 +75,7 @@ const NavBar = () => {
     isActive(!active);
   };
   return(
-    <nav className={styles.navbar}>
+    <nav className={styles.navbar} onTouchStart={() => {""}}>
       <div className={styles.main__logo__container}>
         <Link to={"/"} className={styles.main__logo}>Pokedex React</Link>
       </div>
