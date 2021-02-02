@@ -22,12 +22,6 @@ const PokeHeader = ({name = "Pokemon", id=null, typeClass = "grass", extended = 
     return id;
   };
   const getScale = (e) =>  {
-    if(id >= 722) {
-      return {transform: `scale(1.2)`};
-    }
-    if(id >= 650) {
-      return {transform: `scale(1.5)`};
-    }
     return {transform: `scale(${height / 90})`};
   };
   const getGif = (e) => {
